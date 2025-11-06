@@ -24,6 +24,12 @@ function OptionsPage() {
   const [assessments, setAssessments] = useState<TechAssessment[]>([])
   const [isSaving, setIsSaving] = useState(false)
 
+  // Fetch Convex user by Clerk ID
+  const convexUser = useQuery(
+    api.users.getByClerkId,
+    user ? { clerkId: user.id } : 'skip'
+  )
+
   // Fetch latest analysis for the user
   const analyses = useQuery(api.analysis.list)
   const latestAnalysis = analyses?.[0]
@@ -61,13 +67,12 @@ function OptionsPage() {
   }
 
   const handleSave = async () => {
-    if (!user || !latestAnalysis) return
+    if (!user || !latestAnalysis || !convexUser) return
 
     setIsSaving(true)
     try {
-      // TODO: Get actual userId from Convex users table based on clerkId
       await saveMutation({
-        userId: undefined, // Will be set when we have user sync
+        userId: convexUser._id,
         analysisId: latestAnalysis._id,
         assessments: assessments.map((tech) => ({
           technology: tech.key,
