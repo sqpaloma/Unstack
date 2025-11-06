@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
-import { useQuery } from 'convex/react'
+import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useMemo, useState } from 'react'
 import { BookOpen, Trophy, Target, TrendingUp, CheckCircle2, Clock, ArrowRight, Filter } from 'lucide-react'
@@ -47,6 +47,9 @@ function DashboardPage() {
 
   // Fetch all progress
   const allProgress = useQuery(api.progress.list, {})
+
+  // Mutation for toggling items
+  const toggleItemMutation = useMutation(api.progress.toggleItem)
 
   // Calculate progress per technology
   const techProgress = useMemo((): TechProgress[] => {
@@ -167,6 +170,38 @@ function DashboardPage() {
 
     return filtered
   }, [techProgress, selectedTech, selectedStatus])
+
+  // Check if module is completed
+  const isModuleCompleted = (planId: Id<'plans'>, moduleIndex: number) => {
+    if (!allProgress) return false
+    return allProgress.some(
+      (p) => p.planId === planId && p.moduleIndex === moduleIndex && p.completedAt
+    )
+  }
+
+  // Toggle module handler
+  const handleToggleModule = async (
+    e: React.MouseEvent,
+    planId: Id<'plans'>,
+    technology: string,
+    moduleIndex: number
+  ) => {
+    e.preventDefault() // Prevent Link navigation
+    e.stopPropagation()
+
+    if (!convexUser) return
+
+    try {
+      await toggleItemMutation({
+        userId: convexUser._id,
+        planId,
+        technology,
+        moduleIndex,
+      })
+    } catch (error) {
+      console.error('Error toggling module:', error)
+    }
+  }
 
   return (
     <>
@@ -297,35 +332,67 @@ function DashboardPage() {
                       </h2>
                     </div>
                     <div className="space-y-3">
-                      {nextTasks.map((task, idx) => (
-                        <Link
-                          key={`${task.planId}-${task.moduleIndex}`}
-                          to="/plan"
-                          search={{ analysisId: plans[0]?.analysisId }}
-                          className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-700/50 transition-all border border-slate-600 hover:border-cyan-500/50 group"
-                        >
-                          <div className="flex items-center gap-4 flex-1">
-                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold">
-                              {idx + 1}
+                      {nextTasks.map((task, idx) => {
+                        const isCompleted = isModuleCompleted(task.planId, task.moduleIndex)
+                        return (
+                          <div
+                            key={`${task.planId}-${task.moduleIndex}`}
+                            className={`flex items-center justify-between p-4 rounded-lg transition-all border ${
+                              isCompleted
+                                ? 'bg-green-900/20 border-green-500/50'
+                                : 'bg-slate-900/50 border-slate-600 hover:bg-slate-700/50 hover:border-cyan-500/50'
+                            }`}
+                          >
+                            <div className="flex items-center gap-4 flex-1">
+                              <label className="flex items-center cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  checked={isCompleted}
+                                  onChange={(e) =>
+                                    handleToggleModule(
+                                      e as any,
+                                      task.planId,
+                                      task.technology,
+                                      task.moduleIndex
+                                    )
+                                  }
+                                  className="w-5 h-5 text-green-500 bg-slate-700 border-slate-600 rounded focus:ring-green-500 focus:ring-2"
+                                />
+                              </label>
+                              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold">
+                                {idx + 1}
+                              </div>
+                              <div className="flex-1">
+                                <p className="text-sm text-gray-400 capitalize mb-1">
+                                  {task.technology.replace(/-/g, ' ')}
+                                </p>
+                                <Link
+                                  to="/plan"
+                                  search={{ analysisId: plans[0]?.analysisId }}
+                                  className={`font-medium hover:text-cyan-400 transition-colors ${
+                                    isCompleted ? 'text-green-400 line-through' : 'text-white'
+                                  }`}
+                                >
+                                  {task.moduleTitle}
+                                </Link>
+                              </div>
                             </div>
-                            <div className="flex-1">
-                              <p className="text-sm text-gray-400 capitalize mb-1">
-                                {task.technology.replace(/-/g, ' ')}
-                              </p>
-                              <p className="text-white font-medium group-hover:text-cyan-400 transition-colors">
-                                {task.moduleTitle}
-                              </p>
+                            <div className="flex items-center gap-4">
+                              <div className="flex items-center gap-2 text-gray-400">
+                                <Clock className="w-4 h-4" />
+                                <span className="text-sm">{task.estimatedHours}h</span>
+                              </div>
+                              <Link
+                                to="/plan"
+                                search={{ analysisId: plans[0]?.analysisId }}
+                                className="text-gray-400 hover:text-cyan-400 transition-colors"
+                              >
+                                <ArrowRight className="w-5 h-5" />
+                              </Link>
                             </div>
                           </div>
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2 text-gray-400">
-                              <Clock className="w-4 h-4" />
-                              <span className="text-sm">{task.estimatedHours}h</span>
-                            </div>
-                            <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors" />
-                          </div>
-                        </Link>
-                      ))}
+                        )
+                      })}
                     </div>
                   </div>
                 )}
@@ -381,50 +448,107 @@ function DashboardPage() {
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredTechProgress.map((tech) => (
-                      <Link
+                      <div
                         key={tech.planId}
-                        to="/plan"
-                        search={{ analysisId: plans[0]?.analysisId }}
-                        className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all group"
+                        className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all"
                       >
-                        <div className="flex items-start justify-between mb-4">
-                          <h3 className="text-xl font-semibold text-white capitalize group-hover:text-cyan-400 transition-colors">
-                            {tech.technology.replace(/-/g, ' ')}
-                          </h3>
-                          <div
-                            className={`px-3 py-1 rounded-full text-sm font-semibold border ${getProgressColor(
-                              tech.percentage
-                            )}`}
-                          >
-                            {tech.percentage}%
+                        <Link
+                          to="/plan"
+                          search={{ analysisId: plans[0]?.analysisId }}
+                          className="block"
+                        >
+                          <div className="flex items-start justify-between mb-4">
+                            <h3 className="text-xl font-semibold text-white capitalize hover:text-cyan-400 transition-colors">
+                              {tech.technology.replace(/-/g, ' ')}
+                            </h3>
+                            <div
+                              className={`px-3 py-1 rounded-full text-sm font-semibold border ${getProgressColor(
+                                tech.percentage
+                              )}`}
+                            >
+                              {tech.percentage}%
+                            </div>
                           </div>
-                        </div>
 
-                        <div className="space-y-3 mb-4">
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-400">Módulos</span>
-                            <span className="text-white font-medium">
-                              {tech.completedModules}/{tech.totalModules}
-                            </span>
+                          <div className="space-y-3 mb-4">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-400">Módulos</span>
+                              <span className="text-white font-medium">
+                                {tech.completedModules}/{tech.totalModules}
+                              </span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-400">Horas estimadas</span>
+                              <span className="text-white font-medium">
+                                {tech.estimatedHours}h
+                              </span>
+                            </div>
                           </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-gray-400">Horas estimadas</span>
-                            <span className="text-white font-medium">
-                              {tech.estimatedHours}h
-                            </span>
-                          </div>
-                        </div>
 
-                        {/* Progress Bar */}
-                        <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                          <div
-                            className={`h-full transition-all duration-500 ${getProgressBarColor(
-                              tech.percentage
-                            )}`}
-                            style={{ width: `${tech.percentage}%` }}
-                          />
-                        </div>
-                      </Link>
+                          {/* Progress Bar */}
+                          <div className="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden mb-4">
+                            <div
+                              className={`h-full transition-all duration-500 ${getProgressBarColor(
+                                tech.percentage
+                              )}`}
+                              style={{ width: `${tech.percentage}%` }}
+                            />
+                          </div>
+                        </Link>
+
+                        {/* Next modules to complete */}
+                        {tech.nextModules.length > 0 && (
+                          <div className="border-t border-slate-700 pt-4">
+                            <p className="text-xs text-gray-400 uppercase tracking-wider mb-3">
+                              Próximos módulos
+                            </p>
+                            <div className="space-y-2">
+                              {tech.nextModules.slice(0, 2).map((module) => {
+                                const isCompleted = isModuleCompleted(
+                                  tech.planId as Id<'plans'>,
+                                  module.moduleIndex
+                                )
+                                return (
+                                  <div
+                                    key={module.moduleIndex}
+                                    className="flex items-start gap-3"
+                                  >
+                                    <label className="flex items-center cursor-pointer mt-0.5">
+                                      <input
+                                        type="checkbox"
+                                        checked={isCompleted}
+                                        onChange={(e) =>
+                                          handleToggleModule(
+                                            e as any,
+                                            tech.planId as Id<'plans'>,
+                                            tech.technology,
+                                            module.moduleIndex
+                                          )
+                                        }
+                                        className="w-4 h-4 text-green-500 bg-slate-700 border-slate-600 rounded focus:ring-green-500 focus:ring-2"
+                                      />
+                                    </label>
+                                    <div className="flex-1 min-w-0">
+                                      <p
+                                        className={`text-sm ${
+                                          isCompleted
+                                            ? 'text-green-400 line-through'
+                                            : 'text-gray-300'
+                                        }`}
+                                      >
+                                        {module.title}
+                                      </p>
+                                      <p className="text-xs text-gray-500">
+                                        {module.estimatedHours}h
+                                      </p>
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
