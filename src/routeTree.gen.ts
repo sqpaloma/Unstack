@@ -14,7 +14,6 @@ import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as OptionsRouteImport } from './routes/options'
 import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as AnalyzeRouteImport } from './routes/analyze'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoConvexRouteImport } from './routes/demo/convex'
 import { Route as DemoClerkRouteImport } from './routes/demo/clerk'
@@ -52,11 +51,6 @@ const OptionsRoute = OptionsRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AnalyzeRoute = AnalyzeRouteImport.update({
-  id: '/analyze',
-  path: '/analyze',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -127,7 +121,6 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/analyze': typeof AnalyzeRoute
   '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
@@ -148,7 +141,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/analyze': typeof AnalyzeRoute
   '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
@@ -170,7 +162,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/analyze': typeof AnalyzeRoute
   '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
@@ -193,7 +184,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/analyze'
     | '/dashboard'
     | '/options'
     | '/plan'
@@ -214,7 +204,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/analyze'
     | '/dashboard'
     | '/options'
     | '/plan'
@@ -235,7 +224,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/analyze'
     | '/dashboard'
     | '/options'
     | '/plan'
@@ -257,7 +245,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AnalyzeRoute: typeof AnalyzeRoute
   DashboardRoute: typeof DashboardRoute
   OptionsRoute: typeof OptionsRoute
   PlanRoute: typeof PlanRoute
@@ -312,13 +299,6 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/analyze': {
-      id: '/analyze'
-      path: '/analyze'
-      fullPath: '/analyze'
-      preLoaderRoute: typeof AnalyzeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -417,7 +397,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AnalyzeRoute: AnalyzeRoute,
   DashboardRoute: DashboardRoute,
   OptionsRoute: OptionsRoute,
   PlanRoute: PlanRoute,

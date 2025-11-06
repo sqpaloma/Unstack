@@ -7,7 +7,6 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
-import Header from "../components/Header";
 import ClerkProvider from "../integrations/clerk/provider";
 import ConvexProvider from "../integrations/convex/provider";
 
@@ -49,7 +48,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<ConvexProvider>
 					<ClerkProvider>
-						<Header />
 						{children}
 						<TanStackDevtools
 							config={{
