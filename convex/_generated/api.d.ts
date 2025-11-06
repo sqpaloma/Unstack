@@ -8,7 +8,13 @@
  * @module
  */
 
-import type * as todos from "../todos.js";
+import type * as analysis from "../analysis.js";
+import type * as assessments from "../assessments.js";
+import type * as lib_detector from "../lib/detector.js";
+import type * as lib_firecrawl from "../lib/firecrawl.js";
+import type * as plans from "../plans.js";
+import type * as progress from "../progress.js";
+import type * as users from "../users.js";
 
 import type {
   ApiFromModules,
@@ -25,7 +31,13 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
-  todos: typeof todos;
+  analysis: typeof analysis;
+  assessments: typeof assessments;
+  "lib/detector": typeof lib_detector;
+  "lib/firecrawl": typeof lib_firecrawl;
+  plans: typeof plans;
+  progress: typeof progress;
+  users: typeof users;
 }>;
 declare const fullApiWithMounts: typeof fullApi;
 
