@@ -144,6 +144,71 @@ export const createAndAnalyzeFromUrl = action({
   },
 })
 
+// Action para criar e analisar a partir de código manual
+export const createAndAnalyzeFromCode = action({
+  args: {
+    codeSnippet: v.string(),
+    userId: v.optional(v.id('users')),
+  },
+  handler: async (ctx, args): Promise<Id<'githubAnalysis'>> => {
+    // Criar registro de análise manual
+    const analysisId: Id<'githubAnalysis'> = await ctx.runMutation(api.analysis.create, {
+      userId: args.userId,
+      githubUrl: 'manual-code-analysis',
+      owner: 'manual',
+      repo: 'code-snippet',
+      branch: undefined,
+    })
+
+    // Atualizar status para analyzing
+    await ctx.runMutation(api.analysis.updateStatus, {
+      id: analysisId,
+      status: 'analyzing',
+    })
+
+    try {
+      // Criar arquivo virtual com o código
+      const files = [{
+        path: 'manual-code.txt',
+        content: args.codeSnippet,
+      }]
+
+      console.log('[Manual Analysis] Analyzing code snippet')
+
+      // Detectar tecnologias
+      const detectedTechs = detectTechnologies(files)
+
+      console.log(`[Manual Analysis] Detected ${detectedTechs.length} technologies`)
+
+      if (detectedTechs.length === 0) {
+        throw new Error('No technologies detected in code snippet. Try including package.json, imports, or configuration files.')
+      }
+
+      // Gerar resumo
+      const analysisSummary = generateAnalysisSummary(detectedTechs)
+
+      // Atualizar resultados
+      await ctx.runMutation(api.analysis.updateResults, {
+        id: analysisId,
+        detectedTechs,
+        analysisSummary,
+      })
+
+      return analysisId
+    } catch (error) {
+      console.error('[Manual Analysis] Failed:', error)
+
+      await ctx.runMutation(api.analysis.updateStatus, {
+        id: analysisId,
+        status: 'failed',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      })
+
+      throw error
+    }
+  },
+})
+
 // Action para análise de repositório
 export const analyzeRepo = action({
   args: {

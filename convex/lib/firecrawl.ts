@@ -14,14 +14,20 @@ export function parseGitHubUrl(url: string): {
   branch?: string
 } | null {
   try {
+    // Remove trailing slash e .git
+    const cleanUrl = url.trim().replace(/\.git$/, '').replace(/\/$/, '')
+
     const githubRegex = /github\.com\/([^\/]+)\/([^\/]+)(?:\/tree\/([^\/]+))?/
-    const match = url.match(githubRegex)
+    const match = cleanUrl.match(githubRegex)
 
     if (!match) return null
 
+    // Remove qualquer sufixo do repo (ex: .git que não foi pego antes)
+    const repo = match[2].replace(/\.git$/, '')
+
     return {
       owner: match[1],
-      repo: match[2],
+      repo: repo,
       branch: match[3],
     }
   } catch {
@@ -162,6 +168,89 @@ export async function fetchGitHubFilesFallback(
     'schema.prisma',
     'drizzle.config.ts',
     'convex.json',
+    // Flutter/Dart
+    'pubspec.yaml',
+    'pubspec.lock',
+    // Python
+    'requirements.txt',
+    'pyproject.toml',
+    'Pipfile',
+    'setup.py',
+    'manage.py',
+    // Go
+    'go.mod',
+    'go.sum',
+    // Rust
+    'Cargo.toml',
+    'Cargo.lock',
+    // Java/Kotlin
+    'pom.xml',
+    'build.gradle',
+    'build.gradle.kts',
+    'gradlew',
+    'settings.gradle',
+    // Swift
+    'Package.swift',
+    'Podfile',
+    // C#/.NET
+    'project.json',
+    // PHP
+    'composer.json',
+    'composer.lock',
+    // Ruby
+    'Gemfile',
+    'Gemfile.lock',
+    'Rakefile',
+    // Elixir
+    'mix.exs',
+    'mix.lock',
+    // Scala
+    'build.sbt',
+    // Haskell
+    'stack.yaml',
+    // Clojure
+    'project.clj',
+    'deps.edn',
+    // Erlang
+    'rebar.config',
+    // R
+    'DESCRIPTION',
+    // Julia
+    'Project.toml',
+    'Manifest.toml',
+    // Zig
+    'build.zig',
+    // C/C++
+    'CMakeLists.txt',
+    'Makefile',
+    // Solidity
+    'hardhat.config.js',
+    'truffle-config.js',
+    // Vue/Nuxt
+    'nuxt.config.js',
+    'nuxt.config.ts',
+    // Angular
+    'angular.json',
+    // Svelte
+    'svelte.config.js',
+    // NestJS
+    'nest-cli.json',
+    // Spring
+    'application.properties',
+    'application.yml',
+    // Rails
+    'config/routes.rb',
+    // Laravel
+    'artisan',
+    // ASP.NET
+    'appsettings.json',
+    // Unity
+    'ProjectSettings/ProjectVersion.txt',
+    // Godot
+    'project.godot',
+    // React Native
+    'app.json',
+    'metro.config.js',
   ]
 
   // Buscar cada arquivo

@@ -33,7 +33,12 @@ export default function AppClerkProvider({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <ClerkProvider
+      publishableKey={PUBLISHABLE_KEY}
+      afterSignOutUrl="/"
+      signInFallbackRedirectUrl="/analyze"
+      signUpFallbackRedirectUrl="/analyze"
+    >
       <UserSyncWrapper>{children}</UserSyncWrapper>
     </ClerkProvider>
   )

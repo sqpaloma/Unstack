@@ -1,57 +1,17 @@
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { useNavigate } from "@tanstack/react-router";
-import { useAction } from "convex/react";
-import { useState } from "react";
-import { api } from "../../../convex/_generated/api";
 import * as Sentry from "@sentry/tanstackstart-react";
 import { Github } from "lucide-react";
 
 export function Hero() {
-	const [githubUrl, setGithubUrl] = useState("");
-	const [isAnalyzing, setIsAnalyzing] = useState(false);
-	const [showLoginModal, setShowLoginModal] = useState(false);
 	const navigate = useNavigate();
-	const createAndAnalyze = useAction(api.analysis.createAndAnalyzeFromUrl);
 
-	const isValidGitHubUrl = (url: string) => {
-		const pattern = /^https?:\/\/(www\.)?github\.com\/[\w-]+\/[\w.-]+\/?$/;
-		return pattern.test(url);
-	};
-
-	const handleAnalyze = async () => {
-		if (!isValidGitHubUrl(githubUrl)) {
-			alert("Por favor, insira uma URL válida do GitHub (ex: https://github.com/owner/repo)");
-			return;
-		}
-
-		setIsAnalyzing(true);
-
+	const handleAnalyze = () => {
 		Sentry.captureMessage("home_analyze_clicked", {
 			level: "info",
-			extra: { githubUrl },
 		});
 
-		try {
-			const analysisId = await createAndAnalyze({ githubUrl });
-
-			navigate({
-				to: "/options",
-				search: { analysisId },
-			});
-		} catch (error) {
-			console.error("Error analyzing repository:", error);
-			Sentry.captureException(error, {
-				extra: { githubUrl },
-			});
-			alert("Erro ao analisar repositório: " + (error as Error).message);
-		} finally {
-			setIsAnalyzing(false);
-		}
-	};
-
-	const handleAnalyzeClick = () => {
-		// SignedIn users can proceed directly
-		// SignedOut users will see a login prompt via showLoginModal
+		navigate({ to: "/analyze" });
 	};
 
 	return (
@@ -81,27 +41,14 @@ export function Hero() {
 				</p>
 
 				<SignedIn>
-					<div className="flex flex-col items-center gap-4 max-w-2xl mx-auto">
-						<div className="flex w-full gap-3">
-							<div className="relative flex-1">
-								<Github className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-								<input
-									type="url"
-									value={githubUrl}
-									onChange={(e) => setGithubUrl(e.target.value)}
-									placeholder="https://github.com/owner/repo"
-									className="w-full pl-12 pr-4 py-4 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
-									disabled={isAnalyzing}
-								/>
-							</div>
-							<button
-								onClick={handleAnalyze}
-								disabled={isAnalyzing || !githubUrl}
-								className="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 whitespace-nowrap"
-							>
-								{isAnalyzing ? "Analisando..." : "Analisar repositório"}
-							</button>
-						</div>
+					<div className="flex flex-col items-center gap-4">
+						<button
+							onClick={handleAnalyze}
+							className="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 flex items-center gap-2"
+						>
+							<Github className="w-5 h-5" />
+							Analisar repositório
+						</button>
 						<a
 							href="#como-funciona"
 							className="text-cyan-400 hover:text-cyan-300 transition-colors text-sm underline"

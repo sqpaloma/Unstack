@@ -54,6 +54,203 @@ const TECH_PATTERNS: Record<
       { type: 'content', match: /node:/, confidence: 0.85 },
     ],
   },
+  dart: {
+    name: 'Dart',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'pubspec.yaml', confidence: 0.95 },
+      { type: 'content', match: /\.dart$/, confidence: 0.8 },
+    ],
+  },
+  python: {
+    name: 'Python',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'requirements.txt', confidence: 0.9 },
+      { type: 'file', match: 'pyproject.toml', confidence: 0.95 },
+      { type: 'file', match: 'Pipfile', confidence: 0.9 },
+      { type: 'content', match: /\.py$/, confidence: 0.8 },
+    ],
+  },
+  go: {
+    name: 'Go',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'go.mod', confidence: 0.95 },
+      { type: 'file', match: 'go.sum', confidence: 0.9 },
+      { type: 'content', match: /\.go$/, confidence: 0.8 },
+    ],
+  },
+  rust: {
+    name: 'Rust',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'Cargo.toml', confidence: 0.95 },
+      { type: 'file', match: 'Cargo.lock', confidence: 0.9 },
+      { type: 'content', match: /\.rs$/, confidence: 0.8 },
+    ],
+  },
+  java: {
+    name: 'Java',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'pom.xml', confidence: 0.95 },
+      { type: 'file', match: 'build.gradle', confidence: 0.9 },
+      { type: 'content', match: /\.java$/, confidence: 0.8 },
+    ],
+  },
+  kotlin: {
+    name: 'Kotlin',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'build.gradle.kts', confidence: 0.95 },
+      { type: 'content', match: /\.kt$/, confidence: 0.9 },
+    ],
+  },
+  swift: {
+    name: 'Swift',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'Package.swift', confidence: 0.95 },
+      { type: 'content', match: /\.swift$/, confidence: 0.9 },
+    ],
+  },
+  csharp: {
+    name: 'C#',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: /\.csproj$/, confidence: 0.95 },
+      { type: 'file', match: /\.sln$/, confidence: 0.9 },
+      { type: 'content', match: /\.cs$/, confidence: 0.85 },
+    ],
+  },
+  cpp: {
+    name: 'C++',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'CMakeLists.txt', confidence: 0.9 },
+      { type: 'content', match: /\.(cpp|hpp|cc|cxx)$/, confidence: 0.85 },
+    ],
+  },
+  c: {
+    name: 'C',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'Makefile', confidence: 0.6 },
+      { type: 'content', match: /\.(c|h)$/, confidence: 0.8 },
+    ],
+  },
+  php: {
+    name: 'PHP',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'composer.json', confidence: 0.95 },
+      { type: 'content', match: /\.php$/, confidence: 0.85 },
+    ],
+  },
+  ruby: {
+    name: 'Ruby',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'Gemfile', confidence: 0.95 },
+      { type: 'file', match: 'Rakefile', confidence: 0.85 },
+      { type: 'content', match: /\.rb$/, confidence: 0.8 },
+    ],
+  },
+  elixir: {
+    name: 'Elixir',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'mix.exs', confidence: 0.95 },
+      { type: 'content', match: /\.(ex|exs)$/, confidence: 0.85 },
+    ],
+  },
+  scala: {
+    name: 'Scala',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'build.sbt', confidence: 0.95 },
+      { type: 'content', match: /\.scala$/, confidence: 0.9 },
+    ],
+  },
+  haskell: {
+    name: 'Haskell',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: /\.cabal$/, confidence: 0.95 },
+      { type: 'file', match: 'stack.yaml', confidence: 0.95 },
+      { type: 'content', match: /\.hs$/, confidence: 0.9 },
+    ],
+  },
+  clojure: {
+    name: 'Clojure',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'project.clj', confidence: 0.95 },
+      { type: 'content', match: /\.(clj|cljs)$/, confidence: 0.9 },
+    ],
+  },
+  erlang: {
+    name: 'Erlang',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'rebar.config', confidence: 0.95 },
+      { type: 'content', match: /\.erl$/, confidence: 0.9 },
+    ],
+  },
+  lua: {
+    name: 'Lua',
+    category: 'language',
+    patterns: [
+      { type: 'content', match: /\.lua$/, confidence: 0.9 },
+    ],
+  },
+  r: {
+    name: 'R',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'DESCRIPTION', confidence: 0.85 },
+      { type: 'content', match: /\.(R|Rmd)$/, confidence: 0.9 },
+    ],
+  },
+  julia: {
+    name: 'Julia',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'Project.toml', confidence: 0.9 },
+      { type: 'content', match: /\.jl$/, confidence: 0.9 },
+    ],
+  },
+  zig: {
+    name: 'Zig',
+    category: 'language',
+    patterns: [
+      { type: 'file', match: 'build.zig', confidence: 0.95 },
+      { type: 'content', match: /\.zig$/, confidence: 0.9 },
+    ],
+  },
+  solidity: {
+    name: 'Solidity',
+    category: 'language',
+    patterns: [
+      { type: 'content', match: /\.sol$/, confidence: 0.95 },
+      { type: 'file', match: 'hardhat.config.js', confidence: 0.85 },
+    ],
+  },
+  shell: {
+    name: 'Shell Script',
+    category: 'language',
+    patterns: [
+      { type: 'content', match: /\.(sh|bash|zsh)$/, confidence: 0.85 },
+    ],
+  },
+  powershell: {
+    name: 'PowerShell',
+    category: 'language',
+    patterns: [
+      { type: 'content', match: /\.ps1$/, confidence: 0.95 },
+    ],
+  },
 
   // Frameworks
   react: {
@@ -96,12 +293,255 @@ const TECH_PATTERNS: Record<
       { type: 'file', match: /vite\.config\.(js|ts|mjs)$/, confidence: 0.95 },
     ],
   },
+  flutter: {
+    name: 'Flutter',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: 'pubspec.yaml', confidence: 0.9 },
+      { type: 'content', match: /flutter:/, confidence: 0.95 },
+      { type: 'content', match: /dependencies:\s+flutter:/, confidence: 0.95 },
+    ],
+  },
   tailwind: {
     name: 'Tailwind CSS',
     category: 'framework',
     patterns: [
       { type: 'package', match: 'tailwindcss', confidence: 0.95 },
       { type: 'file', match: /tailwind\.config\.(js|ts|mjs|cjs)$/, confidence: 0.95 },
+    ],
+  },
+  django: {
+    name: 'Django',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: 'manage.py', confidence: 0.95 },
+      { type: 'content', match: /django/, confidence: 0.9 },
+    ],
+  },
+  fastapi: {
+    name: 'FastAPI',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /from fastapi import/, confidence: 0.95 },
+      { type: 'content', match: /fastapi/, confidence: 0.85 },
+    ],
+  },
+  vue: {
+    name: 'Vue.js',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'vue', confidence: 0.95 },
+      { type: 'content', match: /import.*from\s+['"]vue['"]/, confidence: 0.9 },
+    ],
+  },
+  angular: {
+    name: 'Angular',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: '@angular/core', confidence: 0.95 },
+      { type: 'file', match: 'angular.json', confidence: 0.95 },
+    ],
+  },
+  svelte: {
+    name: 'Svelte',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'svelte', confidence: 0.95 },
+      { type: 'file', match: 'svelte.config.js', confidence: 0.95 },
+      { type: 'content', match: /\.svelte$/, confidence: 0.9 },
+    ],
+  },
+  sveltekit: {
+    name: 'SvelteKit',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: '@sveltejs/kit', confidence: 0.95 },
+    ],
+  },
+  nuxt: {
+    name: 'Nuxt.js',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'nuxt', confidence: 0.95 },
+      { type: 'file', match: 'nuxt.config.js', confidence: 0.95 },
+      { type: 'file', match: 'nuxt.config.ts', confidence: 0.95 },
+    ],
+  },
+  solidjs: {
+    name: 'Solid.js',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'solid-js', confidence: 0.95 },
+    ],
+  },
+  qwik: {
+    name: 'Qwik',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: '@builder.io/qwik', confidence: 0.95 },
+    ],
+  },
+  express: {
+    name: 'Express.js',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'express', confidence: 0.95 },
+    ],
+  },
+  fastify: {
+    name: 'Fastify',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'fastify', confidence: 0.95 },
+    ],
+  },
+  nestjs: {
+    name: 'NestJS',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: '@nestjs/core', confidence: 0.95 },
+      { type: 'file', match: 'nest-cli.json', confidence: 0.95 },
+    ],
+  },
+  flask: {
+    name: 'Flask',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /from flask import/, confidence: 0.95 },
+      { type: 'content', match: /flask/, confidence: 0.85 },
+    ],
+  },
+  spring: {
+    name: 'Spring Boot',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /spring-boot/, confidence: 0.95 },
+      { type: 'file', match: 'application.properties', confidence: 0.8 },
+      { type: 'file', match: 'application.yml', confidence: 0.8 },
+    ],
+  },
+  rails: {
+    name: 'Ruby on Rails',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: 'Gemfile', confidence: 0.7 },
+      { type: 'content', match: /gem ['"]rails['"]/, confidence: 0.95 },
+      { type: 'file', match: 'config/routes.rb', confidence: 0.9 },
+    ],
+  },
+  laravel: {
+    name: 'Laravel',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: 'artisan', confidence: 0.95 },
+      { type: 'content', match: /laravel\/framework/, confidence: 0.95 },
+    ],
+  },
+  aspnet: {
+    name: 'ASP.NET Core',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /Microsoft\.AspNetCore/, confidence: 0.95 },
+      { type: 'file', match: 'appsettings.json', confidence: 0.7 },
+    ],
+  },
+  gin: {
+    name: 'Gin (Go)',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /github\.com\/gin-gonic\/gin/, confidence: 0.95 },
+    ],
+  },
+  fiber: {
+    name: 'Fiber (Go)',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /github\.com\/gofiber\/fiber/, confidence: 0.95 },
+    ],
+  },
+  echo: {
+    name: 'Echo (Go)',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /github\.com\/labstack\/echo/, confidence: 0.95 },
+    ],
+  },
+  phoenix: {
+    name: 'Phoenix',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /phoenix/, confidence: 0.9 },
+      { type: 'file', match: 'mix.exs', confidence: 0.7 },
+    ],
+  },
+  reactnative: {
+    name: 'React Native',
+    category: 'framework',
+    patterns: [
+      { type: 'package', match: 'react-native', confidence: 0.95 },
+      { type: 'file', match: 'app.json', confidence: 0.7 },
+    ],
+  },
+  unity: {
+    name: 'Unity',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: 'ProjectSettings/ProjectVersion.txt', confidence: 0.95 },
+      { type: 'content', match: /UnityEngine/, confidence: 0.9 },
+    ],
+  },
+  unreal: {
+    name: 'Unreal Engine',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: /\.uproject$/, confidence: 0.95 },
+    ],
+  },
+  godot: {
+    name: 'Godot',
+    category: 'framework',
+    patterns: [
+      { type: 'file', match: 'project.godot', confidence: 0.95 },
+      { type: 'content', match: /\.gd$/, confidence: 0.9 },
+    ],
+  },
+  tensorflow: {
+    name: 'TensorFlow',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /tensorflow/, confidence: 0.95 },
+      { type: 'content', match: /import tensorflow/, confidence: 0.95 },
+    ],
+  },
+  pytorch: {
+    name: 'PyTorch',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /torch/, confidence: 0.9 },
+      { type: 'content', match: /import torch/, confidence: 0.95 },
+    ],
+  },
+  sklearn: {
+    name: 'Scikit-Learn',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /sklearn/, confidence: 0.95 },
+      { type: 'content', match: /from sklearn/, confidence: 0.95 },
+    ],
+  },
+  keras: {
+    name: 'Keras',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /keras/, confidence: 0.95 },
+      { type: 'content', match: /from keras/, confidence: 0.95 },
+    ],
+  },
+  jax: {
+    name: 'JAX',
+    category: 'framework',
+    patterns: [
+      { type: 'content', match: /import jax/, confidence: 0.95 },
     ],
   },
 
