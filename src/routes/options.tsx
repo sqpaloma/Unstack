@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
+import * as Sentry from "@sentry/tanstackstart-react";
 
 export const Route = createFileRoute("/options")({
 	component: OptionsPage,
@@ -95,10 +96,29 @@ function OptionsPage() {
 		if (!convexUser || !latestAnalysis) return;
 
 		setIsGeneratingPlan(true);
+
+		// Telemetry: plan_generate_started
+		Sentry.captureMessage("plan_generate_started", {
+			level: "info",
+			extra: {
+				userId: convexUser._id,
+				analysisId: latestAnalysis._id,
+			},
+		});
+
 		try {
 			await generatePlanAction({
 				userId: convexUser._id,
 				analysisId: latestAnalysis._id,
+			});
+
+			// Telemetry: plan_generate_success
+			Sentry.captureMessage("plan_generate_success", {
+				level: "info",
+				extra: {
+					userId: convexUser._id,
+					analysisId: latestAnalysis._id,
+				},
 			});
 
 			// Navigate to plan page with analysisId
@@ -108,6 +128,15 @@ function OptionsPage() {
 			});
 		} catch (error) {
 			console.error("Error generating plan:", error);
+
+			// Telemetry: plan_generate_error
+			Sentry.captureException(error, {
+				extra: {
+					userId: convexUser._id,
+					analysisId: latestAnalysis._id,
+				},
+			});
+
 			alert("Erro ao gerar plano: " + (error as Error).message);
 		} finally {
 			setIsGeneratingPlan(false);

@@ -265,60 +265,114 @@ export const generate = action({
     analysisId: v.id('githubAnalysis'),
   },
   handler: async (ctx, args): Promise<Id<'plans'>[]> => {
-    // Fetch analysis
-    const analysis = await ctx.runQuery(api.analysis.getById, {
-      id: args.analysisId,
-    })
+    const startTime = Date.now()
 
-    if (!analysis) {
-      throw new Error('Analysis not found')
-    }
-
-    if (!analysis.detectedTechs || analysis.detectedTechs.length === 0) {
-      throw new Error('No technologies detected in analysis')
-    }
-
-    // Fetch assessments for this analysis
-    const assessments = await ctx.runQuery(api.assessments.getByAnalysis, {
+    console.log('[Plan Generation] Started', {
+      userId: args.userId,
       analysisId: args.analysisId,
     })
 
-    // Create assessment map for quick lookup
-    const assessmentMap = new Map<string, 'sei' | 'nocao' | 'nao_sei'>()
-    assessments.forEach((a) => {
-      assessmentMap.set(a.technology, a.level)
-    })
+    // TODO: Send to Sentry
+    // Sentry.captureMessage('plan_generate_started', {
+    //   extra: {
+    //     userId: args.userId,
+    //     analysisId: args.analysisId,
+    //   },
+    // })
 
-    // Generate plans for each technology that needs learning (not 'sei')
-    const planIds: Id<'plans'>[] = []
+    try {
+      // Fetch analysis
+      const analysis = await ctx.runQuery(api.analysis.getById, {
+        id: args.analysisId,
+      })
 
-    for (const tech of analysis.detectedTechs) {
-      const level = assessmentMap.get(tech.key) || 'nao_sei'
-
-      // Only create plan if user doesn't fully know it
-      if (level !== 'sei') {
-        const modules = generateModulesForTech(
-          tech.key,
-          tech.name,
-          tech.category,
-          level
-        )
-
-        const planId = await ctx.runMutation(api.plans.create, {
-          userId: args.userId,
-          analysisId: args.analysisId,
-          technology: tech.key,
-          modules,
-        })
-
-        planIds.push(planId)
+      if (!analysis) {
+        throw new Error('Analysis not found')
       }
-    }
 
-    if (planIds.length === 0) {
-      throw new Error('No plans generated - you already know all technologies!')
-    }
+      if (!analysis.detectedTechs || analysis.detectedTechs.length === 0) {
+        throw new Error('No technologies detected in analysis')
+      }
 
-    return planIds
+      // Fetch assessments for this analysis
+      const assessments = await ctx.runQuery(api.assessments.getByAnalysis, {
+        analysisId: args.analysisId,
+      })
+
+      // Create assessment map for quick lookup
+      const assessmentMap = new Map<string, 'sei' | 'nocao' | 'nao_sei'>()
+      assessments.forEach((a) => {
+        assessmentMap.set(a.technology, a.level)
+      })
+
+      // Generate plans for each technology that needs learning (not 'sei')
+      const planIds: Id<'plans'>[] = []
+
+      for (const tech of analysis.detectedTechs) {
+        const level = assessmentMap.get(tech.key) || 'nao_sei'
+
+        // Only create plan if user doesn't fully know it
+        if (level !== 'sei') {
+          const modules = generateModulesForTech(
+            tech.key,
+            tech.name,
+            tech.category,
+            level
+          )
+
+          const planId = await ctx.runMutation(api.plans.create, {
+            userId: args.userId,
+            analysisId: args.analysisId,
+            technology: tech.key,
+            modules,
+          })
+
+          planIds.push(planId)
+        }
+      }
+
+      if (planIds.length === 0) {
+        throw new Error('No plans generated - you already know all technologies!')
+      }
+
+      const duration = Date.now() - startTime
+      console.log('[Plan Generation] Success', {
+        userId: args.userId,
+        analysisId: args.analysisId,
+        plansCount: planIds.length,
+        duration,
+      })
+
+      // TODO: Send to Sentry
+      // Sentry.captureMessage('plan_generate_success', {
+      //   extra: {
+      //     userId: args.userId,
+      //     analysisId: args.analysisId,
+      //     plansCount: planIds.length,
+      //     duration,
+      //   },
+      // })
+
+      return planIds
+    } catch (error) {
+      const duration = Date.now() - startTime
+      console.error('[Plan Generation] Error', {
+        userId: args.userId,
+        analysisId: args.analysisId,
+        error,
+        duration,
+      })
+
+      // TODO: Send to Sentry
+      // Sentry.captureException(error, {
+      //   extra: {
+      //     userId: args.userId,
+      //     analysisId: args.analysisId,
+      //     duration,
+      //   },
+      // })
+
+      throw error
+    }
   },
 })
