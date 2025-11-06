@@ -1,9 +1,10 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
-import { useQuery } from 'convex/react'
+import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { Id } from '../../convex/_generated/dataModel'
 import { BookOpen, Clock, ExternalLink, CheckCircle2 } from 'lucide-react'
+import { useMemo } from 'react'
 
 export const Route = createFileRoute('/plan')({
   component: PlanPage,
@@ -36,6 +37,54 @@ function PlanPage() {
     api.analysis.getById,
     analysisId ? { id: analysisId as Id<'githubAnalysis'> } : 'skip'
   )
+
+  // Fetch progress for all plans
+  const allProgress = useQuery(
+    api.progress.list,
+    {}
+  )
+
+  const toggleItemMutation = useMutation(api.progress.toggleItem)
+
+  // Create a map of completed modules by planId and moduleIndex
+  const completedModules = useMemo(() => {
+    if (!allProgress) return new Map<string, Set<number>>()
+
+    const map = new Map<string, Set<number>>()
+    allProgress.forEach((progress) => {
+      const key = progress.planId
+      if (!map.has(key)) {
+        map.set(key, new Set())
+      }
+      if (progress.completedAt) {
+        map.get(key)!.add(progress.moduleIndex)
+      }
+    })
+    return map
+  }, [allProgress])
+
+  const isModuleCompleted = (planId: Id<'plans'>, moduleIndex: number) => {
+    return completedModules.get(planId)?.has(moduleIndex) || false
+  }
+
+  const handleToggleModule = async (
+    planId: Id<'plans'>,
+    technology: string,
+    moduleIndex: number
+  ) => {
+    if (!convexUser) return
+
+    try {
+      await toggleItemMutation({
+        userId: convexUser._id,
+        planId,
+        technology,
+        moduleIndex,
+      })
+    } catch (error) {
+      console.error('Error toggling module:', error)
+    }
+  }
 
   const handleGoToDashboard = () => {
     navigate({ to: '/' })
@@ -160,27 +209,55 @@ function PlanPage() {
                     </h2>
 
                     <div className="space-y-4">
-                      {plan.modules.map((module, idx) => (
-                        <div
-                          key={idx}
-                          className="bg-slate-900/50 border border-slate-600 rounded-lg p-5"
-                        >
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="flex-1">
-                              <h3 className="text-lg font-semibold text-white mb-1">
-                                {module.title}
-                              </h3>
-                              <p className="text-gray-400 text-sm">
-                                {module.description}
-                              </p>
+                      {plan.modules.map((module, idx) => {
+                        const isCompleted = isModuleCompleted(plan._id, idx)
+                        return (
+                          <div
+                            key={idx}
+                            className={`bg-slate-900/50 border rounded-lg p-5 transition-all ${
+                              isCompleted
+                                ? 'border-green-500/50 bg-green-900/10'
+                                : 'border-slate-600'
+                            }`}
+                          >
+                            <div className="flex items-start gap-4 mb-3">
+                              <label className="flex items-center cursor-pointer mt-1">
+                                <input
+                                  type="checkbox"
+                                  checked={isCompleted}
+                                  onChange={() =>
+                                    handleToggleModule(
+                                      plan._id,
+                                      plan.technology,
+                                      idx
+                                    )
+                                  }
+                                  className="w-5 h-5 text-green-500 bg-slate-700 border-slate-600 rounded focus:ring-green-500 focus:ring-2"
+                                />
+                              </label>
+
+                              <div className="flex-1">
+                                <h3
+                                  className={`text-lg font-semibold mb-1 ${
+                                    isCompleted
+                                      ? 'text-green-400 line-through'
+                                      : 'text-white'
+                                  }`}
+                                >
+                                  {module.title}
+                                </h3>
+                                <p className="text-gray-400 text-sm">
+                                  {module.description}
+                                </p>
+                              </div>
+
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-cyan-400" />
+                                <span className="text-cyan-400 font-medium">
+                                  {module.estimatedHours}h
+                                </span>
+                              </div>
                             </div>
-                            <div className="flex items-center gap-2 ml-4">
-                              <Clock className="w-4 h-4 text-cyan-400" />
-                              <span className="text-cyan-400 font-medium">
-                                {module.estimatedHours}h
-                              </span>
-                            </div>
-                          </div>
 
                           {module.resources.length > 0 && (
                             <div className="space-y-2">
@@ -207,7 +284,7 @@ function PlanPage() {
                             </div>
                           )}
 
-                          {module.completed && (
+                          {isCompleted && (
                             <div className="mt-3 flex items-center gap-2 text-green-400">
                               <CheckCircle2 className="w-5 h-5" />
                               <span className="text-sm font-medium">
@@ -216,7 +293,8 @@ function PlanPage() {
                             </div>
                           )}
                         </div>
-                      ))}
+                        )
+                      })}
                     </div>
                   </div>
                 ))}

@@ -93,6 +93,42 @@ export const update = mutation({
   },
 })
 
+export const toggleItem = mutation({
+  args: {
+    userId: v.optional(v.id('users')),
+    planId: v.id('plans'),
+    technology: v.string(),
+    moduleIndex: v.number(),
+  },
+  handler: async (ctx, args) => {
+    // Check if progress already exists for this module
+    const existing = await ctx.db
+      .query('progress')
+      .withIndex('by_plan', (q) => q.eq('planId', args.planId))
+      .collect()
+
+    const existingProgress = existing.find(
+      (p) => p.moduleIndex === args.moduleIndex
+    )
+
+    if (existingProgress) {
+      // If exists, toggle by deleting it (uncomplete)
+      await ctx.db.delete(existingProgress._id)
+      return { completed: false }
+    } else {
+      // If doesn't exist, create it (complete)
+      await ctx.db.insert('progress', {
+        userId: args.userId,
+        planId: args.planId,
+        technology: args.technology,
+        moduleIndex: args.moduleIndex,
+        completedAt: Date.now(),
+      })
+      return { completed: true }
+    }
+  },
+})
+
 export const remove = mutation({
   args: { id: v.id('progress') },
   handler: async (ctx, args) => {
