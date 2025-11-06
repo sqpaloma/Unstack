@@ -1,5 +1,7 @@
-import { mutation, query } from './_generated/server'
+import { mutation, query, action } from './_generated/server'
 import { v } from 'convex/values'
+import { api } from './_generated/api'
+import { Id } from './_generated/dataModel'
 
 const moduleSchema = v.object({
   title: v.string(),
@@ -112,5 +114,211 @@ export const remove = mutation({
   args: { id: v.id('plans') },
   handler: async (ctx, args) => {
     return await ctx.db.delete(args.id)
+  },
+})
+
+// Helper function to generate modules based on tech level
+function generateModulesForTech(
+  techKey: string,
+  techName: string,
+  category: string,
+  level: 'sei' | 'nocao' | 'nao_sei'
+) {
+  const modules = []
+
+  // Base module structure varies by level
+  if (level === 'nao_sei') {
+    // Beginner: fundamentals + basics + practice
+    modules.push(
+      {
+        title: `Fundamentos de ${techName}`,
+        description: `Introdução aos conceitos básicos e arquitetura do ${techName}`,
+        estimatedHours: 4,
+        resources: [
+          {
+            type: 'doc' as const,
+            title: `${techName} Official Documentation`,
+            url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' official documentation')}`,
+          },
+          {
+            type: 'video' as const,
+            title: `${techName} Tutorial for Beginners`,
+            url: `https://www.youtube.com/results?search_query=${encodeURIComponent(techName + ' tutorial for beginners')}`,
+          },
+        ],
+        completed: false,
+      },
+      {
+        title: `Primeiros Passos com ${techName}`,
+        description: `Configuração de ambiente e primeiro projeto`,
+        estimatedHours: 6,
+        resources: [
+          {
+            type: 'article' as const,
+            title: `Getting Started with ${techName}`,
+            url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' getting started guide')}`,
+          },
+        ],
+        completed: false,
+      },
+      {
+        title: `Prática com ${techName}`,
+        description: `Exercícios práticos e projeto básico`,
+        estimatedHours: 8,
+        resources: [
+          {
+            type: 'course' as const,
+            title: `${techName} Hands-on Course`,
+            url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' course')}`,
+          },
+        ],
+        completed: false,
+      }
+    )
+  } else if (level === 'nocao') {
+    // Intermediate: advanced concepts + best practices
+    modules.push(
+      {
+        title: `Conceitos Avançados de ${techName}`,
+        description: `Aprofundamento em recursos avançados e padrões`,
+        estimatedHours: 5,
+        resources: [
+          {
+            type: 'doc' as const,
+            title: `${techName} Advanced Guide`,
+            url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' advanced guide')}`,
+          },
+        ],
+        completed: false,
+      },
+      {
+        title: `Best Practices com ${techName}`,
+        description: `Padrões de arquitetura e melhores práticas`,
+        estimatedHours: 4,
+        resources: [
+          {
+            type: 'article' as const,
+            title: `${techName} Best Practices`,
+            url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' best practices')}`,
+          },
+        ],
+        completed: false,
+      }
+    )
+  } else {
+    // Expert: optimization + edge cases
+    modules.push({
+      title: `Otimização e Performance com ${techName}`,
+      description: `Técnicas avançadas de otimização e casos especiais`,
+      estimatedHours: 3,
+      resources: [
+        {
+          type: 'article' as const,
+          title: `${techName} Performance Optimization`,
+          url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' performance optimization')}`,
+        },
+      ],
+      completed: false,
+    })
+  }
+
+  // Add category-specific modules
+  if (category === 'auth' && level !== 'sei') {
+    modules.push({
+      title: `Segurança e Autenticação com ${techName}`,
+      description: `OAuth, JWT, sessions, e melhores práticas de segurança`,
+      estimatedHours: 6,
+      resources: [
+        {
+          type: 'doc' as const,
+          title: `${techName} Security Guide`,
+          url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' security authentication guide')}`,
+        },
+      ],
+      completed: false,
+    })
+  }
+
+  if (category === 'db' && level !== 'sei') {
+    modules.push({
+      title: `Modelagem e Queries com ${techName}`,
+      description: `Schema design, queries eficientes, e migrations`,
+      estimatedHours: 7,
+      resources: [
+        {
+          type: 'doc' as const,
+          title: `${techName} Schema Design`,
+          url: `https://www.google.com/search?q=${encodeURIComponent(techName + ' schema design best practices')}`,
+        },
+      ],
+      completed: false,
+    })
+  }
+
+  return modules
+}
+
+// Action to generate learning plan from analysis + assessments
+export const generate = action({
+  args: {
+    userId: v.optional(v.id('users')),
+    analysisId: v.id('githubAnalysis'),
+  },
+  handler: async (ctx, args): Promise<Id<'plans'>[]> => {
+    // Fetch analysis
+    const analysis = await ctx.runQuery(api.analysis.getById, {
+      id: args.analysisId,
+    })
+
+    if (!analysis) {
+      throw new Error('Analysis not found')
+    }
+
+    if (!analysis.detectedTechs || analysis.detectedTechs.length === 0) {
+      throw new Error('No technologies detected in analysis')
+    }
+
+    // Fetch assessments for this analysis
+    const assessments = await ctx.runQuery(api.assessments.getByAnalysis, {
+      analysisId: args.analysisId,
+    })
+
+    // Create assessment map for quick lookup
+    const assessmentMap = new Map<string, 'sei' | 'nocao' | 'nao_sei'>()
+    assessments.forEach((a) => {
+      assessmentMap.set(a.technology, a.level)
+    })
+
+    // Generate plans for each technology that needs learning (not 'sei')
+    const planIds: Id<'plans'>[] = []
+
+    for (const tech of analysis.detectedTechs) {
+      const level = assessmentMap.get(tech.key) || 'nao_sei'
+
+      // Only create plan if user doesn't fully know it
+      if (level !== 'sei') {
+        const modules = generateModulesForTech(
+          tech.key,
+          tech.name,
+          tech.category,
+          level
+        )
+
+        const planId = await ctx.runMutation(api.plans.create, {
+          userId: args.userId,
+          analysisId: args.analysisId,
+          technology: tech.key,
+          modules,
+        })
+
+        planIds.push(planId)
+      }
+    }
+
+    if (planIds.length === 0) {
+      throw new Error('No plans generated - you already know all technologies!')
+    }
+
+    return planIds
   },
 })
