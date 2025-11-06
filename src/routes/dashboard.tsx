@@ -2,8 +2,9 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
 import { useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
-import { useMemo } from 'react'
-import { BookOpen, Trophy, Target, TrendingUp, CheckCircle2 } from 'lucide-react'
+import { useMemo, useState } from 'react'
+import { BookOpen, Trophy, Target, TrendingUp, CheckCircle2, Clock, ArrowRight, Filter } from 'lucide-react'
+import { Id } from '../../convex/_generated/dataModel'
 
 export const Route = createFileRoute('/dashboard')({
   component: DashboardPage,
@@ -16,10 +17,21 @@ interface TechProgress {
   completedModules: number
   percentage: number
   estimatedHours: number
+  nextModules: { moduleIndex: number; title: string; estimatedHours: number }[]
+}
+
+interface NextTask {
+  technology: string
+  planId: Id<'plans'>
+  moduleIndex: number
+  moduleTitle: string
+  estimatedHours: number
 }
 
 function DashboardPage() {
   const { user } = useUser()
+  const [selectedTech, setSelectedTech] = useState<string>('all')
+  const [selectedStatus, setSelectedStatus] = useState<string>('all')
 
   // Fetch Convex user
   const convexUser = useQuery(
@@ -45,6 +57,9 @@ function DashboardPage() {
       const planProgress = allProgress.filter(
         (p) => p.planId === plan._id && p.completedAt
       )
+      const completedModulesIndexes = new Set(
+        planProgress.map((p) => p.moduleIndex)
+      )
       const completedModules = planProgress.length
       const percentage =
         totalModules > 0 ? Math.round((completedModules / totalModules) * 100) : 0
@@ -54,6 +69,22 @@ function DashboardPage() {
         0
       )
 
+      // Find next incomplete modules (up to 3)
+      const nextModules = plan.modules
+        .map((module, idx) => ({
+          moduleIndex: idx,
+          title: module.title,
+          estimatedHours: module.estimatedHours,
+          completed: completedModulesIndexes.has(idx),
+        }))
+        .filter((m) => !m.completed)
+        .slice(0, 3)
+        .map(({ moduleIndex, title, estimatedHours }) => ({
+          moduleIndex,
+          title,
+          estimatedHours,
+        }))
+
       return {
         technology: plan.technology,
         planId: plan._id,
@@ -61,6 +92,7 @@ function DashboardPage() {
         completedModules,
         percentage,
         estimatedHours,
+        nextModules,
       }
     })
   }, [plans, allProgress])
@@ -96,6 +128,45 @@ function DashboardPage() {
     if (percentage >= 25) return 'bg-orange-500'
     return 'bg-red-500'
   }
+
+  // Get "Continue from where you left off" tasks
+  const nextTasks = useMemo((): NextTask[] => {
+    const tasks: NextTask[] = []
+
+    techProgress.forEach((tech) => {
+      tech.nextModules.forEach((module) => {
+        tasks.push({
+          technology: tech.technology,
+          planId: tech.planId as Id<'plans'>,
+          moduleIndex: module.moduleIndex,
+          moduleTitle: module.title,
+          estimatedHours: module.estimatedHours,
+        })
+      })
+    })
+
+    // Sort by technology and return first 3
+    return tasks.slice(0, 3)
+  }, [techProgress])
+
+  // Filter tech progress
+  const filteredTechProgress = useMemo(() => {
+    let filtered = techProgress
+
+    // Filter by technology
+    if (selectedTech !== 'all') {
+      filtered = filtered.filter((tech) => tech.technology === selectedTech)
+    }
+
+    // Filter by status
+    if (selectedStatus === 'pending') {
+      filtered = filtered.filter((tech) => tech.percentage < 100)
+    } else if (selectedStatus === 'completed') {
+      filtered = filtered.filter((tech) => tech.percentage === 100)
+    }
+
+    return filtered
+  }, [techProgress, selectedTech, selectedStatus])
 
   return (
     <>
@@ -216,13 +287,100 @@ function DashboardPage() {
                   </div>
                 </div>
 
+                {/* Continue from where you left off */}
+                {nextTasks.length > 0 && (
+                  <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <ArrowRight className="w-6 h-6 text-cyan-400" />
+                      <h2 className="text-2xl font-bold text-white">
+                        Continuar de onde parei
+                      </h2>
+                    </div>
+                    <div className="space-y-3">
+                      {nextTasks.map((task, idx) => (
+                        <Link
+                          key={`${task.planId}-${task.moduleIndex}`}
+                          to="/plan"
+                          search={{ analysisId: plans[0]?.analysisId }}
+                          className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-700/50 transition-all border border-slate-600 hover:border-cyan-500/50 group"
+                        >
+                          <div className="flex items-center gap-4 flex-1">
+                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold">
+                              {idx + 1}
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm text-gray-400 capitalize mb-1">
+                                {task.technology.replace(/-/g, ' ')}
+                              </p>
+                              <p className="text-white font-medium group-hover:text-cyan-400 transition-colors">
+                                {task.moduleTitle}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2 text-gray-400">
+                              <Clock className="w-4 h-4" />
+                              <span className="text-sm">{task.estimatedHours}h</span>
+                            </div>
+                            <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-cyan-400 transition-colors" />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Filters */}
+                <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Filter className="w-5 h-5 text-cyan-400" />
+                    <h3 className="text-lg font-semibold text-white">Filtros</h3>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Technology Filter */}
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">
+                        Tecnologia
+                      </label>
+                      <select
+                        value={selectedTech}
+                        onChange={(e) => setSelectedTech(e.target.value)}
+                        className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                      >
+                        <option value="all">Todas</option>
+                        {techProgress.map((tech) => (
+                          <option key={tech.planId} value={tech.technology}>
+                            {tech.technology.replace(/-/g, ' ')}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Status Filter */}
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">
+                        Status
+                      </label>
+                      <select
+                        value={selectedStatus}
+                        onChange={(e) => setSelectedStatus(e.target.value)}
+                        className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                      >
+                        <option value="all">Todos</option>
+                        <option value="pending">Pendentes</option>
+                        <option value="completed">Concluídos</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Technology Progress Cards */}
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold text-white mb-4">
-                    Progresso por Tecnologia
+                    Tecnologias ({filteredTechProgress.length})
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {techProgress.map((tech) => (
+                    {filteredTechProgress.map((tech) => (
                       <Link
                         key={tech.planId}
                         to="/plan"
