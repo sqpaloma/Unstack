@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as OptionsRouteImport } from './routes/options'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoConvexRouteImport } from './routes/demo/convex'
 import { Route as DemoClerkRouteImport } from './routes/demo/clerk'
@@ -33,6 +34,11 @@ const PlanRoute = PlanRouteImport.update({
 const OptionsRoute = OptionsRouteImport.update({
   id: '/options',
   path: '/options',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -103,6 +109,7 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
   '/demo/clerk': typeof DemoClerkRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
   '/demo/clerk': typeof DemoClerkRoute
@@ -138,6 +146,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/plan': typeof PlanRoute
   '/demo/clerk': typeof DemoClerkRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard'
     | '/options'
     | '/plan'
     | '/demo/clerk'
@@ -174,6 +184,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard'
     | '/options'
     | '/plan'
     | '/demo/clerk'
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dashboard'
     | '/options'
     | '/plan'
     | '/demo/clerk'
@@ -209,6 +221,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
   OptionsRoute: typeof OptionsRoute
   PlanRoute: typeof PlanRoute
   DemoClerkRoute: typeof DemoClerkRoute
@@ -239,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/options'
       fullPath: '/options'
       preLoaderRoute: typeof OptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -337,6 +357,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
   OptionsRoute: OptionsRoute,
   PlanRoute: PlanRoute,
   DemoClerkRoute: DemoClerkRoute,

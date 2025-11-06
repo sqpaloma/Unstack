@@ -87,7 +87,7 @@ function PlanPage() {
   }
 
   const handleGoToDashboard = () => {
-    navigate({ to: '/' })
+    navigate({ to: '/dashboard' })
   }
 
   const getTotalHours = () => {
