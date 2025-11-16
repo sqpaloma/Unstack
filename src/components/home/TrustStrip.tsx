@@ -9,7 +9,6 @@ export function TrustStrip() {
 		{ name: "Autumn", logo: "/logos/autumn.svg" },
 		{ name: "Sentry", logo: "/logos/sentry.svg" },
 	];
-
 	return (
 		<section className="py-12 px-6 border-y border-slate-700/50">
 			<div className="max-w-7xl mx-auto">

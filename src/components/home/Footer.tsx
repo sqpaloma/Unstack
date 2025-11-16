@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin } from "lucide-react";
+import { Github, Linkedin, Twitter } from "lucide-react";
 
 export function Footer() {
 	return (
@@ -52,7 +52,7 @@ export function Footer() {
 									rel="noopener noreferrer"
 									className="text-gray-400 hover:text-cyan-400 transition-colors text-sm"
 								>
-									TanStack Start
+									Unstack Docs
 								</a>
 							</li>
 							<li>
@@ -115,8 +115,7 @@ export function Footer() {
 				<div className="border-t border-slate-700/50 pt-8">
 					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 						<p className="text-gray-400 text-sm">
-							© {new Date().getFullYear()} Unstack. All rights
-							reserved.
+							© {new Date().getFullYear()} Unstack. All rights reserved.
 						</p>
 						<div className="flex gap-6 text-sm">
 							<a

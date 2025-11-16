@@ -230,16 +230,25 @@ export const analyzeRepo = action({
       console.log(`[GitHub Analysis] Starting analysis for ${analysis.owner}/${analysis.repo}`)
 
       // Buscar arquivos do GitHub
-      const files = await fetchGitHubFilesFallback(
-        analysis.owner,
-        analysis.repo,
-        analysis.branch
-      )
+      let files
+      try {
+        files = await fetchGitHubFilesFallback(
+          analysis.owner,
+          analysis.repo,
+          analysis.branch
+        )
+      } catch (error) {
+        // Re-throw com mensagem mais clara se for erro de acesso ao repositório
+        if (error instanceof Error) {
+          throw error
+        }
+        throw new Error('Failed to fetch repository files. Repository may be private or does not exist.')
+      }
 
       console.log(`[GitHub Analysis] Fetched ${files.length} files`)
 
       if (files.length === 0) {
-        throw new Error('No files found. Repository may be private or does not exist.')
+        throw new Error('No matching files found in repository. The repository may not contain recognized configuration files.')
       }
 
       // Detectar tecnologias

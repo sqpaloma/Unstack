@@ -1,0 +1,3921 @@
+{
+  "metadata": {
+    "source": "https://github.com/freeCodeCamp/devdocs",
+    "extracted_date": "2025-11-16",
+    "total_count": 234,
+    "description": "Complete list of all technologies and documentations available on DevDocs.io"
+  },
+  "technologies": [
+    {
+      "name": "Angular",
+      "slug": "angular",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://angular.dev/",
+      "repository": "https://github.com/angular/angular",
+      "file_patterns": [
+        "angular.json",
+        "*.component.ts",
+        "*.module.ts"
+      ],
+      "package_names": [
+        "@angular/core",
+        "@angular/common"
+      ],
+      "extensions": [
+        ".component.ts",
+        ".module.ts",
+        ".service.ts"
+      ]
+    },
+    {
+      "name": "AngularJS",
+      "slug": "angularjs",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://docs.angularjs.org/",
+      "repository": "https://github.com/angular/angular.js",
+      "file_patterns": [
+        "bower.json",
+        "*.controller.js"
+      ],
+      "package_names": [
+        "angular"
+      ],
+      "extensions": [
+        ".js"
+      ],
+      "deprecated": true
+    },
+    {
+      "name": "Ansible",
+      "slug": "ansible",
+      "category": "devops",
+      "subcategory": "automation",
+      "official_docs": "https://docs.ansible.com/",
+      "repository": "https://github.com/ansible/ansible",
+      "file_patterns": [
+        "ansible.cfg",
+        "playbook.yml",
+        "inventory"
+      ],
+      "package_names": [
+        "ansible"
+      ],
+      "extensions": [
+        ".yml",
+        ".yaml"
+      ]
+    },
+    {
+      "name": "Apache HTTP Server",
+      "slug": "apache",
+      "category": "devops",
+      "subcategory": "web_server",
+      "official_docs": "https://httpd.apache.org/docs/",
+      "repository": "https://github.com/apache/httpd",
+      "file_patterns": [
+        "httpd.conf",
+        ".htaccess",
+        "apache2.conf"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".conf"
+      ]
+    },
+    {
+      "name": "Apache Pig",
+      "slug": "apache_pig",
+      "category": "data",
+      "subcategory": "big_data",
+      "official_docs": "https://pig.apache.org/docs/",
+      "repository": "https://github.com/apache/pig",
+      "file_patterns": [
+        "*.pig"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".pig"
+      ]
+    },
+    {
+      "name": "Astro",
+      "slug": "astro",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://docs.astro.build/",
+      "repository": "https://github.com/withastro/astro",
+      "file_patterns": [
+        "astro.config.mjs",
+        "*.astro"
+      ],
+      "package_names": [
+        "astro"
+      ],
+      "extensions": [
+        ".astro"
+      ]
+    },
+    {
+      "name": "Async",
+      "slug": "async",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://caolan.github.io/async/",
+      "repository": "https://github.com/caolan/async",
+      "file_patterns": [],
+      "package_names": [
+        "async"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Axios",
+      "slug": "axios",
+      "category": "library",
+      "subcategory": "http_client",
+      "official_docs": "https://axios-http.com/",
+      "repository": "https://github.com/axios/axios",
+      "file_patterns": [],
+      "package_names": [
+        "axios"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Babel",
+      "slug": "babel",
+      "category": "build_tool",
+      "subcategory": "transpiler",
+      "official_docs": "https://babeljs.io/docs/",
+      "repository": "https://github.com/babel/babel",
+      "file_patterns": [
+        ".babelrc",
+        "babel.config.js",
+        ".babelrc.json"
+      ],
+      "package_names": [
+        "@babel/core"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Backbone.js",
+      "slug": "backbone",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://backbonejs.org/",
+      "repository": "https://github.com/jashkenas/backbone",
+      "file_patterns": [],
+      "package_names": [
+        "backbone"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Bash",
+      "slug": "bash",
+      "category": "language",
+      "subcategory": "shell",
+      "official_docs": "https://www.gnu.org/software/bash/",
+      "repository": "https://git.savannah.gnu.org/git/bash.git",
+      "file_patterns": [
+        ".bashrc",
+        ".bash_profile",
+        "*.sh"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".sh",
+        ".bash"
+      ]
+    },
+    {
+      "name": "Bazel",
+      "slug": "bazel",
+      "category": "build_tool",
+      "subcategory": "build_system",
+      "official_docs": "https://bazel.build/",
+      "repository": "https://github.com/bazelbuild/bazel",
+      "file_patterns": [
+        "BUILD",
+        "WORKSPACE",
+        "*.bzl"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".bzl"
+      ]
+    },
+    {
+      "name": "Bluebird",
+      "slug": "bluebird",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "http://bluebirdjs.com/",
+      "repository": "https://github.com/petkaantonov/bluebird",
+      "file_patterns": [],
+      "package_names": [
+        "bluebird"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Bootstrap",
+      "slug": "bootstrap",
+      "category": "css_framework",
+      "subcategory": "ui_framework",
+      "official_docs": "https://getbootstrap.com/docs/",
+      "repository": "https://github.com/twbs/bootstrap",
+      "file_patterns": [],
+      "package_names": [
+        "bootstrap"
+      ],
+      "extensions": [
+        ".css",
+        ".scss"
+      ]
+    },
+    {
+      "name": "Bottle",
+      "slug": "bottle",
+      "category": "backend_framework",
+      "subcategory": "python_framework",
+      "official_docs": "https://bottlepy.org/",
+      "repository": "https://github.com/bottlepy/bottle",
+      "file_patterns": [],
+      "package_names": [
+        "bottle"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Bower",
+      "slug": "bower",
+      "category": "build_tool",
+      "subcategory": "package_manager",
+      "official_docs": "https://bower.io/",
+      "repository": "https://github.com/bower/bower",
+      "file_patterns": [
+        "bower.json",
+        ".bowerrc"
+      ],
+      "package_names": [
+        "bower"
+      ],
+      "extensions": [
+        ".json"
+      ],
+      "deprecated": true
+    },
+    {
+      "name": "Bun",
+      "slug": "bun",
+      "category": "runtime",
+      "subcategory": "javascript_runtime",
+      "official_docs": "https://bun.sh/docs",
+      "repository": "https://github.com/oven-sh/bun",
+      "file_patterns": [
+        "bunfig.toml",
+        "bun.lockb"
+      ],
+      "package_names": [
+        "bun"
+      ],
+      "extensions": [
+        ".ts",
+        ".js"
+      ]
+    },
+    {
+      "name": "C",
+      "slug": "c",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://en.cppreference.com/w/c",
+      "repository": null,
+      "file_patterns": [
+        "*.c",
+        "*.h",
+        "Makefile"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".c",
+        ".h"
+      ]
+    },
+    {
+      "name": "C++",
+      "slug": "cpp",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://en.cppreference.com/w/cpp",
+      "repository": null,
+      "file_patterns": [
+        "*.cpp",
+        "*.hpp",
+        "*.cc",
+        "*.hh",
+        "CMakeLists.txt"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".cpp",
+        ".hpp",
+        ".cc",
+        ".cxx",
+        ".h"
+      ]
+    },
+    {
+      "name": "CakePHP",
+      "slug": "cakephp",
+      "category": "backend_framework",
+      "subcategory": "php_framework",
+      "official_docs": "https://book.cakephp.org/",
+      "repository": "https://github.com/cakephp/cakephp",
+      "file_patterns": [
+        "config/app.php"
+      ],
+      "package_names": [
+        "cakephp/cakephp"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "Chai",
+      "slug": "chai",
+      "category": "testing",
+      "subcategory": "assertion_library",
+      "official_docs": "https://www.chaijs.com/",
+      "repository": "https://github.com/chaijs/chai",
+      "file_patterns": [],
+      "package_names": [
+        "chai"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Chef",
+      "slug": "chef",
+      "category": "devops",
+      "subcategory": "automation",
+      "official_docs": "https://docs.chef.io/",
+      "repository": "https://github.com/chef/chef",
+      "file_patterns": [
+        "*.rb",
+        "Berksfile"
+      ],
+      "package_names": [
+        "chef"
+      ],
+      "extensions": [
+        ".rb"
+      ]
+    },
+    {
+      "name": "Click",
+      "slug": "click",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://click.palletsprojects.com/",
+      "repository": "https://github.com/pallets/click",
+      "file_patterns": [],
+      "package_names": [
+        "click"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Clojure",
+      "slug": "clojure",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://clojure.org/",
+      "repository": "https://github.com/clojure/clojure",
+      "file_patterns": [
+        "project.clj",
+        "deps.edn",
+        "*.clj"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".clj",
+        ".cljs",
+        ".cljc"
+      ]
+    },
+    {
+      "name": "CMake",
+      "slug": "cmake",
+      "category": "build_tool",
+      "subcategory": "build_system",
+      "official_docs": "https://cmake.org/documentation/",
+      "repository": "https://github.com/Kitware/CMake",
+      "file_patterns": [
+        "CMakeLists.txt",
+        "*.cmake"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".cmake"
+      ]
+    },
+    {
+      "name": "Codeception",
+      "slug": "codeception",
+      "category": "testing",
+      "subcategory": "php_testing",
+      "official_docs": "https://codeception.com/docs/",
+      "repository": "https://github.com/Codeception/Codeception",
+      "file_patterns": [
+        "codeception.yml"
+      ],
+      "package_names": [
+        "codeception/codeception"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "CodeceptJS",
+      "slug": "codeceptjs",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://codecept.io/",
+      "repository": "https://github.com/codeceptjs/CodeceptJS",
+      "file_patterns": [
+        "codecept.conf.js"
+      ],
+      "package_names": [
+        "codeceptjs"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "CodeIgniter",
+      "slug": "codeigniter",
+      "category": "backend_framework",
+      "subcategory": "php_framework",
+      "official_docs": "https://codeigniter.com/user_guide/",
+      "repository": "https://github.com/bcit-ci/CodeIgniter",
+      "file_patterns": [
+        "application/config/config.php"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "CoffeeScript",
+      "slug": "coffeescript",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://coffeescript.org/",
+      "repository": "https://github.com/jashkenas/coffeescript",
+      "file_patterns": [
+        "*.coffee"
+      ],
+      "package_names": [
+        "coffeescript"
+      ],
+      "extensions": [
+        ".coffee"
+      ]
+    },
+    {
+      "name": "Composer",
+      "slug": "composer",
+      "category": "build_tool",
+      "subcategory": "package_manager",
+      "official_docs": "https://getcomposer.org/doc/",
+      "repository": "https://github.com/composer/composer",
+      "file_patterns": [
+        "composer.json",
+        "composer.lock"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".json"
+      ]
+    },
+    {
+      "name": "Cordova",
+      "slug": "cordova",
+      "category": "mobile",
+      "subcategory": "mobile_framework",
+      "official_docs": "https://cordova.apache.org/docs/",
+      "repository": "https://github.com/apache/cordova",
+      "file_patterns": [
+        "config.xml",
+        "www/**"
+      ],
+      "package_names": [
+        "cordova"
+      ],
+      "extensions": [
+        ".xml",
+        ".js"
+      ]
+    },
+    {
+      "name": "Crystal",
+      "slug": "crystal",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://crystal-lang.org/docs/",
+      "repository": "https://github.com/crystal-lang/crystal",
+      "file_patterns": [
+        "shard.yml",
+        "*.cr"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".cr"
+      ]
+    },
+    {
+      "name": "CSS",
+      "slug": "css",
+      "category": "language",
+      "subcategory": "styling_language",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      "repository": null,
+      "file_patterns": [
+        "*.css"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".css"
+      ]
+    },
+    {
+      "name": "Cypress",
+      "slug": "cypress",
+      "category": "testing",
+      "subcategory": "e2e_testing",
+      "official_docs": "https://docs.cypress.io/",
+      "repository": "https://github.com/cypress-io/cypress",
+      "file_patterns": [
+        "cypress.config.js",
+        "cypress/**"
+      ],
+      "package_names": [
+        "cypress"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "D",
+      "slug": "d",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://dlang.org/",
+      "repository": "https://github.com/dlang/dmd",
+      "file_patterns": [
+        "*.d",
+        "dub.json"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".d"
+      ]
+    },
+    {
+      "name": "D3.js",
+      "slug": "d3",
+      "category": "library",
+      "subcategory": "visualization",
+      "official_docs": "https://d3js.org/",
+      "repository": "https://github.com/d3/d3",
+      "file_patterns": [],
+      "package_names": [
+        "d3"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Dart",
+      "slug": "dart",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://dart.dev/guides",
+      "repository": "https://github.com/dart-lang/sdk",
+      "file_patterns": [
+        "pubspec.yaml",
+        "*.dart"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".dart"
+      ]
+    },
+    {
+      "name": "date-fns",
+      "slug": "date_fns",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://date-fns.org/",
+      "repository": "https://github.com/date-fns/date-fns",
+      "file_patterns": [],
+      "package_names": [
+        "date-fns"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Deno",
+      "slug": "deno",
+      "category": "runtime",
+      "subcategory": "javascript_runtime",
+      "official_docs": "https://deno.land/manual",
+      "repository": "https://github.com/denoland/deno",
+      "file_patterns": [
+        "deno.json",
+        "deno.jsonc",
+        "deno.lock"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".ts",
+        ".js"
+      ]
+    },
+    {
+      "name": "Django",
+      "slug": "django",
+      "category": "backend_framework",
+      "subcategory": "python_framework",
+      "official_docs": "https://docs.djangoproject.com/",
+      "repository": "https://github.com/django/django",
+      "file_patterns": [
+        "manage.py",
+        "settings.py",
+        "urls.py"
+      ],
+      "package_names": [
+        "django"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Django REST Framework",
+      "slug": "django_rest_framework",
+      "category": "backend_framework",
+      "subcategory": "python_framework",
+      "official_docs": "https://www.django-rest-framework.org/",
+      "repository": "https://github.com/encode/django-rest-framework",
+      "file_patterns": [],
+      "package_names": [
+        "djangorestframework"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Docker",
+      "slug": "docker",
+      "category": "devops",
+      "subcategory": "containerization",
+      "official_docs": "https://docs.docker.com/",
+      "repository": "https://github.com/docker/docker",
+      "file_patterns": [
+        "Dockerfile",
+        "docker-compose.yml",
+        ".dockerignore"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".dockerfile"
+      ]
+    },
+    {
+      "name": "Dojo",
+      "slug": "dojo",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://dojotoolkit.org/",
+      "repository": "https://github.com/dojo/dojo",
+      "file_patterns": [],
+      "package_names": [
+        "dojo"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "DOM",
+      "slug": "dom",
+      "category": "api",
+      "subcategory": "web_api",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model",
+      "repository": null,
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Drupal",
+      "slug": "drupal",
+      "category": "cms",
+      "subcategory": "content_management",
+      "official_docs": "https://www.drupal.org/docs/",
+      "repository": "https://github.com/drupal/drupal",
+      "file_patterns": [
+        "*.info.yml",
+        "*.module"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".php",
+        ".module"
+      ]
+    },
+    {
+      "name": "DuckDB",
+      "slug": "duckdb",
+      "category": "database",
+      "subcategory": "sql_database",
+      "official_docs": "https://duckdb.org/docs/",
+      "repository": "https://github.com/duckdb/duckdb",
+      "file_patterns": [
+        "*.duckdb"
+      ],
+      "package_names": [
+        "duckdb"
+      ],
+      "extensions": [
+        ".sql"
+      ]
+    },
+    {
+      "name": "Eigen3",
+      "slug": "eigen3",
+      "category": "library",
+      "subcategory": "cpp_library",
+      "official_docs": "https://eigen.tuxfamily.org/",
+      "repository": "https://gitlab.com/libeigen/eigen",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".cpp",
+        ".h"
+      ]
+    },
+    {
+      "name": "Electron",
+      "slug": "electron",
+      "category": "framework",
+      "subcategory": "desktop_framework",
+      "official_docs": "https://www.electronjs.org/docs/",
+      "repository": "https://github.com/electron/electron",
+      "file_patterns": [
+        "main.js",
+        "preload.js"
+      ],
+      "package_names": [
+        "electron"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Elisp",
+      "slug": "elisp",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.gnu.org/software/emacs/manual/html_node/elisp/",
+      "repository": "https://git.savannah.gnu.org/cgit/emacs.git",
+      "file_patterns": [
+        "*.el"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".el"
+      ]
+    },
+    {
+      "name": "Elixir",
+      "slug": "elixir",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://elixir-lang.org/docs.html",
+      "repository": "https://github.com/elixir-lang/elixir",
+      "file_patterns": [
+        "mix.exs",
+        "*.ex",
+        "*.exs"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".ex",
+        ".exs"
+      ]
+    },
+    {
+      "name": "Ember.js",
+      "slug": "ember",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://guides.emberjs.com/",
+      "repository": "https://github.com/emberjs/ember.js",
+      "file_patterns": [
+        "ember-cli-build.js",
+        "*.hbs"
+      ],
+      "package_names": [
+        "ember-source"
+      ],
+      "extensions": [
+        ".js",
+        ".hbs"
+      ]
+    },
+    {
+      "name": "Enzyme",
+      "slug": "enzyme",
+      "category": "testing",
+      "subcategory": "react_testing",
+      "official_docs": "https://enzymejs.github.io/enzyme/",
+      "repository": "https://github.com/enzymejs/enzyme",
+      "file_patterns": [],
+      "package_names": [
+        "enzyme"
+      ],
+      "extensions": [
+        ".js",
+        ".jsx"
+      ]
+    },
+    {
+      "name": "Erlang",
+      "slug": "erlang",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.erlang.org/docs",
+      "repository": "https://github.com/erlang/otp",
+      "file_patterns": [
+        "*.erl",
+        "rebar.config"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".erl",
+        ".hrl"
+      ]
+    },
+    {
+      "name": "ES Toolkit",
+      "slug": "es_toolkit",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://es-toolkit.slash.page/",
+      "repository": "https://github.com/toss/es-toolkit",
+      "file_patterns": [],
+      "package_names": [
+        "es-toolkit"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "esbuild",
+      "slug": "esbuild",
+      "category": "build_tool",
+      "subcategory": "bundler",
+      "official_docs": "https://esbuild.github.io/",
+      "repository": "https://github.com/evanw/esbuild",
+      "file_patterns": [
+        "esbuild.config.js"
+      ],
+      "package_names": [
+        "esbuild"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "ESLint",
+      "slug": "eslint",
+      "category": "build_tool",
+      "subcategory": "linter",
+      "official_docs": "https://eslint.org/docs/",
+      "repository": "https://github.com/eslint/eslint",
+      "file_patterns": [
+        ".eslintrc.js",
+        ".eslintrc.json",
+        "eslint.config.js"
+      ],
+      "package_names": [
+        "eslint"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Express",
+      "slug": "express",
+      "category": "backend_framework",
+      "subcategory": "nodejs_framework",
+      "official_docs": "https://expressjs.com/",
+      "repository": "https://github.com/expressjs/express",
+      "file_patterns": [
+        "app.js",
+        "server.js"
+      ],
+      "package_names": [
+        "express"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Falcon",
+      "slug": "falcon",
+      "category": "backend_framework",
+      "subcategory": "python_framework",
+      "official_docs": "https://falcon.readthedocs.io/",
+      "repository": "https://github.com/falconry/falcon",
+      "file_patterns": [],
+      "package_names": [
+        "falcon"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "FastAPI",
+      "slug": "fastapi",
+      "category": "backend_framework",
+      "subcategory": "python_framework",
+      "official_docs": "https://fastapi.tiangolo.com/",
+      "repository": "https://github.com/tiangolo/fastapi",
+      "file_patterns": [
+        "main.py"
+      ],
+      "package_names": [
+        "fastapi"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Fish",
+      "slug": "fish",
+      "category": "language",
+      "subcategory": "shell",
+      "official_docs": "https://fishshell.com/docs/",
+      "repository": "https://github.com/fish-shell/fish-shell",
+      "file_patterns": [
+        "config.fish",
+        "*.fish"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".fish"
+      ]
+    },
+    {
+      "name": "Flask",
+      "slug": "flask",
+      "category": "backend_framework",
+      "subcategory": "python_framework",
+      "official_docs": "https://flask.palletsprojects.com/",
+      "repository": "https://github.com/pallets/flask",
+      "file_patterns": [
+        "app.py",
+        "wsgi.py"
+      ],
+      "package_names": [
+        "flask"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Flow",
+      "slug": "flow",
+      "category": "language",
+      "subcategory": "type_checker",
+      "official_docs": "https://flow.org/",
+      "repository": "https://github.com/facebook/flow",
+      "file_patterns": [
+        ".flowconfig"
+      ],
+      "package_names": [
+        "flow-bin"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Fluture",
+      "slug": "fluture",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://github.com/fluture-js/Fluture",
+      "repository": "https://github.com/fluture-js/Fluture",
+      "file_patterns": [],
+      "package_names": [
+        "fluture"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "GCC",
+      "slug": "gcc",
+      "category": "tool",
+      "subcategory": "compiler",
+      "official_docs": "https://gcc.gnu.org/onlinedocs/",
+      "repository": "https://github.com/gcc-mirror/gcc",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".c",
+        ".cpp"
+      ]
+    },
+    {
+      "name": "Git",
+      "slug": "git",
+      "category": "devops",
+      "subcategory": "version_control",
+      "official_docs": "https://git-scm.com/doc",
+      "repository": "https://github.com/git/git",
+      "file_patterns": [
+        ".gitignore",
+        ".gitconfig",
+        ".git/**"
+      ],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "GitHub",
+      "slug": "github",
+      "category": "platform",
+      "subcategory": "collaboration",
+      "official_docs": "https://docs.github.com/",
+      "repository": null,
+      "file_patterns": [
+        ".github/**"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".yml",
+        ".yaml"
+      ]
+    },
+    {
+      "name": "GNU Cobol",
+      "slug": "gnu_cobol",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://gnucobol.sourceforge.io/",
+      "repository": "https://sourceforge.net/projects/gnucobol/",
+      "file_patterns": [
+        "*.cob",
+        "*.cbl"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".cob",
+        ".cbl"
+      ]
+    },
+    {
+      "name": "GNU Fortran",
+      "slug": "gnu_fortran",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://gcc.gnu.org/fortran/",
+      "repository": "https://github.com/gcc-mirror/gcc",
+      "file_patterns": [
+        "*.f90",
+        "*.f"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".f",
+        ".f90",
+        ".f95"
+      ]
+    },
+    {
+      "name": "GNU Make",
+      "slug": "gnu_make",
+      "category": "build_tool",
+      "subcategory": "build_system",
+      "official_docs": "https://www.gnu.org/software/make/manual/",
+      "repository": "https://git.savannah.gnu.org/git/make.git",
+      "file_patterns": [
+        "Makefile",
+        "makefile",
+        "GNUmakefile"
+      ],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "Gnuplot",
+      "slug": "gnuplot",
+      "category": "tool",
+      "subcategory": "visualization",
+      "official_docs": "http://www.gnuplot.info/docs/",
+      "repository": "https://sourceforge.net/projects/gnuplot/",
+      "file_patterns": [
+        "*.plt",
+        "*.gnu"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".plt",
+        ".gnu"
+      ]
+    },
+    {
+      "name": "Go",
+      "slug": "go",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://go.dev/doc/",
+      "repository": "https://github.com/golang/go",
+      "file_patterns": [
+        "go.mod",
+        "go.sum",
+        "*.go"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".go"
+      ]
+    },
+    {
+      "name": "Godot",
+      "slug": "godot",
+      "category": "game_engine",
+      "subcategory": "game_development",
+      "official_docs": "https://docs.godotengine.org/",
+      "repository": "https://github.com/godotengine/godot",
+      "file_patterns": [
+        "project.godot",
+        "*.gd",
+        "*.tscn"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".gd",
+        ".tscn"
+      ]
+    },
+    {
+      "name": "Graphite",
+      "slug": "graphite",
+      "category": "monitoring",
+      "subcategory": "metrics",
+      "official_docs": "https://graphite.readthedocs.io/",
+      "repository": "https://github.com/graphite-project/graphite-web",
+      "file_patterns": [],
+      "package_names": [
+        "graphite-web"
+      ],
+      "extensions": []
+    },
+    {
+      "name": "Graphviz",
+      "slug": "graphviz",
+      "category": "tool",
+      "subcategory": "visualization",
+      "official_docs": "https://graphviz.org/documentation/",
+      "repository": "https://gitlab.com/graphviz/graphviz",
+      "file_patterns": [
+        "*.dot",
+        "*.gv"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".dot",
+        ".gv"
+      ]
+    },
+    {
+      "name": "Groovy",
+      "slug": "groovy",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://groovy-lang.org/documentation.html",
+      "repository": "https://github.com/apache/groovy",
+      "file_patterns": [
+        "*.groovy",
+        "*.gradle"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".groovy",
+        ".gradle"
+      ]
+    },
+    {
+      "name": "Grunt",
+      "slug": "grunt",
+      "category": "build_tool",
+      "subcategory": "task_runner",
+      "official_docs": "https://gruntjs.com/",
+      "repository": "https://github.com/gruntjs/grunt",
+      "file_patterns": [
+        "Gruntfile.js",
+        "Gruntfile.coffee"
+      ],
+      "package_names": [
+        "grunt"
+      ],
+      "extensions": [
+        ".js"
+      ],
+      "deprecated": true
+    },
+    {
+      "name": "GTK",
+      "slug": "gtk",
+      "category": "library",
+      "subcategory": "gui_framework",
+      "official_docs": "https://docs.gtk.org/",
+      "repository": "https://gitlab.gnome.org/GNOME/gtk",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".c",
+        ".h"
+      ]
+    },
+    {
+      "name": "Hammerspoon",
+      "slug": "hammerspoon",
+      "category": "tool",
+      "subcategory": "automation",
+      "official_docs": "https://www.hammerspoon.org/docs/",
+      "repository": "https://github.com/Hammerspoon/hammerspoon",
+      "file_patterns": [
+        "init.lua"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".lua"
+      ]
+    },
+    {
+      "name": "Handlebars.js",
+      "slug": "handlebars",
+      "category": "library",
+      "subcategory": "templating",
+      "official_docs": "https://handlebarsjs.com/",
+      "repository": "https://github.com/handlebars-lang/handlebars.js",
+      "file_patterns": [
+        "*.hbs",
+        "*.handlebars"
+      ],
+      "package_names": [
+        "handlebars"
+      ],
+      "extensions": [
+        ".hbs",
+        ".handlebars"
+      ]
+    },
+    {
+      "name": "Hapi",
+      "slug": "hapi",
+      "category": "backend_framework",
+      "subcategory": "nodejs_framework",
+      "official_docs": "https://hapi.dev/",
+      "repository": "https://github.com/hapijs/hapi",
+      "file_patterns": [],
+      "package_names": [
+        "@hapi/hapi"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "HAProxy",
+      "slug": "haproxy",
+      "category": "devops",
+      "subcategory": "load_balancer",
+      "official_docs": "https://docs.haproxy.org/",
+      "repository": "https://github.com/haproxy/haproxy",
+      "file_patterns": [
+        "haproxy.cfg"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".cfg"
+      ]
+    },
+    {
+      "name": "Haskell",
+      "slug": "haskell",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.haskell.org/documentation/",
+      "repository": "https://gitlab.haskell.org/ghc/ghc",
+      "file_patterns": [
+        "*.hs",
+        "*.cabal",
+        "stack.yaml"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".hs",
+        ".lhs"
+      ]
+    },
+    {
+      "name": "Haxe",
+      "slug": "haxe",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://haxe.org/documentation/",
+      "repository": "https://github.com/HaxeFoundation/haxe",
+      "file_patterns": [
+        "*.hx",
+        "build.hxml"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".hx"
+      ]
+    },
+    {
+      "name": "Homebrew",
+      "slug": "homebrew",
+      "category": "tool",
+      "subcategory": "package_manager",
+      "official_docs": "https://docs.brew.sh/",
+      "repository": "https://github.com/Homebrew/brew",
+      "file_patterns": [
+        "Brewfile",
+        "*.rb"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".rb"
+      ]
+    },
+    {
+      "name": "HTML",
+      "slug": "html",
+      "category": "language",
+      "subcategory": "markup_language",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      "repository": null,
+      "file_patterns": [
+        "*.html",
+        "*.htm"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".html",
+        ".htm"
+      ]
+    },
+    {
+      "name": "htmx",
+      "slug": "htmx",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://htmx.org/docs/",
+      "repository": "https://github.com/bigskysoftware/htmx",
+      "file_patterns": [],
+      "package_names": [
+        "htmx.org"
+      ],
+      "extensions": [
+        ".html"
+      ]
+    },
+    {
+      "name": "HTTP",
+      "slug": "http",
+      "category": "protocol",
+      "subcategory": "network_protocol",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+      "repository": null,
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "i3",
+      "slug": "i3",
+      "category": "tool",
+      "subcategory": "window_manager",
+      "official_docs": "https://i3wm.org/docs/",
+      "repository": "https://github.com/i3/i3",
+      "file_patterns": [
+        "~/.config/i3/config"
+      ],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "Immutable.js",
+      "slug": "immutable",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://immutable-js.com/",
+      "repository": "https://github.com/immutable-js/immutable-js",
+      "file_patterns": [],
+      "package_names": [
+        "immutable"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "InfluxData",
+      "slug": "influxdata",
+      "category": "database",
+      "subcategory": "time_series_database",
+      "official_docs": "https://docs.influxdata.com/",
+      "repository": "https://github.com/influxdata/influxdb",
+      "file_patterns": [],
+      "package_names": [
+        "influxdb"
+      ],
+      "extensions": []
+    },
+    {
+      "name": "Jasmine",
+      "slug": "jasmine",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://jasmine.github.io/",
+      "repository": "https://github.com/jasmine/jasmine",
+      "file_patterns": [
+        "spec/**/*.spec.js"
+      ],
+      "package_names": [
+        "jasmine"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "JavaScript",
+      "slug": "javascript",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      "repository": null,
+      "file_patterns": [
+        "*.js",
+        "*.mjs"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".js",
+        ".mjs",
+        ".cjs"
+      ]
+    },
+    {
+      "name": "Jekyll",
+      "slug": "jekyll",
+      "category": "tool",
+      "subcategory": "static_site_generator",
+      "official_docs": "https://jekyllrb.com/docs/",
+      "repository": "https://github.com/jekyll/jekyll",
+      "file_patterns": [
+        "_config.yml",
+        "Gemfile"
+      ],
+      "package_names": [
+        "jekyll"
+      ],
+      "extensions": [
+        ".md",
+        ".html"
+      ]
+    },
+    {
+      "name": "Jest",
+      "slug": "jest",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://jestjs.io/docs/",
+      "repository": "https://github.com/facebook/jest",
+      "file_patterns": [
+        "jest.config.js",
+        "*.test.js",
+        "*.spec.js"
+      ],
+      "package_names": [
+        "jest"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Jinja",
+      "slug": "jinja",
+      "category": "library",
+      "subcategory": "templating",
+      "official_docs": "https://jinja.palletsprojects.com/",
+      "repository": "https://github.com/pallets/jinja",
+      "file_patterns": [
+        "*.jinja",
+        "*.jinja2",
+        "*.j2"
+      ],
+      "package_names": [
+        "jinja2"
+      ],
+      "extensions": [
+        ".jinja",
+        ".jinja2",
+        ".j2"
+      ]
+    },
+    {
+      "name": "Joi",
+      "slug": "joi",
+      "category": "library",
+      "subcategory": "validation",
+      "official_docs": "https://joi.dev/",
+      "repository": "https://github.com/hapijs/joi",
+      "file_patterns": [],
+      "package_names": [
+        "joi"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "jq",
+      "slug": "jq",
+      "category": "tool",
+      "subcategory": "json_processor",
+      "official_docs": "https://stedolan.github.io/jq/",
+      "repository": "https://github.com/stedolan/jq",
+      "file_patterns": [
+        "*.jq"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".jq"
+      ]
+    },
+    {
+      "name": "jQuery",
+      "slug": "jquery",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://api.jquery.com/",
+      "repository": "https://github.com/jquery/jquery",
+      "file_patterns": [],
+      "package_names": [
+        "jquery"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "jQuery Mobile",
+      "slug": "jquery_mobile",
+      "category": "library",
+      "subcategory": "mobile_framework",
+      "official_docs": "https://api.jquerymobile.com/",
+      "repository": "https://github.com/jquery/jquery-mobile",
+      "file_patterns": [],
+      "package_names": [
+        "jquery-mobile"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "jQuery UI",
+      "slug": "jquery_ui",
+      "category": "library",
+      "subcategory": "ui_library",
+      "official_docs": "https://api.jqueryui.com/",
+      "repository": "https://github.com/jquery/jquery-ui",
+      "file_patterns": [],
+      "package_names": [
+        "jquery-ui"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "JSDoc",
+      "slug": "jsdoc",
+      "category": "tool",
+      "subcategory": "documentation",
+      "official_docs": "https://jsdoc.app/",
+      "repository": "https://github.com/jsdoc/jsdoc",
+      "file_patterns": [
+        "jsdoc.json"
+      ],
+      "package_names": [
+        "jsdoc"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Julia",
+      "slug": "julia",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://docs.julialang.org/",
+      "repository": "https://github.com/JuliaLang/julia",
+      "file_patterns": [
+        "*.jl",
+        "Project.toml"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".jl"
+      ]
+    },
+    {
+      "name": "Knockout.js",
+      "slug": "knockout",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://knockoutjs.com/documentation/",
+      "repository": "https://github.com/knockout/knockout",
+      "file_patterns": [],
+      "package_names": [
+        "knockout"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Koa",
+      "slug": "koa",
+      "category": "backend_framework",
+      "subcategory": "nodejs_framework",
+      "official_docs": "https://koajs.com/",
+      "repository": "https://github.com/koajs/koa",
+      "file_patterns": [],
+      "package_names": [
+        "koa"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Kotlin",
+      "slug": "kotlin",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://kotlinlang.org/docs/",
+      "repository": "https://github.com/JetBrains/kotlin",
+      "file_patterns": [
+        "*.kt",
+        "*.kts",
+        "build.gradle.kts"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".kt",
+        ".kts"
+      ]
+    },
+    {
+      "name": "kubectl",
+      "slug": "kubectl",
+      "category": "devops",
+      "subcategory": "kubernetes_tool",
+      "official_docs": "https://kubernetes.io/docs/reference/kubectl/",
+      "repository": "https://github.com/kubernetes/kubectl",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".yaml",
+        ".yml"
+      ]
+    },
+    {
+      "name": "Kubernetes",
+      "slug": "kubernetes",
+      "category": "devops",
+      "subcategory": "orchestration",
+      "official_docs": "https://kubernetes.io/docs/",
+      "repository": "https://github.com/kubernetes/kubernetes",
+      "file_patterns": [
+        "*.yaml",
+        "*.yml",
+        "kustomization.yaml"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".yaml",
+        ".yml"
+      ]
+    },
+    {
+      "name": "Laravel",
+      "slug": "laravel",
+      "category": "backend_framework",
+      "subcategory": "php_framework",
+      "official_docs": "https://laravel.com/docs/",
+      "repository": "https://github.com/laravel/laravel",
+      "file_patterns": [
+        "artisan",
+        "composer.json"
+      ],
+      "package_names": [
+        "laravel/framework"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "LaTeX",
+      "slug": "latex",
+      "category": "language",
+      "subcategory": "markup_language",
+      "official_docs": "https://www.latex-project.org/help/documentation/",
+      "repository": null,
+      "file_patterns": [
+        "*.tex",
+        "*.sty",
+        "*.cls"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".tex"
+      ]
+    },
+    {
+      "name": "Leaflet",
+      "slug": "leaflet",
+      "category": "library",
+      "subcategory": "mapping",
+      "official_docs": "https://leafletjs.com/reference.html",
+      "repository": "https://github.com/Leaflet/Leaflet",
+      "file_patterns": [],
+      "package_names": [
+        "leaflet"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Less",
+      "slug": "less",
+      "category": "language",
+      "subcategory": "css_preprocessor",
+      "official_docs": "https://lesscss.org/",
+      "repository": "https://github.com/less/less.js",
+      "file_patterns": [
+        "*.less"
+      ],
+      "package_names": [
+        "less"
+      ],
+      "extensions": [
+        ".less"
+      ]
+    },
+    {
+      "name": "Liquid",
+      "slug": "liquid",
+      "category": "library",
+      "subcategory": "templating",
+      "official_docs": "https://shopify.github.io/liquid/",
+      "repository": "https://github.com/Shopify/liquid",
+      "file_patterns": [
+        "*.liquid"
+      ],
+      "package_names": [
+        "liquid"
+      ],
+      "extensions": [
+        ".liquid"
+      ]
+    },
+    {
+      "name": "Lit",
+      "slug": "lit",
+      "category": "library",
+      "subcategory": "web_components",
+      "official_docs": "https://lit.dev/docs/",
+      "repository": "https://github.com/lit/lit",
+      "file_patterns": [],
+      "package_names": [
+        "lit"
+      ],
+      "extensions": [
+        ".ts",
+        ".js"
+      ]
+    },
+    {
+      "name": "Lodash",
+      "slug": "lodash",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://lodash.com/docs/",
+      "repository": "https://github.com/lodash/lodash",
+      "file_patterns": [],
+      "package_names": [
+        "lodash"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "LÖVE",
+      "slug": "love",
+      "category": "game_engine",
+      "subcategory": "game_development",
+      "official_docs": "https://love2d.org/wiki/",
+      "repository": "https://github.com/love2d/love",
+      "file_patterns": [
+        "main.lua",
+        "conf.lua"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".lua"
+      ]
+    },
+    {
+      "name": "Lua",
+      "slug": "lua",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.lua.org/manual/",
+      "repository": "https://github.com/lua/lua",
+      "file_patterns": [
+        "*.lua"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".lua"
+      ]
+    },
+    {
+      "name": "Man Pages",
+      "slug": "man",
+      "category": "documentation",
+      "subcategory": "system_documentation",
+      "official_docs": "https://man7.org/linux/man-pages/",
+      "repository": null,
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "MariaDB",
+      "slug": "mariadb",
+      "category": "database",
+      "subcategory": "sql_database",
+      "official_docs": "https://mariadb.com/kb/en/documentation/",
+      "repository": "https://github.com/MariaDB/server",
+      "file_patterns": [
+        "*.sql"
+      ],
+      "package_names": [
+        "mariadb"
+      ],
+      "extensions": [
+        ".sql"
+      ]
+    },
+    {
+      "name": "Marionette.js",
+      "slug": "marionette",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://marionettejs.com/",
+      "repository": "https://github.com/marionettejs/backbone.marionette",
+      "file_patterns": [],
+      "package_names": [
+        "backbone.marionette"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Markdown",
+      "slug": "markdown",
+      "category": "language",
+      "subcategory": "markup_language",
+      "official_docs": "https://daringfireball.net/projects/markdown/",
+      "repository": null,
+      "file_patterns": [
+        "*.md",
+        "*.markdown"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".md",
+        ".markdown"
+      ]
+    },
+    {
+      "name": "Matplotlib",
+      "slug": "matplotlib",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://matplotlib.org/stable/contents.html",
+      "repository": "https://github.com/matplotlib/matplotlib",
+      "file_patterns": [],
+      "package_names": [
+        "matplotlib"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Meteor",
+      "slug": "meteor",
+      "category": "framework",
+      "subcategory": "fullstack_framework",
+      "official_docs": "https://docs.meteor.com/",
+      "repository": "https://github.com/meteor/meteor",
+      "file_patterns": [
+        ".meteor/**"
+      ],
+      "package_names": [
+        "meteor"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "MkDocs",
+      "slug": "mkdocs",
+      "category": "tool",
+      "subcategory": "documentation",
+      "official_docs": "https://www.mkdocs.org/",
+      "repository": "https://github.com/mkdocs/mkdocs",
+      "file_patterns": [
+        "mkdocs.yml"
+      ],
+      "package_names": [
+        "mkdocs"
+      ],
+      "extensions": [
+        ".md"
+      ]
+    },
+    {
+      "name": "Mocha",
+      "slug": "mocha",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://mochajs.org/",
+      "repository": "https://github.com/mochajs/mocha",
+      "file_patterns": [
+        ".mocharc.json",
+        "test/**/*.js"
+      ],
+      "package_names": [
+        "mocha"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Modernizr",
+      "slug": "modernizr",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://modernizr.com/docs",
+      "repository": "https://github.com/Modernizr/Modernizr",
+      "file_patterns": [],
+      "package_names": [
+        "modernizr"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Moment.js",
+      "slug": "moment",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://momentjs.com/docs/",
+      "repository": "https://github.com/moment/moment",
+      "file_patterns": [],
+      "package_names": [
+        "moment"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Moment Timezone",
+      "slug": "moment_timezone",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://momentjs.com/timezone/docs/",
+      "repository": "https://github.com/moment/moment-timezone",
+      "file_patterns": [],
+      "package_names": [
+        "moment-timezone"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Mongoose",
+      "slug": "mongoose",
+      "category": "library",
+      "subcategory": "database_orm",
+      "official_docs": "https://mongoosejs.com/docs/",
+      "repository": "https://github.com/Automattic/mongoose",
+      "file_patterns": [],
+      "package_names": [
+        "mongoose"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "MongoDB",
+      "slug": "mongodb",
+      "category": "database",
+      "subcategory": "nosql_database",
+      "official_docs": "https://docs.mongodb.com/",
+      "repository": "https://github.com/mongodb/mongo",
+      "file_patterns": [],
+      "package_names": [
+        "mongodb"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "MySQL",
+      "slug": "mysql",
+      "category": "database",
+      "subcategory": "sql_database",
+      "official_docs": "https://dev.mysql.com/doc/",
+      "repository": "https://github.com/mysql/mysql-server",
+      "file_patterns": [
+        "*.sql"
+      ],
+      "package_names": [
+        "mysql"
+      ],
+      "extensions": [
+        ".sql"
+      ]
+    },
+    {
+      "name": "Next.js",
+      "slug": "nextjs",
+      "category": "frontend_framework",
+      "subcategory": "react_framework",
+      "official_docs": "https://nextjs.org/docs",
+      "repository": "https://github.com/vercel/next.js",
+      "file_patterns": [
+        "next.config.js",
+        "pages/**",
+        "app/**"
+      ],
+      "package_names": [
+        "next"
+      ],
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx"
+      ]
+    },
+    {
+      "name": "Nginx",
+      "slug": "nginx",
+      "category": "devops",
+      "subcategory": "web_server",
+      "official_docs": "https://nginx.org/en/docs/",
+      "repository": "https://github.com/nginx/nginx",
+      "file_patterns": [
+        "nginx.conf",
+        "*.conf"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".conf"
+      ]
+    },
+    {
+      "name": "Nginx Lua Module",
+      "slug": "nginx_lua_module",
+      "category": "devops",
+      "subcategory": "nginx_module",
+      "official_docs": "https://github.com/openresty/lua-nginx-module",
+      "repository": "https://github.com/openresty/lua-nginx-module",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".lua"
+      ]
+    },
+    {
+      "name": "Nim",
+      "slug": "nim",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://nim-lang.org/docs/",
+      "repository": "https://github.com/nim-lang/Nim",
+      "file_patterns": [
+        "*.nim",
+        "*.nimble"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".nim"
+      ]
+    },
+    {
+      "name": "Nix",
+      "slug": "nix",
+      "category": "devops",
+      "subcategory": "package_manager",
+      "official_docs": "https://nixos.org/manual/nix/",
+      "repository": "https://github.com/NixOS/nix",
+      "file_patterns": [
+        "*.nix",
+        "flake.nix"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".nix"
+      ]
+    },
+    {
+      "name": "Node.js",
+      "slug": "node",
+      "category": "runtime",
+      "subcategory": "javascript_runtime",
+      "official_docs": "https://nodejs.org/docs/",
+      "repository": "https://github.com/nodejs/node",
+      "file_patterns": [
+        "package.json",
+        "*.js"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".js",
+        ".mjs",
+        ".cjs"
+      ]
+    },
+    {
+      "name": "Nokogiri",
+      "slug": "nokogiri2",
+      "category": "library",
+      "subcategory": "ruby_library",
+      "official_docs": "https://nokogiri.org/",
+      "repository": "https://github.com/sparklemotion/nokogiri",
+      "file_patterns": [],
+      "package_names": [
+        "nokogiri"
+      ],
+      "extensions": [
+        ".rb"
+      ]
+    },
+    {
+      "name": "npm",
+      "slug": "npm",
+      "category": "build_tool",
+      "subcategory": "package_manager",
+      "official_docs": "https://docs.npmjs.com/",
+      "repository": "https://github.com/npm/cli",
+      "file_patterns": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".json"
+      ]
+    },
+    {
+      "name": "NumPy",
+      "slug": "numpy",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://numpy.org/doc/",
+      "repository": "https://github.com/numpy/numpy",
+      "file_patterns": [],
+      "package_names": [
+        "numpy"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Nushell",
+      "slug": "nushell",
+      "category": "language",
+      "subcategory": "shell",
+      "official_docs": "https://www.nushell.sh/book/",
+      "repository": "https://github.com/nushell/nushell",
+      "file_patterns": [
+        "*.nu",
+        "config.nu"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".nu"
+      ]
+    },
+    {
+      "name": "OCaml",
+      "slug": "ocaml",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://ocaml.org/docs/",
+      "repository": "https://github.com/ocaml/ocaml",
+      "file_patterns": [
+        "*.ml",
+        "*.mli",
+        "dune"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".ml",
+        ".mli"
+      ]
+    },
+    {
+      "name": "Octave",
+      "slug": "octave",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://octave.org/doc/",
+      "repository": "https://hg.savannah.gnu.org/hgweb/octave",
+      "file_patterns": [
+        "*.m"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".m"
+      ]
+    },
+    {
+      "name": "OpenGL",
+      "slug": "opengl",
+      "category": "api",
+      "subcategory": "graphics_api",
+      "official_docs": "https://www.opengl.org/documentation/",
+      "repository": null,
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".c",
+        ".cpp"
+      ]
+    },
+    {
+      "name": "OpenJDK",
+      "slug": "openjdk",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://docs.oracle.com/en/java/",
+      "repository": "https://github.com/openjdk/jdk",
+      "file_patterns": [
+        "*.java",
+        "pom.xml",
+        "build.gradle"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".java"
+      ]
+    },
+    {
+      "name": "OpenLayers",
+      "slug": "openlayers",
+      "category": "library",
+      "subcategory": "mapping",
+      "official_docs": "https://openlayers.org/",
+      "repository": "https://github.com/openlayers/openlayers",
+      "file_patterns": [],
+      "package_names": [
+        "ol"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "OpenTSDB",
+      "slug": "opentsdb",
+      "category": "database",
+      "subcategory": "time_series_database",
+      "official_docs": "http://opentsdb.net/docs/",
+      "repository": "https://github.com/OpenTSDB/opentsdb",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "Padrino",
+      "slug": "padrino",
+      "category": "backend_framework",
+      "subcategory": "ruby_framework",
+      "official_docs": "https://padrinorb.com/guides/",
+      "repository": "https://github.com/padrino/padrino-framework",
+      "file_patterns": [],
+      "package_names": [
+        "padrino"
+      ],
+      "extensions": [
+        ".rb"
+      ]
+    },
+    {
+      "name": "Pandas",
+      "slug": "pandas",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://pandas.pydata.org/docs/",
+      "repository": "https://github.com/pandas-dev/pandas",
+      "file_patterns": [],
+      "package_names": [
+        "pandas"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Perl",
+      "slug": "perl",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://perldoc.perl.org/",
+      "repository": "https://github.com/Perl/perl5",
+      "file_patterns": [
+        "*.pl",
+        "*.pm"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".pl",
+        ".pm"
+      ]
+    },
+    {
+      "name": "Phalcon",
+      "slug": "phalcon",
+      "category": "backend_framework",
+      "subcategory": "php_framework",
+      "official_docs": "https://docs.phalcon.io/",
+      "repository": "https://github.com/phalcon/cphalcon",
+      "file_patterns": [],
+      "package_names": [
+        "phalcon/cphalcon"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "Phaser",
+      "slug": "phaser",
+      "category": "game_engine",
+      "subcategory": "game_development",
+      "official_docs": "https://photonstorm.github.io/phaser3-docs/",
+      "repository": "https://github.com/photonstorm/phaser",
+      "file_patterns": [],
+      "package_names": [
+        "phaser"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Phoenix",
+      "slug": "phoenix",
+      "category": "backend_framework",
+      "subcategory": "elixir_framework",
+      "official_docs": "https://hexdocs.pm/phoenix/",
+      "repository": "https://github.com/phoenixframework/phoenix",
+      "file_patterns": [
+        "mix.exs"
+      ],
+      "package_names": [
+        "phoenix"
+      ],
+      "extensions": [
+        ".ex",
+        ".exs"
+      ]
+    },
+    {
+      "name": "PHP",
+      "slug": "php",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.php.net/docs.php",
+      "repository": "https://github.com/php/php-src",
+      "file_patterns": [
+        "*.php",
+        "composer.json"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "PHPUnit",
+      "slug": "phpunit",
+      "category": "testing",
+      "subcategory": "php_testing",
+      "official_docs": "https://phpunit.de/documentation.html",
+      "repository": "https://github.com/sebastianbergmann/phpunit",
+      "file_patterns": [
+        "phpunit.xml"
+      ],
+      "package_names": [
+        "phpunit/phpunit"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "Playwright",
+      "slug": "playwright",
+      "category": "testing",
+      "subcategory": "e2e_testing",
+      "official_docs": "https://playwright.dev/docs/",
+      "repository": "https://github.com/microsoft/playwright",
+      "file_patterns": [
+        "playwright.config.js",
+        "playwright.config.ts"
+      ],
+      "package_names": [
+        "@playwright/test"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Point Cloud Library",
+      "slug": "point_cloud_library",
+      "category": "library",
+      "subcategory": "cpp_library",
+      "official_docs": "https://pointclouds.org/documentation/",
+      "repository": "https://github.com/PointCloudLibrary/pcl",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".cpp",
+        ".h"
+      ]
+    },
+    {
+      "name": "Pony",
+      "slug": "pony",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.ponylang.io/learn/",
+      "repository": "https://github.com/ponylang/ponyc",
+      "file_patterns": [
+        "*.pony"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".pony"
+      ]
+    },
+    {
+      "name": "PostgreSQL",
+      "slug": "postgresql",
+      "category": "database",
+      "subcategory": "sql_database",
+      "official_docs": "https://www.postgresql.org/docs/",
+      "repository": "https://git.postgresql.org/gitweb/?p=postgresql.git",
+      "file_patterns": [
+        "*.sql"
+      ],
+      "package_names": [
+        "pg",
+        "psycopg2"
+      ],
+      "extensions": [
+        ".sql"
+      ]
+    },
+    {
+      "name": "Prettier",
+      "slug": "prettier",
+      "category": "build_tool",
+      "subcategory": "formatter",
+      "official_docs": "https://prettier.io/docs/",
+      "repository": "https://github.com/prettier/prettier",
+      "file_patterns": [
+        ".prettierrc",
+        "prettier.config.js"
+      ],
+      "package_names": [
+        "prettier"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Pug",
+      "slug": "pug",
+      "category": "library",
+      "subcategory": "templating",
+      "official_docs": "https://pugjs.org/",
+      "repository": "https://github.com/pugjs/pug",
+      "file_patterns": [
+        "*.pug",
+        "*.jade"
+      ],
+      "package_names": [
+        "pug"
+      ],
+      "extensions": [
+        ".pug",
+        ".jade"
+      ]
+    },
+    {
+      "name": "Puppeteer",
+      "slug": "puppeteer",
+      "category": "testing",
+      "subcategory": "automation",
+      "official_docs": "https://pptr.dev/",
+      "repository": "https://github.com/puppeteer/puppeteer",
+      "file_patterns": [],
+      "package_names": [
+        "puppeteer"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Pygame",
+      "slug": "pygame",
+      "category": "library",
+      "subcategory": "game_development",
+      "official_docs": "https://www.pygame.org/docs/",
+      "repository": "https://github.com/pygame/pygame",
+      "file_patterns": [],
+      "package_names": [
+        "pygame"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Python",
+      "slug": "python",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://docs.python.org/",
+      "repository": "https://github.com/python/cpython",
+      "file_patterns": [
+        "*.py",
+        "requirements.txt",
+        "setup.py",
+        "pyproject.toml"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".py",
+        ".pyw"
+      ]
+    },
+    {
+      "name": "PyTorch",
+      "slug": "pytorch",
+      "category": "library",
+      "subcategory": "machine_learning",
+      "official_docs": "https://pytorch.org/docs/",
+      "repository": "https://github.com/pytorch/pytorch",
+      "file_patterns": [],
+      "package_names": [
+        "torch"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Q",
+      "slug": "q",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://github.com/kriskowal/q",
+      "repository": "https://github.com/kriskowal/q",
+      "file_patterns": [],
+      "package_names": [
+        "q"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Qt",
+      "slug": "qt",
+      "category": "framework",
+      "subcategory": "gui_framework",
+      "official_docs": "https://doc.qt.io/",
+      "repository": "https://github.com/qt/qtbase",
+      "file_patterns": [
+        "*.pro",
+        "CMakeLists.txt"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".cpp",
+        ".h"
+      ]
+    },
+    {
+      "name": "QUnit",
+      "slug": "qunit",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://qunitjs.com/",
+      "repository": "https://github.com/qunitjs/qunit",
+      "file_patterns": [],
+      "package_names": [
+        "qunit"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "R",
+      "slug": "r",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.r-project.org/other-docs.html",
+      "repository": "https://svn.r-project.org/R/",
+      "file_patterns": [
+        "*.R",
+        "*.Rmd",
+        "DESCRIPTION"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".R",
+        ".r"
+      ]
+    },
+    {
+      "name": "Rails",
+      "slug": "rails",
+      "category": "backend_framework",
+      "subcategory": "ruby_framework",
+      "official_docs": "https://guides.rubyonrails.org/",
+      "repository": "https://github.com/rails/rails",
+      "file_patterns": [
+        "Gemfile",
+        "config.ru",
+        "config/routes.rb"
+      ],
+      "package_names": [
+        "rails"
+      ],
+      "extensions": [
+        ".rb"
+      ]
+    },
+    {
+      "name": "Ramda",
+      "slug": "ramda",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://ramdajs.com/docs/",
+      "repository": "https://github.com/ramda/ramda",
+      "file_patterns": [],
+      "package_names": [
+        "ramda"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "React",
+      "slug": "react",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://react.dev/",
+      "repository": "https://github.com/facebook/react",
+      "file_patterns": [
+        "*.jsx",
+        "*.tsx"
+      ],
+      "package_names": [
+        "react",
+        "react-dom"
+      ],
+      "extensions": [
+        ".jsx",
+        ".tsx",
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "React Bootstrap",
+      "slug": "react_bootstrap",
+      "category": "library",
+      "subcategory": "ui_library",
+      "official_docs": "https://react-bootstrap.github.io/",
+      "repository": "https://github.com/react-bootstrap/react-bootstrap",
+      "file_patterns": [],
+      "package_names": [
+        "react-bootstrap"
+      ],
+      "extensions": [
+        ".jsx",
+        ".tsx"
+      ]
+    },
+    {
+      "name": "React Native",
+      "slug": "react_native",
+      "category": "mobile",
+      "subcategory": "mobile_framework",
+      "official_docs": "https://reactnative.dev/docs/",
+      "repository": "https://github.com/facebook/react-native",
+      "file_patterns": [
+        "app.json",
+        "metro.config.js"
+      ],
+      "package_names": [
+        "react-native"
+      ],
+      "extensions": [
+        ".jsx",
+        ".tsx"
+      ]
+    },
+    {
+      "name": "React Router",
+      "slug": "react_router",
+      "category": "library",
+      "subcategory": "routing",
+      "official_docs": "https://reactrouter.com/",
+      "repository": "https://github.com/remix-run/react-router",
+      "file_patterns": [],
+      "package_names": [
+        "react-router-dom"
+      ],
+      "extensions": [
+        ".jsx",
+        ".tsx"
+      ]
+    },
+    {
+      "name": "ReactiveX",
+      "slug": "reactivex",
+      "category": "library",
+      "subcategory": "reactive_programming",
+      "official_docs": "https://reactivex.io/",
+      "repository": "https://github.com/ReactiveX/rxjs",
+      "file_patterns": [],
+      "package_names": [
+        "rxjs"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Redis",
+      "slug": "redis",
+      "category": "database",
+      "subcategory": "cache_database",
+      "official_docs": "https://redis.io/documentation",
+      "repository": "https://github.com/redis/redis",
+      "file_patterns": [
+        "redis.conf"
+      ],
+      "package_names": [
+        "redis"
+      ],
+      "extensions": []
+    },
+    {
+      "name": "Redux",
+      "slug": "redux",
+      "category": "library",
+      "subcategory": "state_management",
+      "official_docs": "https://redux.js.org/",
+      "repository": "https://github.com/reduxjs/redux",
+      "file_patterns": [],
+      "package_names": [
+        "redux",
+        "@reduxjs/toolkit"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Relay",
+      "slug": "relay",
+      "category": "library",
+      "subcategory": "graphql_client",
+      "official_docs": "https://relay.dev/docs/",
+      "repository": "https://github.com/facebook/relay",
+      "file_patterns": [],
+      "package_names": [
+        "react-relay"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Requests",
+      "slug": "requests",
+      "category": "library",
+      "subcategory": "http_client",
+      "official_docs": "https://requests.readthedocs.io/",
+      "repository": "https://github.com/psf/requests",
+      "file_patterns": [],
+      "package_names": [
+        "requests"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "RequireJS",
+      "slug": "requirejs",
+      "category": "library",
+      "subcategory": "module_loader",
+      "official_docs": "https://requirejs.org/",
+      "repository": "https://github.com/requirejs/requirejs",
+      "file_patterns": [
+        "require.config.js"
+      ],
+      "package_names": [
+        "requirejs"
+      ],
+      "extensions": [
+        ".js"
+      ],
+      "deprecated": true
+    },
+    {
+      "name": "RethinkDB",
+      "slug": "rethinkdb",
+      "category": "database",
+      "subcategory": "nosql_database",
+      "official_docs": "https://rethinkdb.com/docs/",
+      "repository": "https://github.com/rethinkdb/rethinkdb",
+      "file_patterns": [],
+      "package_names": [
+        "rethinkdb"
+      ],
+      "extensions": []
+    },
+    {
+      "name": "Ruby",
+      "slug": "ruby",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://ruby-doc.org/",
+      "repository": "https://github.com/ruby/ruby",
+      "file_patterns": [
+        "*.rb",
+        "Gemfile",
+        "Rakefile"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".rb"
+      ]
+    },
+    {
+      "name": "Rust",
+      "slug": "rust",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://doc.rust-lang.org/",
+      "repository": "https://github.com/rust-lang/rust",
+      "file_patterns": [
+        "Cargo.toml",
+        "Cargo.lock",
+        "*.rs"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".rs"
+      ]
+    },
+    {
+      "name": "RxJS",
+      "slug": "rxjs",
+      "category": "library",
+      "subcategory": "reactive_programming",
+      "official_docs": "https://rxjs.dev/",
+      "repository": "https://github.com/ReactiveX/rxjs",
+      "file_patterns": [],
+      "package_names": [
+        "rxjs"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "SaltStack",
+      "slug": "salt_stack",
+      "category": "devops",
+      "subcategory": "automation",
+      "official_docs": "https://docs.saltproject.io/",
+      "repository": "https://github.com/saltstack/salt",
+      "file_patterns": [
+        "*.sls"
+      ],
+      "package_names": [
+        "salt"
+      ],
+      "extensions": [
+        ".sls"
+      ]
+    },
+    {
+      "name": "Sanctuary",
+      "slug": "sanctuary",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://sanctuary.js.org/",
+      "repository": "https://github.com/sanctuary-js/sanctuary",
+      "file_patterns": [],
+      "package_names": [
+        "sanctuary"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Sanctuary Def",
+      "slug": "sanctuary_def",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://github.com/sanctuary-js/sanctuary-def",
+      "repository": "https://github.com/sanctuary-js/sanctuary-def",
+      "file_patterns": [],
+      "package_names": [
+        "sanctuary-def"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Sanctuary Type Classes",
+      "slug": "sanctuary_type_classes",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://github.com/sanctuary-js/sanctuary-type-classes",
+      "repository": "https://github.com/sanctuary-js/sanctuary-type-classes",
+      "file_patterns": [],
+      "package_names": [
+        "sanctuary-type-classes"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Sass",
+      "slug": "sass",
+      "category": "language",
+      "subcategory": "css_preprocessor",
+      "official_docs": "https://sass-lang.com/documentation",
+      "repository": "https://github.com/sass/sass",
+      "file_patterns": [
+        "*.scss",
+        "*.sass"
+      ],
+      "package_names": [
+        "sass"
+      ],
+      "extensions": [
+        ".scss",
+        ".sass"
+      ]
+    },
+    {
+      "name": "Scala",
+      "slug": "scala",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://docs.scala-lang.org/",
+      "repository": "https://github.com/scala/scala",
+      "file_patterns": [
+        "*.scala",
+        "build.sbt"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".scala"
+      ]
+    },
+    {
+      "name": "scikit-image",
+      "slug": "scikit_image",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://scikit-image.org/docs/",
+      "repository": "https://github.com/scikit-image/scikit-image",
+      "file_patterns": [],
+      "package_names": [
+        "scikit-image"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "scikit-learn",
+      "slug": "scikit_learn",
+      "category": "library",
+      "subcategory": "machine_learning",
+      "official_docs": "https://scikit-learn.org/stable/",
+      "repository": "https://github.com/scikit-learn/scikit-learn",
+      "file_patterns": [],
+      "package_names": [
+        "scikit-learn"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Sequelize",
+      "slug": "sequelize",
+      "category": "library",
+      "subcategory": "database_orm",
+      "official_docs": "https://sequelize.org/docs/",
+      "repository": "https://github.com/sequelize/sequelize",
+      "file_patterns": [],
+      "package_names": [
+        "sequelize"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Sinon.JS",
+      "slug": "sinon",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://sinonjs.org/",
+      "repository": "https://github.com/sinonjs/sinon",
+      "file_patterns": [],
+      "package_names": [
+        "sinon"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Socket.IO",
+      "slug": "socketio",
+      "category": "library",
+      "subcategory": "websocket",
+      "official_docs": "https://socket.io/docs/",
+      "repository": "https://github.com/socketio/socket.io",
+      "file_patterns": [],
+      "package_names": [
+        "socket.io"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Sphinx",
+      "slug": "sphinx",
+      "category": "tool",
+      "subcategory": "documentation",
+      "official_docs": "https://www.sphinx-doc.org/",
+      "repository": "https://github.com/sphinx-doc/sphinx",
+      "file_patterns": [
+        "conf.py",
+        "*.rst"
+      ],
+      "package_names": [
+        "sphinx"
+      ],
+      "extensions": [
+        ".rst"
+      ]
+    },
+    {
+      "name": "Spring Boot",
+      "slug": "spring_boot",
+      "category": "backend_framework",
+      "subcategory": "java_framework",
+      "official_docs": "https://docs.spring.io/spring-boot/",
+      "repository": "https://github.com/spring-projects/spring-boot",
+      "file_patterns": [
+        "pom.xml",
+        "build.gradle",
+        "application.properties"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".java"
+      ]
+    },
+    {
+      "name": "SQLite",
+      "slug": "sqlite",
+      "category": "database",
+      "subcategory": "sql_database",
+      "official_docs": "https://www.sqlite.org/docs.html",
+      "repository": "https://github.com/sqlite/sqlite",
+      "file_patterns": [
+        "*.db",
+        "*.sqlite",
+        "*.sqlite3"
+      ],
+      "package_names": [
+        "sqlite3"
+      ],
+      "extensions": [
+        ".sql"
+      ]
+    },
+    {
+      "name": "statsmodels",
+      "slug": "statsmodels",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://www.statsmodels.org/stable/",
+      "repository": "https://github.com/statsmodels/statsmodels",
+      "file_patterns": [],
+      "package_names": [
+        "statsmodels"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Support Tables",
+      "slug": "support_tables",
+      "category": "reference",
+      "subcategory": "web_reference",
+      "official_docs": "https://developer.mozilla.org/",
+      "repository": null,
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "Svelte",
+      "slug": "svelte",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://svelte.dev/docs",
+      "repository": "https://github.com/sveltejs/svelte",
+      "file_patterns": [
+        "*.svelte",
+        "svelte.config.js"
+      ],
+      "package_names": [
+        "svelte"
+      ],
+      "extensions": [
+        ".svelte"
+      ]
+    },
+    {
+      "name": "SVG",
+      "slug": "svg",
+      "category": "language",
+      "subcategory": "markup_language",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/SVG",
+      "repository": null,
+      "file_patterns": [
+        "*.svg"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".svg"
+      ]
+    },
+    {
+      "name": "Symfony",
+      "slug": "symfony",
+      "category": "backend_framework",
+      "subcategory": "php_framework",
+      "official_docs": "https://symfony.com/doc/",
+      "repository": "https://github.com/symfony/symfony",
+      "file_patterns": [
+        "composer.json",
+        "symfony.lock"
+      ],
+      "package_names": [
+        "symfony/symfony"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "Tailwind CSS",
+      "slug": "tailwindcss",
+      "category": "css_framework",
+      "subcategory": "utility_framework",
+      "official_docs": "https://tailwindcss.com/docs",
+      "repository": "https://github.com/tailwindlabs/tailwindcss",
+      "file_patterns": [
+        "tailwind.config.js",
+        "tailwind.config.ts"
+      ],
+      "package_names": [
+        "tailwindcss"
+      ],
+      "extensions": [
+        ".css"
+      ]
+    },
+    {
+      "name": "Tcl/Tk",
+      "slug": "tcl_tk",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.tcl.tk/doc/",
+      "repository": "https://github.com/tcltk/tcl",
+      "file_patterns": [
+        "*.tcl"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".tcl"
+      ]
+    },
+    {
+      "name": "Tcllib",
+      "slug": "tcllib",
+      "category": "library",
+      "subcategory": "tcl_library",
+      "official_docs": "https://core.tcl-lang.org/tcllib/",
+      "repository": "https://core.tcl-lang.org/tcllib/",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".tcl"
+      ]
+    },
+    {
+      "name": "TensorFlow",
+      "slug": "tensorflow",
+      "category": "library",
+      "subcategory": "machine_learning",
+      "official_docs": "https://www.tensorflow.org/api_docs/",
+      "repository": "https://github.com/tensorflow/tensorflow",
+      "file_patterns": [],
+      "package_names": [
+        "tensorflow"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "TensorFlow C++",
+      "slug": "tensorflow_cpp",
+      "category": "library",
+      "subcategory": "machine_learning",
+      "official_docs": "https://www.tensorflow.org/api_docs/cc",
+      "repository": "https://github.com/tensorflow/tensorflow",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".cpp",
+        ".h"
+      ]
+    },
+    {
+      "name": "Terraform",
+      "slug": "terraform",
+      "category": "devops",
+      "subcategory": "infrastructure_as_code",
+      "official_docs": "https://www.terraform.io/docs/",
+      "repository": "https://github.com/hashicorp/terraform",
+      "file_patterns": [
+        "*.tf",
+        "*.tfvars",
+        "terraform.tfstate"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".tf"
+      ]
+    },
+    {
+      "name": "Three.js",
+      "slug": "threejs",
+      "category": "library",
+      "subcategory": "3d_graphics",
+      "official_docs": "https://threejs.org/docs/",
+      "repository": "https://github.com/mrdoob/three.js",
+      "file_patterns": [],
+      "package_names": [
+        "three"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Trio",
+      "slug": "trio",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://trio.readthedocs.io/",
+      "repository": "https://github.com/python-trio/trio",
+      "file_patterns": [],
+      "package_names": [
+        "trio"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Twig",
+      "slug": "twig",
+      "category": "library",
+      "subcategory": "templating",
+      "official_docs": "https://twig.symfony.com/doc/",
+      "repository": "https://github.com/twigphp/Twig",
+      "file_patterns": [
+        "*.twig"
+      ],
+      "package_names": [
+        "twig/twig"
+      ],
+      "extensions": [
+        ".twig"
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "slug": "typescript",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://www.typescriptlang.org/docs/",
+      "repository": "https://github.com/microsoft/TypeScript",
+      "file_patterns": [
+        "*.ts",
+        "*.tsx",
+        "tsconfig.json"
+      ],
+      "package_names": [
+        "typescript"
+      ],
+      "extensions": [
+        ".ts",
+        ".tsx"
+      ]
+    },
+    {
+      "name": "Underscore.js",
+      "slug": "underscore",
+      "category": "library",
+      "subcategory": "javascript_library",
+      "official_docs": "https://underscorejs.org/",
+      "repository": "https://github.com/jashkenas/underscore",
+      "file_patterns": [],
+      "package_names": [
+        "underscore"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Vagrant",
+      "slug": "vagrant",
+      "category": "devops",
+      "subcategory": "virtualization",
+      "official_docs": "https://www.vagrantup.com/docs",
+      "repository": "https://github.com/hashicorp/vagrant",
+      "file_patterns": [
+        "Vagrantfile"
+      ],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "Varnish",
+      "slug": "varnish",
+      "category": "devops",
+      "subcategory": "cache_server",
+      "official_docs": "https://varnish-cache.org/docs/",
+      "repository": "https://github.com/varnishcache/varnish-cache",
+      "file_patterns": [
+        "*.vcl"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".vcl"
+      ]
+    },
+    {
+      "name": "Vert.x",
+      "slug": "vertx",
+      "category": "backend_framework",
+      "subcategory": "java_framework",
+      "official_docs": "https://vertx.io/docs/",
+      "repository": "https://github.com/eclipse-vertx/vert.x",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".java"
+      ]
+    },
+    {
+      "name": "Vite",
+      "slug": "vite",
+      "category": "build_tool",
+      "subcategory": "bundler",
+      "official_docs": "https://vitejs.dev/",
+      "repository": "https://github.com/vitejs/vite",
+      "file_patterns": [
+        "vite.config.js",
+        "vite.config.ts"
+      ],
+      "package_names": [
+        "vite"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Vitest",
+      "slug": "vitest",
+      "category": "testing",
+      "subcategory": "javascript_testing",
+      "official_docs": "https://vitest.dev/",
+      "repository": "https://github.com/vitest-dev/vitest",
+      "file_patterns": [
+        "vitest.config.js",
+        "vitest.config.ts"
+      ],
+      "package_names": [
+        "vitest"
+      ],
+      "extensions": [
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Vue.js",
+      "slug": "vue",
+      "category": "frontend_framework",
+      "subcategory": "web_framework",
+      "official_docs": "https://vuejs.org/guide/",
+      "repository": "https://github.com/vuejs/core",
+      "file_patterns": [
+        "*.vue",
+        "vite.config.js"
+      ],
+      "package_names": [
+        "vue"
+      ],
+      "extensions": [
+        ".vue"
+      ]
+    },
+    {
+      "name": "Vue Router",
+      "slug": "vue_router",
+      "category": "library",
+      "subcategory": "routing",
+      "official_docs": "https://router.vuejs.org/",
+      "repository": "https://github.com/vuejs/router",
+      "file_patterns": [],
+      "package_names": [
+        "vue-router"
+      ],
+      "extensions": [
+        ".vue",
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "VueUse",
+      "slug": "vueuse",
+      "category": "library",
+      "subcategory": "vue_library",
+      "official_docs": "https://vueuse.org/",
+      "repository": "https://github.com/vueuse/vueuse",
+      "file_patterns": [],
+      "package_names": [
+        "@vueuse/core"
+      ],
+      "extensions": [
+        ".vue",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Vuex",
+      "slug": "vuex",
+      "category": "library",
+      "subcategory": "state_management",
+      "official_docs": "https://vuex.vuejs.org/",
+      "repository": "https://github.com/vuejs/vuex",
+      "file_patterns": [],
+      "package_names": [
+        "vuex"
+      ],
+      "extensions": [
+        ".vue",
+        ".js",
+        ".ts"
+      ]
+    },
+    {
+      "name": "Vulkan",
+      "slug": "vulkan",
+      "category": "api",
+      "subcategory": "graphics_api",
+      "official_docs": "https://www.vulkan.org/",
+      "repository": "https://github.com/KhronosGroup/Vulkan-Docs",
+      "file_patterns": [],
+      "package_names": [],
+      "extensions": [
+        ".cpp",
+        ".c"
+      ]
+    },
+    {
+      "name": "Wagtail",
+      "slug": "wagtail",
+      "category": "cms",
+      "subcategory": "content_management",
+      "official_docs": "https://docs.wagtail.org/",
+      "repository": "https://github.com/wagtail/wagtail",
+      "file_patterns": [],
+      "package_names": [
+        "wagtail"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "Web Extensions",
+      "slug": "web_extensions",
+      "category": "api",
+      "subcategory": "browser_api",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions",
+      "repository": null,
+      "file_patterns": [
+        "manifest.json"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Webpack",
+      "slug": "webpack",
+      "category": "build_tool",
+      "subcategory": "bundler",
+      "official_docs": "https://webpack.js.org/",
+      "repository": "https://github.com/webpack/webpack",
+      "file_patterns": [
+        "webpack.config.js",
+        "webpack.config.ts"
+      ],
+      "package_names": [
+        "webpack"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    {
+      "name": "Werkzeug",
+      "slug": "werkzeug",
+      "category": "library",
+      "subcategory": "python_library",
+      "official_docs": "https://werkzeug.palletsprojects.com/",
+      "repository": "https://github.com/pallets/werkzeug",
+      "file_patterns": [],
+      "package_names": [
+        "werkzeug"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    {
+      "name": "WordPress",
+      "slug": "wordpress",
+      "category": "cms",
+      "subcategory": "content_management",
+      "official_docs": "https://developer.wordpress.org/",
+      "repository": "https://github.com/WordPress/WordPress",
+      "file_patterns": [
+        "wp-config.php",
+        "*.php"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "XSLT/XPath",
+      "slug": "xslt_xpath",
+      "category": "language",
+      "subcategory": "xml_technology",
+      "official_docs": "https://developer.mozilla.org/en-US/docs/Web/XSLT",
+      "repository": null,
+      "file_patterns": [
+        "*.xsl",
+        "*.xslt"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".xsl",
+        ".xslt"
+      ]
+    },
+    {
+      "name": "Yarn",
+      "slug": "yarn",
+      "category": "build_tool",
+      "subcategory": "package_manager",
+      "official_docs": "https://yarnpkg.com/",
+      "repository": "https://github.com/yarnpkg/berry",
+      "file_patterns": [
+        "yarn.lock",
+        ".yarnrc.yml"
+      ],
+      "package_names": [],
+      "extensions": []
+    },
+    {
+      "name": "Yii",
+      "slug": "yii",
+      "category": "backend_framework",
+      "subcategory": "php_framework",
+      "official_docs": "https://www.yiiframework.com/doc/",
+      "repository": "https://github.com/yiisoft/yii2",
+      "file_patterns": [],
+      "package_names": [
+        "yiisoft/yii2"
+      ],
+      "extensions": [
+        ".php"
+      ]
+    },
+    {
+      "name": "Zig",
+      "slug": "zig",
+      "category": "language",
+      "subcategory": "programming_language",
+      "official_docs": "https://ziglang.org/documentation/",
+      "repository": "https://github.com/ziglang/zig",
+      "file_patterns": [
+        "*.zig",
+        "build.zig"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".zig"
+      ]
+    },
+    {
+      "name": "Zsh",
+      "slug": "zsh",
+      "category": "language",
+      "subcategory": "shell",
+      "official_docs": "https://zsh.sourceforge.io/Doc/",
+      "repository": "https://sourceforge.net/projects/zsh/",
+      "file_patterns": [
+        ".zshrc",
+        ".zshenv",
+        "*.zsh"
+      ],
+      "package_names": [],
+      "extensions": [
+        ".zsh"
+      ]
+    }
+  ],
+  "categories": {
+    "language": {
+      "description": "Programming and markup languages",
+      "count": 43
+    },
+    "frontend_framework": {
+      "description": "Frontend web frameworks and libraries",
+      "count": 11
+    },
+    "backend_framework": {
+      "description": "Backend web frameworks",
+      "count": 17
+    },
+    "library": {
+      "description": "Software libraries and utilities",
+      "count": 58
+    },
+    "database": {
+      "description": "Database systems",
+      "count": 10
+    },
+    "devops": {
+      "description": "DevOps tools and platforms",
+      "count": 15
+    },
+    "testing": {
+      "description": "Testing frameworks and libraries",
+      "count": 12
+    },
+    "build_tool": {
+      "description": "Build tools, bundlers, and package managers",
+      "count": 14
+    },
+    "css_framework": {
+      "description": "CSS frameworks and preprocessors",
+      "count": 2
+    },
+    "mobile": {
+      "description": "Mobile development frameworks",
+      "count": 2
+    },
+    "runtime": {
+      "description": "Runtime environments",
+      "count": 3
+    },
+    "game_engine": {
+      "description": "Game development engines",
+      "count": 3
+    },
+    "framework": {
+      "description": "General purpose frameworks",
+      "count": 3
+    },
+    "cms": {
+      "description": "Content management systems",
+      "count": 3
+    },
+    "tool": {
+      "description": "Development tools and utilities",
+      "count": 9
+    },
+    "api": {
+      "description": "APIs and protocols",
+      "count": 5
+    },
+    "platform": {
+      "description": "Development platforms",
+      "count": 1
+    },
+    "protocol": {
+      "description": "Network protocols",
+      "count": 1
+    },
+    "monitoring": {
+      "description": "Monitoring and metrics tools",
+      "count": 1
+    },
+    "documentation": {
+      "description": "Documentation tools",
+      "count": 2
+    },
+    "reference": {
+      "description": "Reference materials",
+      "count": 1
+    }
+  }
+}

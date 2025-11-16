@@ -65,17 +65,64 @@ async function fetchGitHubFile(
   }
 }
 
-// Buscar branch padrão do repositório
-async function getDefaultBranch(owner: string, repo: string): Promise<string> {
+// Verificar se o repositório existe e é público
+export async function checkRepositoryExists(owner: string, repo: string): Promise<{
+  exists: boolean
+  isPrivate: boolean
+  defaultBranch?: string
+  message?: string
+}> {
   try {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`)
-    if (!response.ok) return 'main'
+    
+    if (response.status === 404) {
+      return {
+        exists: false,
+        isPrivate: false,
+        message: 'Repository not found. Please check the owner and repository name.',
+      }
+    }
+
+    if (response.status === 403) {
+      return {
+        exists: true,
+        isPrivate: true,
+        message: 'Repository may be private. Access denied.',
+      }
+    }
+
+    if (!response.ok) {
+      return {
+        exists: false,
+        isPrivate: false,
+        message: `Failed to access repository: ${response.statusText}`,
+      }
+    }
 
     const data = await response.json()
-    return data.default_branch || 'main'
-  } catch {
+    return {
+      exists: true,
+      isPrivate: data.private || false,
+      defaultBranch: data.default_branch || 'main',
+      message: data.private ? 'Repository is private.' : undefined,
+    }
+  } catch (error) {
+    console.error('Error checking repository:', error)
+    return {
+      exists: false,
+      isPrivate: false,
+      message: 'Failed to check repository. Network error or invalid URL.',
+    }
+  }
+}
+
+// Buscar branch padrão do repositório
+async function getDefaultBranch(owner: string, repo: string): Promise<string> {
+  const repoInfo = await checkRepositoryExists(owner, repo)
+  if (!repoInfo.exists || !repoInfo.defaultBranch) {
     return 'main'
   }
+  return repoInfo.defaultBranch
 }
 
 // Buscar arquivos prioritários usando Firecrawl
@@ -148,7 +195,18 @@ export async function fetchGitHubFilesFallback(
   repo: string,
   branch?: string
 ): Promise<GitHubFileResult[]> {
-  const defaultBranch = branch || (await getDefaultBranch(owner, repo))
+  // Verificar se o repositório existe primeiro
+  const repoInfo = await checkRepositoryExists(owner, repo)
+  
+  if (!repoInfo.exists) {
+    throw new Error(repoInfo.message || 'Repository not found. Please check the owner and repository name.')
+  }
+
+  if (repoInfo.isPrivate) {
+    throw new Error(repoInfo.message || 'Repository is private. Public repositories only.')
+  }
+
+  const defaultBranch = branch || repoInfo.defaultBranch || 'main'
   const files: GitHubFileResult[] = []
 
   // Lista de arquivos prioritários para buscar
@@ -259,6 +317,32 @@ export async function fetchGitHubFilesFallback(
     if (file) {
       files.push(file)
     }
+  }
+
+  // Se nenhum arquivo foi encontrado após verificar que o repositório existe e é público,
+  // o repositório pode não ter arquivos reconhecidos ou o branch especificado pode não existir
+  if (files.length === 0) {
+    // Verificar se o branch existe tentando buscar um arquivo comum
+    const testFile = await fetchGitHubFile(owner, repo, defaultBranch, 'README.md')
+    if (!testFile) {
+      // Verificar se outro branch comum existe
+      const altBranches = branch ? [] : ['master', 'develop', 'main']
+      let branchFound = false
+      
+      for (const altBranch of altBranches) {
+        const testFileAlt = await fetchGitHubFile(owner, repo, altBranch, 'README.md')
+        if (testFileAlt) {
+          branchFound = true
+          break
+        }
+      }
+      
+      if (!branchFound && branch) {
+        throw new Error(`Branch "${branch}" not found in repository. The repository may not have this branch.`)
+      }
+    }
+    
+    throw new Error(`No recognized configuration files found in repository. The repository exists but doesn't contain any of the expected files (package.json, requirements.txt, etc.).`)
   }
 
   return files
