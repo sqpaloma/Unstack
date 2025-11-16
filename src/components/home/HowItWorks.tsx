@@ -5,42 +5,42 @@ export function HowItWorks() {
 		{
 			number: "1",
 			icon: <Upload className="w-10 h-10 text-cyan-400" />,
-			title: "Cole a URL do GitHub",
+			title: "Paste GitHub URL",
 			description:
-				"Insira o link do seu repositório público e deixe nossa IA analisar toda a stack.",
+				"Enter your public repository link and let our AI analyze the entire stack.",
 		},
 		{
 			number: "2",
 			icon: <Code2 className="w-10 h-10 text-cyan-400" />,
-			title: "Análise automática de código (opcional)",
+			title: "Automatic code analysis (optional)",
 			description:
-				"Detectamos linguagens, frameworks, ferramentas de auth, databases e infra usadas no projeto.",
+				"We detect languages, frameworks, auth tools, databases and infrastructure used in the project.",
 		},
 		{
 			number: "3",
 			icon: <CheckSquare className="w-10 h-10 text-cyan-400" />,
-			title: "Opções & Autoavaliação",
+			title: "Options & Self-assessment",
 			description:
-				"Você marca o que já sabe, tem noção ou não sabe. Isso personaliza seu plano de estudos.",
+				"You mark what you already know, have basic knowledge or don't know. This personalizes your study plan.",
 		},
 		{
 			number: "4",
 			icon: <BarChart3 className="w-10 h-10 text-cyan-400" />,
-			title: "Dashboard com progresso",
+			title: "Dashboard with progress",
 			description:
-				"Acompanhe módulos, checkboxes de conclusão, filtros por tecnologia e continue de onde parou.",
+				"Track modules, completion checkboxes, filters by technology and continue where you left off.",
 		},
 	];
 
 	return (
-		<section id="como-funciona" className="py-16 px-6 scroll-mt-20">
+		<section id="how-it-works" className="py-16 px-6 scroll-mt-20">
 			<div className="max-w-7xl mx-auto">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-						Como funciona
+						How it works
 					</h2>
 					<p className="text-gray-400 text-lg max-w-2xl mx-auto">
-						Do upload ao dashboard: 4 passos para um aprendizado estruturado
+						From upload to dashboard: 4 steps to structured learning
 					</p>
 				</div>
 

@@ -11,10 +11,10 @@ function SignUpPage() {
 			<div className="w-full max-w-md">
 				<div className="text-center mb-8">
 					<h2 className="text-3xl font-bold text-white mb-2">
-						Comece sua jornada
+						Start your journey
 					</h2>
 					<p className="text-gray-400">
-						Crie sua conta e evolua sua stack de conhecimento
+						Create your account and evolve your knowledge stack
 					</p>
 				</div>
 

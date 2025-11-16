@@ -8,19 +8,19 @@ export function Footer() {
 					<div>
 						<h3 className="text-white font-bold text-lg mb-4">Unstack</h3>
 						<p className="text-gray-400 text-sm leading-relaxed">
-							Aprenda sua stack de forma inteligente e focada.
+							Learn your stack intelligently and focused.
 						</p>
 					</div>
 
 					<div>
-						<h4 className="text-white font-semibold mb-4">Produto</h4>
+						<h4 className="text-white font-semibold mb-4">Product</h4>
 						<ul className="space-y-2">
 							<li>
 								<a
-									href="#como-funciona"
+									href="#how-it-works"
 									className="text-gray-400 hover:text-cyan-400 transition-colors text-sm"
 								>
-									Como funciona
+									How it works
 								</a>
 							</li>
 							<li>
@@ -43,7 +43,7 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h4 className="text-white font-semibold mb-4">Recursos</h4>
+						<h4 className="text-white font-semibold mb-4">Resources</h4>
 						<ul className="space-y-2">
 							<li>
 								<a
@@ -79,7 +79,7 @@ export function Footer() {
 					</div>
 
 					<div>
-						<h4 className="text-white font-semibold mb-4">Comunidade</h4>
+						<h4 className="text-white font-semibold mb-4">Community</h4>
 						<div className="flex gap-4">
 							<a
 								href="https://github.com"
@@ -115,27 +115,27 @@ export function Footer() {
 				<div className="border-t border-slate-700/50 pt-8">
 					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 						<p className="text-gray-400 text-sm">
-							© {new Date().getFullYear()} Unstack. Todos os direitos
-							reservados.
+							© {new Date().getFullYear()} Unstack. All rights
+							reserved.
 						</p>
 						<div className="flex gap-6 text-sm">
 							<a
 								href="/privacy"
 								className="text-gray-400 hover:text-cyan-400 transition-colors"
 							>
-								Privacidade
+								Privacy
 							</a>
 							<a
 								href="/terms"
 								className="text-gray-400 hover:text-cyan-400 transition-colors"
 							>
-								Termos de Uso
+								Terms of Use
 							</a>
 						</div>
 					</div>
 					<p className="text-gray-500 text-xs mt-4 text-center md:text-left">
-						Este projeto é uma demonstração de tecnologia e não representa
-						endosso oficial das marcas mencionadas.
+						This project is a technology demonstration and does not represent
+						official endorsement of the mentioned brands.
 					</p>
 				</div>
 			</div>

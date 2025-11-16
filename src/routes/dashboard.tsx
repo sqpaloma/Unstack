@@ -214,7 +214,7 @@ function DashboardPage() {
     e.stopPropagation()
 
     const confirmed = window.confirm(
-      `Tem certeza que deseja excluir o plano de estudos para ${technology.replace(/-/g, ' ')}? Esta ação não pode ser desfeita.`
+      `Are you sure you want to delete the study plan for ${technology.replace(/-/g, ' ')}? This action cannot be undone.`
     )
 
     if (!confirmed) return
@@ -223,7 +223,7 @@ function DashboardPage() {
       await removePlanMutation({ id: planId })
     } catch (error) {
       console.error('Error deleting plan:', error)
-      alert('Erro ao excluir plano: ' + (error as Error).message)
+      alert('Error deleting plan: ' + (error as Error).message)
     }
   }
 
@@ -232,15 +232,15 @@ function DashboardPage() {
       <SignedOut>
         <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
           <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 max-w-md">
-            <h2 className="text-2xl font-bold text-white mb-4">Acesso Restrito</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Restricted Access</h2>
             <p className="text-gray-400 mb-6">
-              Você precisa estar autenticado para acessar esta página.
+              You need to be authenticated to access this page.
             </p>
             <a
               href="/sign-in"
               className="inline-block px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
             >
-              Fazer Login
+              Sign In
             </a>
           </div>
         </div>
@@ -253,7 +253,7 @@ function DashboardPage() {
             <div className="mb-8">
               <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
               <p className="text-gray-400">
-                Acompanhe seu progresso nos planos de estudo
+                Track your progress in study plans
               </p>
             </div>
 
@@ -262,17 +262,17 @@ function DashboardPage() {
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 text-center">
                 <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                 <h2 className="text-2xl font-semibold text-white mb-2">
-                  Nenhum Plano Criado
+                  No Plans Created
                 </h2>
                 <p className="text-gray-400 mb-6">
-                  Comece analisando um repositório e criando seu plano de estudos
-                  personalizado.
+                  Start by analyzing a repository and creating your
+                  personalized study plan.
                 </p>
                 <Link
                   to="/options"
                   className="inline-block px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
                 >
-                  Criar Plano de Estudos
+                  Create Study Plan
                 </Link>
               </div>
             )}
@@ -285,10 +285,10 @@ function DashboardPage() {
                     <Trophy className="w-12 h-12 text-cyan-400" />
                     <div>
                       <h2 className="text-3xl font-bold text-white">
-                        Progresso Global
+                        Global Progress
                       </h2>
                       <p className="text-gray-300">
-                        {techProgress.length} tecnologias em aprendizado
+                        {techProgress.length} technologies in learning
                       </p>
                     </div>
                   </div>
@@ -297,7 +297,7 @@ function DashboardPage() {
                     <div className="bg-slate-800/50 rounded-lg p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <Target className="w-5 h-5 text-cyan-400" />
-                        <span className="text-gray-400 text-sm">Conclusão</span>
+                        <span className="text-gray-400 text-sm">Completion</span>
                       </div>
                       <p className="text-3xl font-bold text-white">
                         {globalProgress.percentage}%
@@ -307,7 +307,7 @@ function DashboardPage() {
                     <div className="bg-slate-800/50 rounded-lg p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <CheckCircle2 className="w-5 h-5 text-green-400" />
-                        <span className="text-gray-400 text-sm">Módulos</span>
+                        <span className="text-gray-400 text-sm">Modules</span>
                       </div>
                       <p className="text-3xl font-bold text-white">
                         {globalProgress.completedModules}/{globalProgress.totalModules}
@@ -317,7 +317,7 @@ function DashboardPage() {
                     <div className="bg-slate-800/50 rounded-lg p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <BookOpen className="w-5 h-5 text-purple-400" />
-                        <span className="text-gray-400 text-sm">Tecnologias</span>
+                        <span className="text-gray-400 text-sm">Technologies</span>
                       </div>
                       <p className="text-3xl font-bold text-white">
                         {techProgress.length}
@@ -327,7 +327,7 @@ function DashboardPage() {
                     <div className="bg-slate-800/50 rounded-lg p-4">
                       <div className="flex items-center gap-3 mb-2">
                         <TrendingUp className="w-5 h-5 text-orange-400" />
-                        <span className="text-gray-400 text-sm">Horas Totais</span>
+                        <span className="text-gray-400 text-sm">Total Hours</span>
                       </div>
                       <p className="text-3xl font-bold text-white">
                         {globalProgress.totalHours}h
@@ -352,7 +352,7 @@ function DashboardPage() {
                     <div className="flex items-center gap-3 mb-4">
                       <ArrowRight className="w-6 h-6 text-cyan-400" />
                       <h2 className="text-2xl font-bold text-white">
-                        Continuar de onde parei
+                        Continue where you left off
                       </h2>
                     </div>
                     <div className="space-y-3">
@@ -368,21 +368,25 @@ function DashboardPage() {
                             }`}
                           >
                             <div className="flex items-center gap-4 flex-1">
-                              <label className="flex items-center cursor-pointer">
-                                <input
-                                  type="checkbox"
-                                  checked={isCompleted}
-                                  onChange={(e) =>
-                                    handleToggleModule(
-                                      e as any,
-                                      task.planId,
-                                      task.technology,
-                                      task.moduleIndex
-                                    )
-                                  }
-                                  className="w-5 h-5 text-green-500 bg-slate-700 border-slate-600 rounded focus:ring-green-500 focus:ring-2"
-                                />
-                              </label>
+                              <button
+                                onClick={(e) =>
+                                  handleToggleModule(
+                                    e,
+                                    task.planId,
+                                    task.technology,
+                                    task.moduleIndex
+                                  )
+                                }
+                                className={`flex items-center justify-center w-6 h-6 rounded-full border-2 transition-all ${
+                                  isCompleted
+                                    ? 'border-green-500 bg-transparent'
+                                    : 'border-gray-400 bg-transparent hover:border-cyan-400'
+                                }`}
+                              >
+                                {isCompleted && (
+                                  <CheckCircle2 className="w-5 h-5 text-green-500" fill="currentColor" />
+                                )}
+                              </button>
                               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 font-bold">
                                 {idx + 1}
                               </div>
@@ -425,20 +429,20 @@ function DashboardPage() {
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Filter className="w-5 h-5 text-cyan-400" />
-                    <h3 className="text-lg font-semibold text-white">Filtros</h3>
+                    <h3 className="text-lg font-semibold text-white">Filters</h3>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Technology Filter */}
                     <div>
                       <label className="block text-sm text-gray-400 mb-2">
-                        Tecnologia
+                        Technology
                       </label>
                       <select
                         value={selectedTech}
                         onChange={(e) => setSelectedTech(e.target.value)}
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
                       >
-                        <option value="all">Todas</option>
+                        <option value="all">All</option>
                         {techProgress.map((tech) => (
                           <option key={tech.planId} value={tech.technology}>
                             {tech.technology.replace(/-/g, ' ')}
@@ -457,9 +461,9 @@ function DashboardPage() {
                         onChange={(e) => setSelectedStatus(e.target.value)}
                         className="w-full px-4 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
                       >
-                        <option value="all">Todos</option>
-                        <option value="pending">Pendentes</option>
-                        <option value="completed">Concluídos</option>
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
                       </select>
                     </div>
                   </div>
@@ -468,7 +472,7 @@ function DashboardPage() {
                 {/* Technology Progress Cards */}
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold text-white mb-4">
-                    Tecnologias ({filteredTechProgress.length})
+                    Technologies ({filteredTechProgress.length})
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredTechProgress.map((tech) => (
@@ -486,14 +490,18 @@ function DashboardPage() {
                             )
                           }
                           className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-400 hover:bg-red-900/20 rounded-lg transition-colors z-10"
-                          title="Excluir plano"
+                          title="Delete plan"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
 
                         <Link
-                          to="/plan"
-                          search={{ analysisId: plans[0]?.analysisId }}
+                          to={tech.percentage === 100 ? "/completion" : "/plan"}
+                          search={
+                            tech.percentage === 100
+                              ? { planId: tech.planId }
+                              : { analysisId: plans[0]?.analysisId }
+                          }
                           className="block"
                         >
                           <div className="flex items-start justify-between mb-4 pr-8">
@@ -511,13 +519,13 @@ function DashboardPage() {
 
                           <div className="space-y-3 mb-4">
                             <div className="flex justify-between text-sm">
-                              <span className="text-gray-400">Módulos</span>
+                              <span className="text-gray-400">Modules</span>
                               <span className="text-white font-medium">
                                 {tech.completedModules}/{tech.totalModules}
                               </span>
                             </div>
                             <div className="flex justify-between text-sm">
-                              <span className="text-gray-400">Horas estimadas</span>
+                              <span className="text-gray-400">Estimated hours</span>
                               <span className="text-white font-medium">
                                 {tech.estimatedHours}h
                               </span>
@@ -539,7 +547,7 @@ function DashboardPage() {
                         {tech.nextModules.length > 0 && (
                           <div className="border-t border-slate-700 pt-4">
                             <p className="text-xs text-gray-400 uppercase tracking-wider mb-3">
-                              Próximos módulos
+                              Next modules
                             </p>
                             <div className="space-y-2">
                               {tech.nextModules.slice(0, 2).map((module) => {
@@ -552,21 +560,25 @@ function DashboardPage() {
                                     key={module.moduleIndex}
                                     className="flex items-start gap-3"
                                   >
-                                    <label className="flex items-center cursor-pointer mt-0.5">
-                                      <input
-                                        type="checkbox"
-                                        checked={isCompleted}
-                                        onChange={(e) =>
-                                          handleToggleModule(
-                                            e as any,
-                                            tech.planId as Id<'plans'>,
-                                            tech.technology,
-                                            module.moduleIndex
-                                          )
-                                        }
-                                        className="w-4 h-4 text-green-500 bg-slate-700 border-slate-600 rounded focus:ring-green-500 focus:ring-2"
-                                      />
-                                    </label>
+                                    <button
+                                      onClick={(e) =>
+                                        handleToggleModule(
+                                          e,
+                                          tech.planId as Id<'plans'>,
+                                          tech.technology,
+                                          module.moduleIndex
+                                        )
+                                      }
+                                      className={`flex items-center justify-center w-5 h-5 rounded-full border-2 transition-all mt-0.5 flex-shrink-0 ${
+                                        isCompleted
+                                          ? 'border-green-500 bg-transparent'
+                                          : 'border-gray-400 bg-transparent hover:border-cyan-400'
+                                      }`}
+                                    >
+                                      {isCompleted && (
+                                        <CheckCircle2 className="w-4 h-4 text-green-500" fill="currentColor" />
+                                      )}
+                                    </button>
                                     <div className="flex-1 min-w-0">
                                       <p
                                         className={`text-sm ${
@@ -599,13 +611,13 @@ function DashboardPage() {
                     search={{ analysisId: plans[0]?.analysisId }}
                     className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
                   >
-                    Continuar Estudando
+                    Continue Studying
                   </Link>
                   <Link
                     to="/options"
                     className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors"
                   >
-                    Criar Novo Plano
+                    Create New Plan
                   </Link>
                 </div>
               </>

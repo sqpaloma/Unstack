@@ -4,21 +4,21 @@ export function WhyUse() {
 	const benefits = [
 		{
 			icon: <Target className="w-12 h-12 text-cyan-400" />,
-			title: "Foco no que importa",
+			title: "Focus on what matters",
 			description:
-				"Não perca tempo estudando o que você já domina. Concentre-se nas lacunas reais do seu conhecimento.",
+				"Don't waste time studying what you already master. Focus on the real gaps in your knowledge.",
 		},
 		{
 			icon: <Clock className="w-12 h-12 text-cyan-400" />,
-			title: "Economia de tempo",
+			title: "Time saving",
 			description:
-				"Planos de estudo gerados automaticamente com módulos, recursos e estimativas de horas baseadas no seu nível.",
+				"Study plans automatically generated with modules, resources and hour estimates based on your level.",
 		},
 		{
 			icon: <TrendingUp className="w-12 h-12 text-cyan-400" />,
-			title: "Evolução visível",
+			title: "Visible evolution",
 			description:
-				"Dashboard com métricas de progresso, filtros por tecnologia e a funcionalidade 'continuar de onde parei'.",
+				"Dashboard with progress metrics, filters by technology and the 'continue where you left off' feature.",
 		},
 	];
 
@@ -27,10 +27,10 @@ export function WhyUse() {
 			<div className="max-w-7xl mx-auto">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-						Por que usar o Unstack?
+						Why use Unstack?
 					</h2>
 					<p className="text-gray-400 text-lg max-w-2xl mx-auto">
-						Aprenda de forma inteligente, não mais difícil
+						Learn smart, not harder
 					</p>
 				</div>
 

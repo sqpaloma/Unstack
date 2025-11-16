@@ -11,7 +11,6 @@ import {
 	Loader2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { ContinueFromWhereYouLeft } from "@/components/home/ContinueFromWhereYouLeft";
 import { Footer } from "@/components/home/Footer";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { TrustStrip } from "@/components/home/TrustStrip";
@@ -227,10 +226,10 @@ function HomePage() {
 			<div className="max-w-4xl mx-auto">
 				<div className="text-center mb-12">
 					<h1 className="text-4xl font-bold text-white mb-4">
-						Analisar Repositório
+						Analyze Repository
 					</h1>
 					<p className="text-gray-400 text-lg">
-						Cole a URL do GitHub ou um trecho de código para começar
+						Paste the GitHub URL or a code snippet to get started
 					</p>
 				</div>
 
@@ -243,7 +242,7 @@ function HomePage() {
 									className="flex items-center gap-2 text-white font-semibold mb-3"
 								>
 									<Github className="w-5 h-5 text-cyan-400" />
-									URL do GitHub
+									GitHub URL
 								</label>
 								<input
 									type="url"
@@ -257,7 +256,7 @@ function HomePage() {
 
 							<div className="flex items-center gap-4">
 								<div className="flex-1 h-px bg-slate-700"></div>
-								<span className="text-gray-500 text-sm">OU</span>
+								<span className="text-gray-500 text-sm">OR</span>
 								<div className="flex-1 h-px bg-slate-700"></div>
 							</div>
 
@@ -267,18 +266,18 @@ function HomePage() {
 									className="flex items-center gap-2 text-white font-semibold mb-3"
 								>
 									<Code2 className="w-5 h-5 text-cyan-400" />
-									Trecho de código (opcional)
+									Code snippet (optional)
 								</label>
 								<textarea
 									value={codeSnippet}
 									onChange={(e) => setCodeSnippet(e.target.value)}
-									placeholder="Cole aqui trechos do seu package.json, imports, ou qualquer código relevante..."
+									placeholder="Paste snippets from your package.json, imports, or any relevant code..."
 									rows={8}
 									className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors font-mono text-sm resize-none"
 									disabled={isAnalyzing}
 								/>
 								<p className="text-gray-500 text-sm mt-2">
-									Isso pode ajudar a detectar tecnologias adicionais
+									This can help detect additional technologies
 								</p>
 							</div>
 
@@ -291,11 +290,11 @@ function HomePage() {
 								{isAnalyzing ? (
 									<>
 										<Loader2 className="w-5 h-5 animate-spin" />
-										Analisando...
+										Analyzing...
 									</>
 								) : (
 									<>
-										Analisar repositório
+										Analyze repository
 										<ArrowRight className="w-5 h-5" />
 									</>
 								)}
@@ -311,10 +310,10 @@ function HomePage() {
 										<Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
 										<div>
 											<h2 className="text-xl font-semibold text-white">
-												Analisando...
+												Analyzing...
 											</h2>
 											<p className="text-gray-400">
-												Detectando tecnologias do repositório
+												Detecting repository technologies
 											</p>
 										</div>
 									</>
@@ -324,11 +323,11 @@ function HomePage() {
 										<CheckCircle2 className="w-8 h-8 text-green-400" />
 										<div>
 											<h2 className="text-xl font-semibold text-white">
-												Análise concluída!
+												Analysis complete!
 											</h2>
 											<p className="text-gray-400">
-												{analysis.detectedTechs?.length || 0} tecnologias
-												detectadas
+												{analysis.detectedTechs?.length || 0} technologies
+												detected
 											</p>
 										</div>
 									</>
@@ -338,10 +337,10 @@ function HomePage() {
 										<AlertCircle className="w-8 h-8 text-red-400" />
 										<div>
 											<h2 className="text-xl font-semibold text-white">
-												Falha na análise
+												Analysis failed
 											</h2>
 											<p className="text-gray-400">
-												{analysis.error || "Erro desconhecido"}
+												{analysis.error || "Unknown error"}
 											</p>
 										</div>
 									</>
@@ -352,10 +351,10 @@ function HomePage() {
 								<>
 									<div className="mb-6">
 										<h3 className="text-lg font-semibold text-white mb-2">
-											Avalie seu conhecimento em cada tecnologia
+											Assess your knowledge of each technology
 										</h3>
 										<p className="text-gray-400 text-sm mb-4">
-											Isso ajudará a personalizar seu plano de estudos
+											This will help personalize your study plan
 										</p>
 										<div className="space-y-4">
 											{analysis.detectedTechs.map((tech) => (
@@ -384,39 +383,48 @@ function HomePage() {
 															onClick={() =>
 																handleAssessmentChange(tech.key, "sei")
 															}
-															className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all ${
+															className={`flex-1 px-4 py-2 rounded-full font-medium transition-all flex items-center justify-center gap-2 ${
 																assessments[tech.key] === "sei"
-																	? "bg-green-500 text-white border-2 border-green-400"
-																	: "bg-slate-800 text-gray-300 border border-slate-600 hover:bg-slate-700"
+																	? "bg-transparent text-green-400 border-2 border-green-500"
+																	: "bg-transparent text-gray-300 border-2 border-slate-600 hover:border-cyan-400"
 															}`}
 														>
-															Sei
+															{assessments[tech.key] === "sei" && (
+																<CheckCircle2 className="w-4 h-4" fill="currentColor" />
+															)}
+															Know
 														</button>
 														<button
 															type="button"
 															onClick={() =>
 																handleAssessmentChange(tech.key, "nocao")
 															}
-															className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all ${
+															className={`flex-1 px-4 py-2 rounded-full font-medium transition-all flex items-center justify-center gap-2 ${
 																assessments[tech.key] === "nocao"
-																	? "bg-yellow-500 text-white border-2 border-yellow-400"
-																	: "bg-slate-800 text-gray-300 border border-slate-600 hover:bg-slate-700"
+																	? "bg-transparent text-yellow-400 border-2 border-yellow-500"
+																	: "bg-transparent text-gray-300 border-2 border-slate-600 hover:border-cyan-400"
 															}`}
 														>
-															Já ouvi falar
+															{assessments[tech.key] === "nocao" && (
+																<CheckCircle2 className="w-4 h-4" fill="currentColor" />
+															)}
+															Heard of it
 														</button>
 														<button
 															type="button"
 															onClick={() =>
 																handleAssessmentChange(tech.key, "nao_sei")
 															}
-															className={`flex-1 px-4 py-2 rounded-lg font-medium transition-all ${
+															className={`flex-1 px-4 py-2 rounded-full font-medium transition-all flex items-center justify-center gap-2 ${
 																assessments[tech.key] === "nao_sei"
-																	? "bg-red-500 text-white border-2 border-red-400"
-																	: "bg-slate-800 text-gray-300 border border-slate-600 hover:bg-slate-700"
+																	? "bg-transparent text-red-400 border-2 border-red-500"
+																	: "bg-transparent text-gray-300 border-2 border-slate-600 hover:border-cyan-400"
 															}`}
 														>
-															Não sei
+															{assessments[tech.key] === "nao_sei" && (
+																<CheckCircle2 className="w-4 h-4" fill="currentColor" />
+															)}
+															Don't know
 														</button>
 													</div>
 												</div>
@@ -427,7 +435,7 @@ function HomePage() {
 									{analysis.analysisSummary && (
 										<div className="mb-6">
 											<h3 className="text-lg font-semibold text-white mb-2">
-												Resumo
+												Summary
 											</h3>
 											<p className="text-gray-400 leading-relaxed">
 												{analysis.analysisSummary}
@@ -444,15 +452,15 @@ function HomePage() {
 										{isGeneratingPlan ? (
 											<>
 												<Loader2 className="w-5 h-5 animate-spin" />
-												Gerando plano...
+												Generating plan...
 											</>
 										) : allAssessed ? (
 											<>
-												Gerar plano de estudos
+												Generate study plan
 												<ArrowRight className="w-5 h-5" />
 											</>
 										) : (
-											"Avalie todas as tecnologias para continuar"
+											"Assess all technologies to continue"
 										)}
 									</button>
 								</>
@@ -462,7 +470,6 @@ function HomePage() {
 				)}
 			</div>
 			<TrustStrip />
-			<ContinueFromWhereYouLeft />
 			<HowItWorks />
 			<WhatWeDetect />
 			<WhyUse />

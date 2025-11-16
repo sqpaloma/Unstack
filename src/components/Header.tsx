@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
-import { BookOpen, LayoutDashboard, Target, Home, LogIn } from "lucide-react";
+import { LayoutDashboard, Target, Home, LogIn } from "lucide-react";
 
 export function Header() {
 	return (
@@ -57,20 +57,9 @@ export function Header() {
 								}}
 							>
 								<Target className="w-4 h-4" />
-								Avaliações
+								Assessments
 							</Link>
 
-							<Link
-								to="/plan"
-								className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors font-medium"
-								activeProps={{
-									className:
-										"flex items-center gap-2 text-cyan-400 font-medium",
-								}}
-							>
-								<BookOpen className="w-4 h-4" />
-								Planos
-							</Link>
 						</SignedIn>
 					</nav>
 
@@ -82,13 +71,13 @@ export function Header() {
 								className="hidden sm:flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-white transition-colors font-medium"
 							>
 								<LogIn className="w-4 h-4" />
-								Entrar
+								Sign In
 							</Link>
 							<Link
 								to="/sign-up"
 								className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
 							>
-								Cadastrar
+								Sign Up
 							</Link>
 						</SignedOut>
 
@@ -136,20 +125,9 @@ export function Header() {
 							}}
 						>
 							<Target className="w-4 h-4" />
-							Avaliações
+							Assessments
 						</Link>
 
-						<Link
-							to="/plan"
-							className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors text-sm font-medium"
-							activeProps={{
-								className:
-									"flex items-center gap-2 text-cyan-400 text-sm font-medium",
-							}}
-						>
-							<BookOpen className="w-4 h-4" />
-							Planos
-						</Link>
 					</nav>
 				</SignedIn>
 			</div>

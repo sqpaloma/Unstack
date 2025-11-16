@@ -11,10 +11,10 @@ function SignInPage() {
 			<div className="w-full max-w-md">
 				<div className="text-center mb-8">
 					<h2 className="text-3xl font-bold text-white mb-2">
-						Bem-vindo de volta!
+						Welcome back!
 					</h2>
 					<p className="text-gray-400">
-						Entre para continuar sua jornada de aprendizado
+						Sign in to continue your learning journey
 					</p>
 				</div>
 

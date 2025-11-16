@@ -13,6 +13,7 @@ import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as OptionsRouteImport } from './routes/options'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CompletionRouteImport } from './routes/completion'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignUpSsoCallbackRouteImport } from './routes/sign-up.sso-callback'
 import { Route as SignInSsoCallbackRouteImport } from './routes/sign-in.sso-callback'
@@ -47,6 +48,11 @@ const OptionsRoute = OptionsRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompletionRoute = CompletionRouteImport.update({
+  id: '/completion',
+  path: '/completion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -127,6 +133,7 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/completion': typeof CompletionRoute
   '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/sign-in': typeof SignInRouteWithChildren
@@ -148,6 +155,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/completion': typeof CompletionRoute
   '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/sign-in': typeof SignInRouteWithChildren
@@ -170,6 +178,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/completion': typeof CompletionRoute
   '/dashboard': typeof DashboardRoute
   '/options': typeof OptionsRoute
   '/sign-in': typeof SignInRouteWithChildren
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/completion'
     | '/dashboard'
     | '/options'
     | '/sign-in'
@@ -214,6 +224,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/completion'
     | '/dashboard'
     | '/options'
     | '/sign-in'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/completion'
     | '/dashboard'
     | '/options'
     | '/sign-in'
@@ -257,6 +269,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompletionRoute: typeof CompletionRoute
   DashboardRoute: typeof DashboardRoute
   OptionsRoute: typeof OptionsRoute
   SignInRoute: typeof SignInRouteWithChildren
@@ -303,6 +316,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/completion': {
+      id: '/completion'
+      path: '/completion'
+      fullPath: '/completion'
+      preLoaderRoute: typeof CompletionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -437,6 +457,7 @@ const SignUpRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompletionRoute: CompletionRoute,
   DashboardRoute: DashboardRoute,
   OptionsRoute: OptionsRoute,
   SignInRoute: SignInRouteWithChildren,

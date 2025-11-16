@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import * as Sentry from "@sentry/tanstackstart-react";
+import { Github, Code2, Loader2, CheckCircle2, AlertCircle, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/options")({
 	component: OptionsPage,
@@ -25,6 +26,11 @@ function OptionsPage() {
 	const navigate = useNavigate();
 	const [assessments, setAssessments] = useState<TechAssessment[]>([]);
 	const [isSaving, setIsSaving] = useState(false);
+	const [showNewAnalysis, setShowNewAnalysis] = useState(false);
+	const [githubUrl, setGithubUrl] = useState("");
+	const [codeSnippet, setCodeSnippet] = useState("");
+	const [isAnalyzing, setIsAnalyzing] = useState(false);
+	const [newAnalysisId, setNewAnalysisId] = useState<Id<"githubAnalysis"> | null>(null);
 
 	// Fetch Convex user by Clerk ID
 	const convexUser = useQuery(
@@ -45,6 +51,14 @@ function OptionsPage() {
 	const saveMutation = useMutation(api.assessments.save);
 	const generatePlanAction = useAction(api.plans.generate);
 	const [isGeneratingPlan, setIsGeneratingPlan] = useState(false);
+
+	const createAndAnalyzeFromUrl = useAction(api.analysis.createAndAnalyzeFromUrl);
+	const createAndAnalyzeFromCode = useAction(api.analysis.createAndAnalyzeFromCode);
+
+	const newAnalysis = useQuery(
+		api.analysis.getById,
+		newAnalysisId ? { id: newAnalysisId } : "skip",
+	);
 
 	// Check for duplicate plans
 	const duplicateCheck = useQuery(
@@ -75,6 +89,63 @@ function OptionsPage() {
 		}
 	}, [latestAnalysis, existingAssessments]);
 
+	// Poll new analysis status
+	useEffect(() => {
+		if (newAnalysis?.status === "done") {
+			setIsAnalyzing(false);
+			setShowNewAnalysis(false);
+			setGithubUrl("");
+			setCodeSnippet("");
+			setNewAnalysisId(null);
+			// Refresh page to show new analysis
+			window.location.reload();
+		} else if (newAnalysis?.status === "failed") {
+			setIsAnalyzing(false);
+			alert("Analysis failed: " + (newAnalysis.error || "Unknown error"));
+		}
+	}, [newAnalysis]);
+
+	const isValidGitHubUrl = (url: string) => {
+		const pattern = /^https?:\/\/(www\.)?github\.com\/[\w-]+\/[\w.-]+/;
+		return pattern.test(url.trim());
+	};
+
+	const handleAnalyzeNew = async () => {
+		if (!githubUrl && !codeSnippet) {
+			alert("Please enter a GitHub URL or code snippet");
+			return;
+		}
+
+		if (githubUrl && !isValidGitHubUrl(githubUrl)) {
+			alert("Please enter a valid GitHub URL (e.g., https://github.com/owner/repo)");
+			return;
+		}
+
+		setIsAnalyzing(true);
+
+		try {
+			let analysisId: string;
+
+			if (githubUrl) {
+				analysisId = await createAndAnalyzeFromUrl({
+					githubUrl,
+					userId: convexUser?._id,
+				});
+			} else {
+				analysisId = await createAndAnalyzeFromCode({
+					codeSnippet,
+					userId: convexUser?._id,
+				});
+			}
+
+			setNewAnalysisId(analysisId as unknown as Id<"githubAnalysis">);
+		} catch (error) {
+			console.error("Error analyzing:", error);
+			alert("Error analyzing: " + (error as Error).message);
+			setIsAnalyzing(false);
+		}
+	};
+
 	const handleLevelChange = (techKey: string, level: TechLevel) => {
 		setAssessments((prev) =>
 			prev.map((tech) => (tech.key === techKey ? { ...tech, level } : tech)),
@@ -94,10 +165,10 @@ function OptionsPage() {
 					level: tech.level,
 				})),
 			});
-			alert("Assessments salvos com sucesso!");
+			alert("Assessments saved successfully!");
 		} catch (error) {
 			console.error("Error saving assessments:", error);
-			alert("Erro ao salvar assessments");
+			alert("Error saving assessments");
 		} finally {
 			setIsSaving(false);
 		}
@@ -148,7 +219,7 @@ function OptionsPage() {
 				},
 			});
 
-			alert("Erro ao gerar plano: " + (error as Error).message);
+			alert("Error generating plan: " + (error as Error).message);
 		} finally {
 			setIsGeneratingPlan(false);
 		}
@@ -160,16 +231,16 @@ function OptionsPage() {
 				<div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
 					<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 max-w-md">
 						<h2 className="text-2xl font-bold text-white mb-4">
-							Acesso Restrito
+							Restricted Access
 						</h2>
 						<p className="text-gray-400 mb-6">
-							Você precisa estar autenticado para acessar esta página.
+							You need to be authenticated to access this page.
 						</p>
 						<a
 							href="/sign-in"
 							className="inline-block px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
 						>
-							Fazer Login
+							Sign In
 						</a>
 					</div>
 				</div>
@@ -178,21 +249,110 @@ function OptionsPage() {
 			<SignedIn>
 				<div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 py-12 px-6">
 					<div className="max-w-5xl mx-auto">
-						<div className="mb-8">
-							<h1 className="text-4xl font-bold text-white mb-2">
-								Avalie seu Conhecimento
-							</h1>
-							<p className="text-gray-400">
-								Avalie seu nível de conhecimento nas tecnologias detectadas no
-								seu repositório
-							</p>
+						<div className="mb-8 flex items-center justify-between">
+							<div>
+								<h1 className="text-4xl font-bold text-white mb-2">
+									Assess Your Knowledge
+								</h1>
+								<p className="text-gray-400">
+									Assess your knowledge level in the technologies detected in
+									your repository
+								</p>
+							</div>
+							{latestAnalysis && (
+								<button
+									onClick={() => setShowNewAnalysis(!showNewAnalysis)}
+									className="flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
+								>
+									<Plus className="w-5 h-5" />
+									{showNewAnalysis ? "Cancel" : "Analyze New Repository"}
+								</button>
+							)}
 						</div>
 
-						{!latestAnalysis && (
-							<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
-								<p className="text-gray-400">
-									Nenhuma análise encontrada. Analise um repositório primeiro.
+						{showNewAnalysis && (
+							<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 mb-6">
+								<h2 className="text-xl font-semibold text-white mb-4">
+									Analyze New Repository
+								</h2>
+								<div className="space-y-6">
+									<div>
+										<label
+											htmlFor="githubUrl"
+											className="flex items-center gap-2 text-white font-semibold mb-3"
+										>
+											<Github className="w-5 h-5 text-cyan-400" />
+											GitHub URL
+										</label>
+										<input
+											type="url"
+											value={githubUrl}
+											onChange={(e) => setGithubUrl(e.target.value)}
+											placeholder="https://github.com/owner/repo"
+											className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors"
+											disabled={isAnalyzing}
+										/>
+									</div>
+
+									<div className="flex items-center gap-4">
+										<div className="flex-1 h-px bg-slate-700"></div>
+										<span className="text-gray-500 text-sm">OR</span>
+										<div className="flex-1 h-px bg-slate-700"></div>
+									</div>
+
+									<div>
+										<label
+											htmlFor="codeSnippet"
+											className="flex items-center gap-2 text-white font-semibold mb-3"
+										>
+											<Code2 className="w-5 h-5 text-cyan-400" />
+											Code snippet (optional)
+										</label>
+										<textarea
+											value={codeSnippet}
+											onChange={(e) => setCodeSnippet(e.target.value)}
+											placeholder="Paste your package.json, imports, or any relevant code..."
+											rows={8}
+											className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-colors font-mono text-sm resize-none"
+											disabled={isAnalyzing}
+										/>
+										<p className="text-gray-500 text-sm mt-2">
+											This can help detect additional technologies
+										</p>
+									</div>
+
+									<button
+										type="button"
+										onClick={handleAnalyzeNew}
+										disabled={isAnalyzing || (!githubUrl && !codeSnippet)}
+										className="w-full px-8 py-4 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 flex items-center justify-center gap-2"
+									>
+										{isAnalyzing ? (
+											<>
+												<Loader2 className="w-5 h-5 animate-spin" />
+												Analyzing...
+											</>
+										) : (
+											<>
+												Analyze repository
+											</>
+										)}
+									</button>
+								</div>
+							</div>
+						)}
+
+						{!latestAnalysis && !showNewAnalysis && (
+							<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 text-center">
+								<p className="text-gray-400 mb-4">
+									No analysis found. Analyze a repository to get started.
 								</p>
+								<button
+									onClick={() => setShowNewAnalysis(true)}
+									className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
+								>
+									Analyze Repository
+								</button>
 							</div>
 						)}
 
@@ -200,7 +360,7 @@ function OptionsPage() {
 							<>
 								<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
 									<h2 className="text-xl font-semibold text-white mb-2">
-										Repositório Analisado
+										Analyzed Repository
 									</h2>
 									<a
 										href={latestAnalysis.githubUrl}
@@ -245,7 +405,7 @@ function OptionsPage() {
 															}
 															className="w-4 h-4 text-cyan-500 focus:ring-cyan-500"
 														/>
-														<span className="text-white">Sei</span>
+														<span className="text-white">Know</span>
 													</label>
 
 													<label className="flex items-center gap-2 cursor-pointer">
@@ -259,7 +419,7 @@ function OptionsPage() {
 															}
 															className="w-4 h-4 text-cyan-500 focus:ring-cyan-500"
 														/>
-														<span className="text-white">Noção</span>
+														<span className="text-white">Basic</span>
 													</label>
 
 													<label className="flex items-center gap-2 cursor-pointer">
@@ -273,7 +433,7 @@ function OptionsPage() {
 															}
 															className="w-4 h-4 text-cyan-500 focus:ring-cyan-500"
 														/>
-														<span className="text-white">Não sei</span>
+														<span className="text-white">Don't know</span>
 													</label>
 												</div>
 								</div>
@@ -290,11 +450,11 @@ function OptionsPage() {
 								</div>
 								<div className="flex-1">
 									<h3 className="text-lg font-semibold text-yellow-400 mb-2">
-										Planos Existentes Detectados
+										Existing Plans Detected
 									</h3>
 									<p className="text-gray-300 mb-3">
-										Você já possui planos de estudo para as seguintes
-										tecnologias:
+										You already have study plans for the following
+										technologies:
 									</p>
 									<div className="flex flex-wrap gap-2 mb-3">
 										{duplicateCheck.existingTechs.map((tech) => {
@@ -312,9 +472,9 @@ function OptionsPage() {
 										})}
 									</div>
 									<p className="text-gray-400 text-sm">
-										Ao gerar novos planos, essas tecnologias serão puladas para
-										evitar duplicatas. Para recriá-las, exclua os planos
-										existentes primeiro no Dashboard.
+										When generating new plans, these technologies will be skipped to
+										avoid duplicates. To recreate them, delete the existing plans
+										first in the Dashboard.
 									</p>
 								</div>
 							</div>
@@ -323,12 +483,19 @@ function OptionsPage() {
 
 					<div className="flex gap-4">
 						<Button
+							onClick={() => navigate({ to: "/analyze" })}
+							type="button"
+							className="px-6 py-3 bg-slate-700 hover:bg-slate-600"
+						>
+							Analyze New Repository
+						</Button>
+						<Button
 							onClick={handleSave}
 							disabled={isSaving}
 							type="button"
 							className="px-6 py-3"
 						>
-							{isSaving ? "Salvando..." : "Salvar Avaliação"}
+							{isSaving ? "Saving..." : "Save Assessment"}
 						</Button>
 						<Button
 							onClick={handleGeneratePlan}
@@ -336,7 +503,7 @@ function OptionsPage() {
 							type="button"
 							className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600"
 						>
-							{isGeneratingPlan ? "Gerando Plano..." : "Gerar Plano de Estudos"}
+							{isGeneratingPlan ? "Generating Plan..." : "Generate Study Plan"}
 						</Button>
 					</div>
 							</>
