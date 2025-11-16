@@ -59,6 +59,39 @@ export const getByUserAndTech = query({
   },
 })
 
+export const checkDuplicates = query({
+  args: {
+    userId: v.optional(v.id('users')),
+    technologies: v.array(v.string()),
+  },
+  handler: async (ctx, args) => {
+    if (!args.userId) {
+      return { existingTechs: [], newTechs: args.technologies, hasExisting: false }
+    }
+
+    // Use index to fetch only user's plans
+    const userPlans = await ctx.db
+      .query('plans')
+      .withIndex('by_user', (q) => q.eq('userId', args.userId))
+      .collect()
+    
+    const existingTechSet = new Set(userPlans.map((p) => p.technology))
+
+    const existingTechs = args.technologies.filter((tech) =>
+      existingTechSet.has(tech)
+    )
+    const newTechs = args.technologies.filter(
+      (tech) => !existingTechSet.has(tech)
+    )
+
+    return {
+      existingTechs,
+      newTechs,
+      hasExisting: existingTechs.length > 0,
+    }
+  },
+})
+
 export const create = mutation({
   args: {
     userId: v.optional(v.id('users')),
@@ -114,6 +147,30 @@ export const remove = mutation({
   args: { id: v.id('plans') },
   handler: async (ctx, args) => {
     return await ctx.db.delete(args.id)
+  },
+})
+
+export const removeByTechnology = mutation({
+  args: {
+    userId: v.optional(v.id('users')),
+    technology: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const plans = await ctx.db.query('plans').collect()
+    const userPlans = plans.filter(
+      (p) => p.userId === args.userId && p.technology === args.technology
+    )
+
+    const deletedIds: Id<'plans'>[] = []
+    for (const plan of userPlans) {
+      await ctx.db.delete(plan._id)
+      deletedIds.push(plan._id)
+    }
+
+    return {
+      deleted: deletedIds.length,
+      ids: deletedIds,
+    }
   },
 })
 
@@ -305,34 +362,59 @@ export const generate = action({
         assessmentMap.set(a.technology, a.level)
       })
 
+      // Fetch existing plans for this user to avoid duplicates
+      const existingPlans = args.userId 
+        ? await ctx.runQuery(api.plans.getByUser, { userId: args.userId })
+        : []
+      
+      const existingTechSet = new Set(existingPlans.map(p => p.technology))
+
       // Generate plans for each technology that needs learning (not 'sei')
       const planIds: Id<'plans'>[] = []
+      const skippedTechs: string[] = []
 
       for (const tech of analysis.detectedTechs) {
         const level = assessmentMap.get(tech.key) || 'nao_sei'
 
-        // Only create plan if user doesn't fully know it
-        if (level !== 'sei') {
-          const modules = generateModulesForTech(
-            tech.key,
-            tech.name,
-            tech.category,
-            level
-          )
-
-          const planId = await ctx.runMutation(api.plans.create, {
-            userId: args.userId,
-            analysisId: args.analysisId,
-            technology: tech.key,
-            modules,
-          })
-
-          planIds.push(planId)
+        // Skip if user already knows it
+        if (level === 'sei') {
+          continue
         }
+
+        // Skip if plan already exists for this technology
+        if (existingTechSet.has(tech.key)) {
+          skippedTechs.push(tech.name)
+          console.log(`[Plan Generation] Skipping duplicate: ${tech.name}`)
+          continue
+        }
+
+        const modules = generateModulesForTech(
+          tech.key,
+          tech.name,
+          tech.category,
+          level
+        )
+
+        const planId = await ctx.runMutation(api.plans.create, {
+          userId: args.userId,
+          analysisId: args.analysisId,
+          technology: tech.key,
+          modules,
+        })
+
+        planIds.push(planId)
       }
 
-      if (planIds.length === 0) {
+      if (skippedTechs.length > 0) {
+        console.log('[Plan Generation] Skipped duplicates:', skippedTechs.join(', '))
+      }
+
+      if (planIds.length === 0 && skippedTechs.length === 0) {
         throw new Error('No plans generated - you already know all technologies!')
+      }
+
+      if (planIds.length === 0 && skippedTechs.length > 0) {
+        throw new Error(`Nenhum plano novo gerado. Você já possui planos para todas as tecnologias detectadas (${skippedTechs.join(', ')}).`)
       }
 
       const duration = Date.now() - startTime
@@ -340,6 +422,7 @@ export const generate = action({
         userId: args.userId,
         analysisId: args.analysisId,
         plansCount: planIds.length,
+        skippedCount: skippedTechs.length,
         duration,
       })
 

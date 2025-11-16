@@ -36,6 +36,7 @@ function HomePage() {
 		null,
 	);
 	const [isAnalyzing, setIsAnalyzing] = useState(false);
+	const [isGeneratingPlan, setIsGeneratingPlan] = useState(false);
 	const [assessments, setAssessments] = useState<
 		Record<string, AssessmentLevel>
 	>({});
@@ -52,6 +53,7 @@ function HomePage() {
 		api.analysis.createAndAnalyzeFromCode,
 	);
 	const saveAssessments = useMutation(api.assessments.save);
+	const generatePlanAction = useAction(api.plans.generate);
 
 	const analysis = useQuery(
 		api.analysis.getById,
@@ -155,6 +157,8 @@ function HomePage() {
 	const handleContinueToGenerate = async () => {
 		if (!analysisId || !allAssessed) return;
 
+		setIsGeneratingPlan(true);
+
 		Sentry.captureMessage("analyze_generate_plan_clicked", {
 			level: "info",
 			extra: {
@@ -171,10 +175,32 @@ function HomePage() {
 				assessments: Object.entries(assessments).map(([key, level]) => {
 					const tech = analysis?.detectedTechs?.find((t) => t.key === key);
 					return {
-						technology: tech?.name || key,
+						technology: tech?.key || key,
 						level,
 					};
 				}),
+			});
+
+			// Gerar plano automaticamente
+			Sentry.captureMessage("plan_generate_started", {
+				level: "info",
+				extra: {
+					userId: convexUser?._id,
+					analysisId,
+				},
+			});
+
+			await generatePlanAction({
+				userId: convexUser?._id,
+				analysisId,
+			});
+
+			Sentry.captureMessage("plan_generate_success", {
+				level: "info",
+				extra: {
+					userId: convexUser?._id,
+					analysisId,
+				},
 			});
 
 			// Navegar para /plan
@@ -183,8 +209,16 @@ function HomePage() {
 				search: { analysisId },
 			});
 		} catch (error) {
-			console.error("Error saving assessments:", error);
-			alert("Erro ao salvar avaliações: " + (error as Error).message);
+			console.error("Error saving assessments or generating plan:", error);
+			Sentry.captureException(error, {
+				extra: {
+					userId: convexUser?._id,
+					analysisId,
+				},
+			});
+			alert("Erro ao gerar plano: " + (error as Error).message);
+		} finally {
+			setIsGeneratingPlan(false);
 		}
 	};
 
@@ -404,13 +438,22 @@ function HomePage() {
 									<button
 										type="button"
 										onClick={handleContinueToGenerate}
-										disabled={!allAssessed}
+										disabled={!allAssessed || isGeneratingPlan}
 										className="w-full px-8 py-4 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50 flex items-center justify-center gap-2"
 									>
-										{allAssessed
-											? "Gerar plano de estudos"
-											: "Avalie todas as tecnologias para continuar"}
-										<ArrowRight className="w-5 h-5" />
+										{isGeneratingPlan ? (
+											<>
+												<Loader2 className="w-5 h-5 animate-spin" />
+												Gerando plano...
+											</>
+										) : allAssessed ? (
+											<>
+												Gerar plano de estudos
+												<ArrowRight className="w-5 h-5" />
+											</>
+										) : (
+											"Avalie todas as tecnologias para continuar"
+										)}
 									</button>
 								</>
 							)}

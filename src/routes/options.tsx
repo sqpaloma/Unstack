@@ -46,6 +46,17 @@ function OptionsPage() {
 	const generatePlanAction = useAction(api.plans.generate);
 	const [isGeneratingPlan, setIsGeneratingPlan] = useState(false);
 
+	// Check for duplicate plans
+	const duplicateCheck = useQuery(
+		api.plans.checkDuplicates,
+		convexUser && latestAnalysis?.detectedTechs
+			? {
+					userId: convexUser._id,
+					technologies: latestAnalysis.detectedTechs.map((t) => t.key),
+				}
+			: "skip",
+	);
+
 	// Initialize assessments from detectedTechs
 	useEffect(() => {
 		if (latestAnalysis?.detectedTechs) {
@@ -265,38 +276,69 @@ function OptionsPage() {
 														<span className="text-white">Não sei</span>
 													</label>
 												</div>
-											</div>
-										</div>
-									))}
 								</div>
+							</div>
+						))}
+					</div>
 
-								<div className="flex gap-4">
-									<Button
-										onClick={handleSave}
-										disabled={isSaving}
-										type="button"
-									>
-										{isSaving ? "Salvando..." : "Salvar Avaliação"}
-									</Button>
-									<Button
-										onClick={handleGeneratePlan}
-										disabled={isGeneratingPlan}
-										type="button"
-									>
-										{isGeneratingPlan
-											? "Gerando Plano..."
-											: "Gerar Plano de Estudos"}
-									</Button>
-									<Button
-										onClick={handleGeneratePlan}
-										disabled={isGeneratingPlan}
-										className="px-6 py-3 bg-purple-500 hover:bg-purple-600 disabled:bg-gray-600 text-white font-semibold rounded-lg transition-colors"
-									>
-										{isGeneratingPlan
-											? "Gerando Plano..."
-											: "Gerar Plano de Estudos"}
-									</Button>
+					{/* Warning about existing plans */}
+					{duplicateCheck?.hasExisting && (
+						<div className="bg-yellow-900/20 border border-yellow-500/50 rounded-xl p-6">
+							<div className="flex items-start gap-3">
+								<div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center">
+									<span className="text-yellow-400 text-lg">⚠️</span>
 								</div>
+								<div className="flex-1">
+									<h3 className="text-lg font-semibold text-yellow-400 mb-2">
+										Planos Existentes Detectados
+									</h3>
+									<p className="text-gray-300 mb-3">
+										Você já possui planos de estudo para as seguintes
+										tecnologias:
+									</p>
+									<div className="flex flex-wrap gap-2 mb-3">
+										{duplicateCheck.existingTechs.map((tech) => {
+											const techInfo = latestAnalysis?.detectedTechs?.find(
+												(t) => t.key === tech,
+											);
+											return (
+												<span
+													key={tech}
+													className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm"
+												>
+													{techInfo?.name || tech}
+												</span>
+											);
+										})}
+									</div>
+									<p className="text-gray-400 text-sm">
+										Ao gerar novos planos, essas tecnologias serão puladas para
+										evitar duplicatas. Para recriá-las, exclua os planos
+										existentes primeiro no Dashboard.
+									</p>
+								</div>
+							</div>
+						</div>
+					)}
+
+					<div className="flex gap-4">
+						<Button
+							onClick={handleSave}
+							disabled={isSaving}
+							type="button"
+							className="px-6 py-3"
+						>
+							{isSaving ? "Salvando..." : "Salvar Avaliação"}
+						</Button>
+						<Button
+							onClick={handleGeneratePlan}
+							disabled={isGeneratingPlan}
+							type="button"
+							className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600"
+						>
+							{isGeneratingPlan ? "Gerando Plano..." : "Gerar Plano de Estudos"}
+						</Button>
+					</div>
 							</>
 						)}
 					</div>

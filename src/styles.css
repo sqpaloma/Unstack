@@ -136,3 +136,7 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+link[rel="icon"] {
+  border-radius: 50%;
+}

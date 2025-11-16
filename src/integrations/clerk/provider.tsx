@@ -36,8 +36,8 @@ export default function AppClerkProvider({
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
       afterSignOutUrl="/"
-      signInFallbackRedirectUrl="/analyze"
-      signUpFallbackRedirectUrl="/analyze"
+      signInFallbackRedirectUrl="/dashboard"
+      signUpFallbackRedirectUrl="/dashboard"
     >
       <UserSyncWrapper>{children}</UserSyncWrapper>
     </ClerkProvider>

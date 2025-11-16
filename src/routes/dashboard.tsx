@@ -3,7 +3,7 @@ import { SignedIn, SignedOut, useUser } from '@clerk/clerk-react'
 import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useMemo, useState } from 'react'
-import { BookOpen, Trophy, Target, TrendingUp, CheckCircle2, Clock, ArrowRight, Filter } from 'lucide-react'
+import { BookOpen, Trophy, Target, TrendingUp, CheckCircle2, Clock, ArrowRight, Filter, Trash2 } from 'lucide-react'
 import { Id } from '../../convex/_generated/dataModel'
 
 export const Route = createFileRoute('/dashboard')({
@@ -50,6 +50,7 @@ function DashboardPage() {
 
   // Mutation for toggling items
   const toggleItemMutation = useMutation(api.progress.toggleItem)
+  const removePlanMutation = useMutation(api.plans.remove)
 
   // Calculate progress per technology
   const techProgress = useMemo((): TechProgress[] => {
@@ -200,6 +201,29 @@ function DashboardPage() {
       })
     } catch (error) {
       console.error('Error toggling module:', error)
+    }
+  }
+
+  // Delete plan handler
+  const handleDeletePlan = async (
+    e: React.MouseEvent,
+    planId: Id<'plans'>,
+    technology: string
+  ) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const confirmed = window.confirm(
+      `Tem certeza que deseja excluir o plano de estudos para ${technology.replace(/-/g, ' ')}? Esta ação não pode ser desfeita.`
+    )
+
+    if (!confirmed) return
+
+    try {
+      await removePlanMutation({ id: planId })
+    } catch (error) {
+      console.error('Error deleting plan:', error)
+      alert('Erro ao excluir plano: ' + (error as Error).message)
     }
   }
 
@@ -450,14 +474,29 @@ function DashboardPage() {
                     {filteredTechProgress.map((tech) => (
                       <div
                         key={tech.planId}
-                        className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all"
+                        className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all relative"
                       >
+                        {/* Delete button */}
+                        <button
+                          onClick={(e) =>
+                            handleDeletePlan(
+                              e,
+                              tech.planId as Id<'plans'>,
+                              tech.technology
+                            )
+                          }
+                          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-red-400 hover:bg-red-900/20 rounded-lg transition-colors z-10"
+                          title="Excluir plano"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+
                         <Link
                           to="/plan"
                           search={{ analysisId: plans[0]?.analysisId }}
                           className="block"
                         >
-                          <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-start justify-between mb-4 pr-8">
                             <h3 className="text-xl font-semibold text-white capitalize hover:text-cyan-400 transition-colors">
                               {tech.technology.replace(/-/g, ' ')}
                             </h3>

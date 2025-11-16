@@ -1,6 +1,6 @@
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import { useNavigate } from "@tanstack/react-router";
 import * as Sentry from "@sentry/tanstackstart-react";
+import { useNavigate } from "@tanstack/react-router";
 import { Github } from "lucide-react";
 
 export function Hero() {
@@ -22,7 +22,7 @@ export function Hero() {
 					<img
 						src="/tanstack-circle-logo.png"
 						alt="Unstack Logo"
-						className="w-24 h-24 md:w-32 md:h-32"
+						className="w-40 h-40 md:w-48 md:h-48 rounded-full"
 					/>
 					<h1 className="text-6xl md:text-7xl font-black text-white [letter-spacing:-0.08em]">
 						<span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
