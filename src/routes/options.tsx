@@ -1,12 +1,19 @@
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-react";
+import * as Sentry from "@sentry/tanstackstart-react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAction, useMutation, useQuery } from "convex/react";
+import {
+	AlertCircle,
+	CheckCircle2,
+	Code2,
+	Github,
+	Loader2,
+	Plus,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "../../convex/_generated/api";
-import { Id } from "../../convex/_generated/dataModel";
-import * as Sentry from "@sentry/tanstackstart-react";
-import { Github, Code2, Loader2, CheckCircle2, AlertCircle, Plus } from "lucide-react";
+import type { Id } from "../../convex/_generated/dataModel";
 
 export const Route = createFileRoute("/options")({
 	component: OptionsPage,
@@ -30,7 +37,8 @@ function OptionsPage() {
 	const [githubUrl, setGithubUrl] = useState("");
 	const [codeSnippet, setCodeSnippet] = useState("");
 	const [isAnalyzing, setIsAnalyzing] = useState(false);
-	const [newAnalysisId, setNewAnalysisId] = useState<Id<"githubAnalysis"> | null>(null);
+	const [newAnalysisId, setNewAnalysisId] =
+		useState<Id<"githubAnalysis"> | null>(null);
 
 	// Fetch Convex user by Clerk ID
 	const convexUser = useQuery(
@@ -52,8 +60,12 @@ function OptionsPage() {
 	const generatePlanAction = useAction(api.plans.generate);
 	const [isGeneratingPlan, setIsGeneratingPlan] = useState(false);
 
-	const createAndAnalyzeFromUrl = useAction(api.analysis.createAndAnalyzeFromUrl);
-	const createAndAnalyzeFromCode = useAction(api.analysis.createAndAnalyzeFromCode);
+	const createAndAnalyzeFromUrl = useAction(
+		api.analysis.createAndAnalyzeFromUrl,
+	);
+	const createAndAnalyzeFromCode = useAction(
+		api.analysis.createAndAnalyzeFromCode,
+	);
 
 	const newAnalysis = useQuery(
 		api.analysis.getById,
@@ -117,7 +129,9 @@ function OptionsPage() {
 		}
 
 		if (githubUrl && !isValidGitHubUrl(githubUrl)) {
-			alert("Please enter a valid GitHub URL (e.g., https://github.com/owner/repo)");
+			alert(
+				"Please enter a valid GitHub URL (e.g., https://github.com/owner/repo)",
+			);
 			return;
 		}
 
@@ -203,10 +217,10 @@ function OptionsPage() {
 				},
 			});
 
-			// Navigate to plan page with analysisId
+			// Navigate to plan page with planId
 			navigate({
-				to: "/plan",
-				search: { analysisId: latestAnalysis._id },
+				to: "/completion",
+				search: { planId: latestAnalysis._id as string },
 			});
 		} catch (error) {
 			console.error("Error generating plan:", error);
@@ -260,13 +274,13 @@ function OptionsPage() {
 								</p>
 							</div>
 							{latestAnalysis && (
-								<button
+								<Button
 									onClick={() => setShowNewAnalysis(!showNewAnalysis)}
 									className="flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
 								>
 									<Plus className="w-5 h-5" />
 									{showNewAnalysis ? "Cancel" : "Analyze New Repository"}
-								</button>
+								</Button>
 							)}
 						</div>
 
@@ -333,9 +347,7 @@ function OptionsPage() {
 												Analyzing...
 											</>
 										) : (
-											<>
-												Analyze repository
-											</>
+											<>Analyze repository</>
 										)}
 									</button>
 								</div>
@@ -347,12 +359,12 @@ function OptionsPage() {
 								<p className="text-gray-400 mb-4">
 									No analysis found. Analyze a repository to get started.
 								</p>
-								<button
+								<Button
 									onClick={() => setShowNewAnalysis(true)}
 									className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
 								>
 									Analyze Repository
-								</button>
+								</Button>
 							</div>
 						)}
 
@@ -436,76 +448,79 @@ function OptionsPage() {
 														<span className="text-white">Don't know</span>
 													</label>
 												</div>
+											</div>
+										</div>
+									))}
 								</div>
-							</div>
-						))}
-					</div>
 
-					{/* Warning about existing plans */}
-					{duplicateCheck?.hasExisting && (
-						<div className="bg-yellow-900/20 border border-yellow-500/50 rounded-xl p-6">
-							<div className="flex items-start gap-3">
-								<div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center">
-									<span className="text-yellow-400 text-lg">⚠️</span>
-								</div>
-								<div className="flex-1">
-									<h3 className="text-lg font-semibold text-yellow-400 mb-2">
-										Existing Plans Detected
-									</h3>
-									<p className="text-gray-300 mb-3">
-										You already have study plans for the following
-										technologies:
-									</p>
-									<div className="flex flex-wrap gap-2 mb-3">
-										{duplicateCheck.existingTechs.map((tech) => {
-											const techInfo = latestAnalysis?.detectedTechs?.find(
-												(t) => t.key === tech,
-											);
-											return (
-												<span
-													key={tech}
-													className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm"
-												>
-													{techInfo?.name || tech}
-												</span>
-											);
-										})}
+								{/* Warning about existing plans */}
+								{duplicateCheck?.hasExisting && (
+									<div className="bg-yellow-900/20 border border-yellow-500/50 rounded-xl p-6">
+										<div className="flex items-start gap-3">
+											<div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center">
+												<span className="text-yellow-400 text-lg">⚠️</span>
+											</div>
+											<div className="flex-1">
+												<h3 className="text-lg font-semibold text-yellow-400 mb-2">
+													Existing Plans Detected
+												</h3>
+												<p className="text-gray-300 mb-3">
+													You already have study plans for the following
+													technologies:
+												</p>
+												<div className="flex flex-wrap gap-2 mb-3">
+													{duplicateCheck.existingTechs.map((tech) => {
+														const techInfo =
+															latestAnalysis?.detectedTechs?.find(
+																(t) => t.key === tech,
+															);
+														return (
+															<span
+																key={tech}
+																className="px-3 py-1 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm"
+															>
+																{techInfo?.name || tech}
+															</span>
+														);
+													})}
+												</div>
+												<p className="text-gray-400 text-sm">
+													When generating new plans, these technologies will be
+													skipped to avoid duplicates. To recreate them, delete
+													the existing plans first in the Dashboard.
+												</p>
+											</div>
+										</div>
 									</div>
-									<p className="text-gray-400 text-sm">
-										When generating new plans, these technologies will be skipped to
-										avoid duplicates. To recreate them, delete the existing plans
-										first in the Dashboard.
-									</p>
-								</div>
-							</div>
-						</div>
-					)}
+								)}
 
-					<div className="flex gap-4">
-						<Button
-							onClick={() => navigate({ to: "/analyze" })}
-							type="button"
-							className="px-6 py-3 bg-slate-700 hover:bg-slate-600"
-						>
-							Analyze New Repository
-						</Button>
-						<Button
-							onClick={handleSave}
-							disabled={isSaving}
-							type="button"
-							className="px-6 py-3"
-						>
-							{isSaving ? "Saving..." : "Save Assessment"}
-						</Button>
-						<Button
-							onClick={handleGeneratePlan}
-							disabled={isGeneratingPlan}
-							type="button"
-							className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600"
-						>
-							{isGeneratingPlan ? "Generating Plan..." : "Generate Study Plan"}
-						</Button>
-					</div>
+								<div className="flex gap-4">
+									<Button
+										onClick={() => navigate({ to: "/" })}
+										type="button"
+										className="px-6 py-3 bg-slate-700 hover:bg-slate-600"
+									>
+										Analyze New Repository
+									</Button>
+									<Button
+										onClick={handleSave}
+										disabled={isSaving}
+										type="button"
+										className="px-6 py-3"
+									>
+										{isSaving ? "Saving..." : "Save Assessment"}
+									</Button>
+									<Button
+										onClick={handleGeneratePlan}
+										disabled={isGeneratingPlan}
+										type="button"
+										className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 disabled:bg-gray-600"
+									>
+										{isGeneratingPlan
+											? "Generating Plan..."
+											: "Generate Study Plan"}
+									</Button>
+								</div>
 							</>
 						)}
 					</div>

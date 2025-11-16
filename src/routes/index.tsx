@@ -53,6 +53,8 @@ function HomePage() {
 	);
 	const saveAssessments = useMutation(api.assessments.save);
 	const generatePlanAction = useAction(api.plans.generate);
+	const plans = useQuery(api.plans.list, {});
+	const plan = plans?.find((p) => p.analysisId === analysisId);
 
 	const analysis = useQuery(
 		api.analysis.getById,
@@ -204,8 +206,8 @@ function HomePage() {
 
 			// Navegar para /plan
 			navigate({
-				to: "/plan",
-				search: { analysisId },
+				to: "/completion",
+				search: { planId: plan?._id as string },
 			});
 		} catch (error) {
 			console.error("Error saving assessments or generating plan:", error);
@@ -390,7 +392,10 @@ function HomePage() {
 															}`}
 														>
 															{assessments[tech.key] === "sei" && (
-																<CheckCircle2 className="w-4 h-4" fill="currentColor" />
+																<CheckCircle2
+																	className="w-4 h-4"
+																	fill="currentColor"
+																/>
 															)}
 															Know
 														</button>
@@ -406,7 +411,10 @@ function HomePage() {
 															}`}
 														>
 															{assessments[tech.key] === "nocao" && (
-																<CheckCircle2 className="w-4 h-4" fill="currentColor" />
+																<CheckCircle2
+																	className="w-4 h-4"
+																	fill="currentColor"
+																/>
 															)}
 															Heard of it
 														</button>
@@ -422,7 +430,10 @@ function HomePage() {
 															}`}
 														>
 															{assessments[tech.key] === "nao_sei" && (
-																<CheckCircle2 className="w-4 h-4" fill="currentColor" />
+																<CheckCircle2
+																	className="w-4 h-4"
+																	fill="currentColor"
+																/>
 															)}
 															Don't know
 														</button>

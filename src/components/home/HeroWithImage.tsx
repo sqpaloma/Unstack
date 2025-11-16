@@ -4,7 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Github, Link } from "lucide-react";
 import { Button } from "../ui/button";
 
-export function Hero() {
+export function HeroWithImage() {
 	const navigate = useNavigate();
 
 	const handleAnalyze = () => {
@@ -12,7 +12,7 @@ export function Hero() {
 			level: "info",
 		});
 
-		navigate({ to: "/dashboard" });
+		navigate({ to: "/" });
 	};
 
 	return (
@@ -66,7 +66,7 @@ export function Hero() {
 								Sign in to analyze your repository
 							</p>
 							<div className="flex gap-4">
-								<Link
+								<a
 									href="/sign-in"
 									className="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50"
 									onClick={() => {
@@ -76,10 +76,10 @@ export function Hero() {
 									}}
 								>
 									Sign In
-								</Link>
+								</a>
 								<Link
-									href="#how-it-works"
-									className="px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-semibent rounded-lg transition-colors"
+									to="#how-it-works"
+									className="px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors"
 									onClick={() => {
 										Sentry.captureMessage("home_demo_clicked", {
 											level: "info",
