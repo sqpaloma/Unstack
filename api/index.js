@@ -11,10 +11,16 @@ let serverEntry
 
 export default async function handler(req, res) {
   try {
+    console.log('[API] Request:', req.method, req.url)
+    console.log('[API] __dirname:', __dirname)
+    console.log('[API] serverPath:', serverPath)
+
     // Lazy load the server module
     if (!serverEntry) {
+      console.log('[API] Loading server module...')
       const serverModule = await import(serverPath)
       serverEntry = serverModule.default
+      console.log('[API] Server module loaded successfully')
     }
 
     // Build the full URL from Vercel request
