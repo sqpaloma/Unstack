@@ -2,6 +2,14 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/assets/(.*)",
+      "destination": "/dist/client/assets/$1"
+    },
+    {
+      "source": "/(favicon.ico|robots.txt|manifest.json|.*\\.(png|jpg|jpeg|svg|gif|webp))",
+      "destination": "/dist/client/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/api"
     }
