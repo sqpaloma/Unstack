@@ -12,7 +12,7 @@ export function WhatWeDetect() {
 	const categories = [
 		{
 			icon: <Code2 className="w-8 h-8 text-cyan-400" />,
-			title: "Linguagens",
+			title: "Languages",
 			examples: "TypeScript, Python, Go, Rust, Java",
 		},
 		{
@@ -22,7 +22,7 @@ export function WhatWeDetect() {
 		},
 		{
 			icon: <Shield className="w-8 h-8 text-cyan-400" />,
-			title: "Autenticação",
+			title: "Authentication",
 			examples: "Clerk, Auth0, NextAuth, Supabase Auth",
 		},
 		{
@@ -32,17 +32,17 @@ export function WhatWeDetect() {
 		},
 		{
 			icon: <Cloud className="w-8 h-8 text-cyan-400" />,
-			title: "Infraestrutura",
+			title: "Infrastructure",
 			examples: "Docker, Kubernetes, Vercel, Cloudflare",
 		},
 		{
 			icon: <Activity className="w-8 h-8 text-cyan-400" />,
-			title: "Observabilidade",
+			title: "Observability",
 			examples: "Sentry, DataDog, LogRocket, Prometheus",
 		},
 		{
 			icon: <Wrench className="w-8 h-8 text-cyan-400" />,
-			title: "Ferramentas",
+			title: "Tools",
 			examples: "Vite, ESBuild, Webpack, Turborepo",
 		},
 	];
@@ -52,10 +52,10 @@ export function WhatWeDetect() {
 			<div className="max-w-7xl mx-auto">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-						O que detectamos
+						What we detect
 					</h2>
 					<p className="text-gray-400 text-lg max-w-2xl mx-auto">
-						Analisamos 7 categorias principais de tecnologias no seu repositório
+						We analyze 7 main categories of technologies in your repository
 					</p>
 				</div>
 

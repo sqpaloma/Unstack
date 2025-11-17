@@ -28,6 +28,13 @@ export const list = query({
   },
 })
 
+export const get = query({
+  args: { id: v.id('plans') },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id)
+  },
+})
+
 export const getByUser = query({
   args: { userId: v.id('users') },
   handler: async (ctx, args) => {
@@ -188,8 +195,8 @@ function generateModulesForTech(
     // Beginner: fundamentals + basics + practice
     modules.push(
       {
-        title: `Fundamentos de ${techName}`,
-        description: `Introdução aos conceitos básicos e arquitetura do ${techName}`,
+        title: `${techName} Fundamentals`,
+        description: `Introduction to basic concepts and ${techName} architecture`,
         estimatedHours: 4,
         resources: [
           {
@@ -206,8 +213,8 @@ function generateModulesForTech(
         completed: false,
       },
       {
-        title: `Primeiros Passos com ${techName}`,
-        description: `Configuração de ambiente e primeiro projeto`,
+        title: `Getting Started with ${techName}`,
+        description: `Environment setup and first project`,
         estimatedHours: 6,
         resources: [
           {
@@ -219,8 +226,8 @@ function generateModulesForTech(
         completed: false,
       },
       {
-        title: `Prática com ${techName}`,
-        description: `Exercícios práticos e projeto básico`,
+        title: `${techName} Practice`,
+        description: `Practical exercises and basic project`,
         estimatedHours: 8,
         resources: [
           {
@@ -236,8 +243,8 @@ function generateModulesForTech(
     // Intermediate: advanced concepts + best practices
     modules.push(
       {
-        title: `Conceitos Avançados de ${techName}`,
-        description: `Aprofundamento em recursos avançados e padrões`,
+        title: `Advanced ${techName} Concepts`,
+        description: `Deep dive into advanced features and patterns`,
         estimatedHours: 5,
         resources: [
           {
@@ -249,8 +256,8 @@ function generateModulesForTech(
         completed: false,
       },
       {
-        title: `Best Practices com ${techName}`,
-        description: `Padrões de arquitetura e melhores práticas`,
+        title: `${techName} Best Practices`,
+        description: `Architecture patterns and best practices`,
         estimatedHours: 4,
         resources: [
           {
@@ -265,8 +272,8 @@ function generateModulesForTech(
   } else {
     // Expert: optimization + edge cases
     modules.push({
-      title: `Otimização e Performance com ${techName}`,
-      description: `Técnicas avançadas de otimização e casos especiais`,
+      title: `${techName} Optimization and Performance`,
+      description: `Advanced optimization techniques and edge cases`,
       estimatedHours: 3,
       resources: [
         {
@@ -282,8 +289,8 @@ function generateModulesForTech(
   // Add category-specific modules
   if (category === 'auth' && level !== 'sei') {
     modules.push({
-      title: `Segurança e Autenticação com ${techName}`,
-      description: `OAuth, JWT, sessions, e melhores práticas de segurança`,
+      title: `${techName} Security and Authentication`,
+      description: `OAuth, JWT, sessions, and security best practices`,
       estimatedHours: 6,
       resources: [
         {
@@ -298,8 +305,8 @@ function generateModulesForTech(
 
   if (category === 'db' && level !== 'sei') {
     modules.push({
-      title: `Modelagem e Queries com ${techName}`,
-      description: `Schema design, queries eficientes, e migrations`,
+      title: `${techName} Modeling and Queries`,
+      description: `Schema design, efficient queries, and migrations`,
       estimatedHours: 7,
       resources: [
         {

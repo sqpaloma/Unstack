@@ -443,9 +443,6 @@ export const TECH_DOCUMENTATION_URLS: Record<string, string> = {
 
   // CSS
   tailwind: 'https://devdocs.io/tailwindcss/',
-  css: 'https://devdocs.io/css/',
-  sass: 'https://devdocs.io/sass/',
-  less: 'https://devdocs.io/less/',
 
   // Libraries
   react_router: 'https://devdocs.io/react_router/',

@@ -74,13 +74,13 @@ function HomePage() {
 
 	const handleAnalyze = async () => {
 		if (!githubUrl && !codeSnippet) {
-			alert("Por favor, insira uma URL do GitHub ou um trecho de código");
+			alert("Please enter a GitHub URL or code snippet");
 			return;
 		}
 
 		if (githubUrl && !isValidGitHubUrl(githubUrl)) {
 			alert(
-				"Por favor, insira uma URL válida do GitHub (ex: https://github.com/owner/repo)",
+				"Please enter a valid GitHub URL (e.g., https://github.com/owner/repo)",
 			);
 			return;
 		}
@@ -100,13 +100,13 @@ function HomePage() {
 			let newAnalysisId: string;
 
 			if (githubUrl) {
-				// Análise via URL do GitHub
+				// Analysis via GitHub URL
 				newAnalysisId = await createAndAnalyzeFromUrl({
 					githubUrl,
 					userId: convexUser?._id,
 				});
 			} else {
-				// Análise via código manual
+				// Analysis via manual code
 				newAnalysisId = await createAndAnalyzeFromCode({
 					codeSnippet,
 					userId: convexUser?._id,
@@ -131,7 +131,7 @@ function HomePage() {
 					hasCodeSnippet: !!codeSnippet,
 				},
 			});
-			alert("Erro ao analisar: " + (error as Error).message);
+			alert("Error analyzing: " + (error as Error).message);
 			setIsAnalyzing(false);
 		}
 	};
@@ -143,7 +143,7 @@ function HomePage() {
 				setIsAnalyzing(false);
 			} else if (analysis.status === "failed") {
 				setIsAnalyzing(false);
-				alert("Análise falhou: " + (analysis.error || "Erro desconhecido"));
+				alert("Analysis failed: " + (analysis.error || "Unknown error"));
 			}
 		}
 	}, [analysis]);
@@ -169,7 +169,7 @@ function HomePage() {
 		});
 
 		try {
-			// Salvar avaliações
+			// Save assessments
 			await saveAssessments({
 				userId: convexUser?._id,
 				analysisId,
@@ -182,7 +182,7 @@ function HomePage() {
 				}),
 			});
 
-			// Gerar plano automaticamente
+			// Generate plan automatically
 			Sentry.captureMessage("plan_generate_started", {
 				level: "info",
 				extra: {
@@ -204,7 +204,7 @@ function HomePage() {
 				},
 			});
 
-			// Navegar para /plan
+			// Navigate to /plan
 			navigate({
 				to: "/completion",
 				search: { planId: plan?._id as string },
@@ -217,7 +217,7 @@ function HomePage() {
 					analysisId,
 				},
 			});
-			alert("Erro ao gerar plano: " + (error as Error).message);
+			alert("Error generating plan: " + (error as Error).message);
 		} finally {
 			setIsGeneratingPlan(false);
 		}

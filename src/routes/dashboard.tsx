@@ -462,11 +462,7 @@ function DashboardPage() {
 															</div>
 															<Link
 																to={isCompleted ? "/completion" : "/plan"}
-																search={
-																	isCompleted
-																		? { planId: task.planId as string }
-																		: { planId: plans[0]?.analysisId as string }
-																}
+																search={{ planId: task.planId as string }}
 																className="text-gray-400 hover:text-cyan-400 transition-colors"
 															>
 																<ArrowRight className="w-5 h-5" />
@@ -552,9 +548,7 @@ function DashboardPage() {
 												</Button>
 
 												<Link
-													to={
-														tech.percentage === 100 ? "/completion" : "/options"
-													}
+													to={tech.percentage === 100 ? "/completion" : "/plan"}
 													search={{ planId: tech.planId as string }}
 													className="block"
 												>

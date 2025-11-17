@@ -44,26 +44,23 @@ export const Route = createRootRouteWithContext<{
 
 	notFoundComponent: () => {
 		return (
-			<>
-				<Header />
-				<div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
-					<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 max-w-md text-center">
-						<h1 className="text-6xl font-bold text-white mb-4">404</h1>
-						<h2 className="text-2xl font-bold text-white mb-4">
-							Página não encontrada
-						</h2>
-						<p className="text-gray-400 mb-6">
-							A página que você está procurando não existe.
-						</p>
-						<Link
-							to="/"
-							className="inline-block px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
-						>
-							Voltar para Home
-						</Link>
-					</div>
+			<div className="min-h-[calc(100vh-80px)] bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6">
+				<div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 max-w-md text-center">
+					<h1 className="text-6xl font-bold text-white mb-4">404</h1>
+					<h2 className="text-2xl font-bold text-white mb-4">
+						Page Not Found
+					</h2>
+					<p className="text-gray-400 mb-6">
+						The page you are looking for does not exist.
+					</p>
+					<Link
+						to="/"
+						className="inline-block px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors"
+					>
+						Back to Home
+					</Link>
 				</div>
-			</>
+			</div>
 		);
 	},
 
